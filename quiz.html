@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EduQuest — Quiz 🎮</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet"/>
+</head>
+<body class="quiz-page">
+  <div class="stars"></div>
+  <div class="container quiz-container">
+    <div class="quiz-header">
+      <div class="player-info">
+        <span class="player-avatar">👤</span>
+        <span id="playerNameDisplay">Jogador</span>
+      </div>
+      <div class="score-display">
+        <span>⭐</span>
+        <span id="scoreDisplay">0</span>
+      </div>
+      <div class="subject-badge" id="subjectBadge">💻 Informática</div>
+    </div>
+    <div class="progress-area">
+      <div class="progress-info">
+        <span id="questionCounter">Pergunta 1 de 10</span>
+        <span id="timerDisplay">⏱ 15s</span>
+      </div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progressBar"></div>
+      </div>
+    </div>
+    <div class="timer-bar-bg">
+      <div class="timer-bar-fill" id="timerBar"></div>
+    </div>
+    <div class="question-card">
+      <div class="question-number" id="questionNumber">01</div>
+      <p class="question-text" id="questionText">🔄 Carregando questões...</p>
+    </div>
+    <div class="options-grid" id="optionsGrid"></div>
+    <div class="feedback-overlay hidden" id="feedbackOverlay">
+      <div class="feedback-text" id="feedbackText"></div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { db, collection, getDocs, addDoc } from './js/firebase.js';
+
+    const subjectNames = { informatica:"💻 Informática", matematica:"📐 Matemática", portugues:"📖 Português", ciencias:"🔬 Ciências" };
+    const diffTime  = { facil:15, medio:20, dificil:25 };
+    const diffBonus = { facil:0, medio:5, dificil:10 };
+    const diffLabel = { facil:'🟢 Fácil', medio:'🟡 Médio', dificil:'🔴 Difícil' };
+
+    let player  = localStorage.getItem('eq_player')  || 'Jogador';
+    let subject = localStorage.getItem('eq_subject') || 'informatica';
+    let diff    = localStorage.getItem('eq_diff')    || 'facil';
+    let questions=[], current=0, score=0, timer, timeLeft, answered=false;
+
+    document.getElementById('playerNameDisplay').textContent = player;
+    document.getElementById('subjectBadge').textContent = subjectNames[subject];
+
+    async function carregarQuestoes() {
+      try {
+        const snap = await getDocs(collection(db, 'questoes'));
+        let firebaseQs = [];
+        snap.forEach(d => {
+          const q = d.data();
+          if (q.disciplina === subject && q.dificuldade === diff) {
+            firebaseQs.push({ p: q.p, ops: q.ops, c: q.c });
+          }
+        });
+        if (firebaseQs.length >= 5) {
+          questions = firebaseQs.sort(() => Math.random() - 0.5).slice(0, 10);
+        } else {
+          const res  = await fetch('data/perguntas.json');
+          const data = await res.json();
+          const pool = data[subject]?.[diff] || [];
+          questions  = [...pool, ...firebaseQs].sort(() => Math.random() - 0.5).slice(0, 10);
+        }
+        if (!questions.length) { document.getElementById('questionText').textContent='Nenhuma questão disponível.'; return; }
+        loadQuestion();
+      } catch(e) {
+        try {
+          const res  = await fetch('data/perguntas.json');
+          const data = await res.json();
+          questions  = (data[subject]?.[diff] || []).sort(() => Math.random() - 0.5).slice(0, 10);
+          if (questions.length) loadQuestion();
+        } catch { document.getElementById('questionText').textContent='⚠️ Erro ao carregar questões.'; }
+      }
+    }
+
+    function loadQuestion() {
+      answered=false; clearInterval(timer);
+      timeLeft = diffTime[diff]||15;
+      const q = questions[current];
+      document.getElementById('questionNumber').textContent = String(current+1).padStart(2,'0');
+      document.getElementById('questionText').textContent   = q.p;
+      document.getElementById('questionCounter').textContent = `Pergunta ${current+1} de ${questions.length}`;
+      document.getElementById('progressBar').style.width    = ((current/questions.length)*100)+'%';
+      const grid = document.getElementById('optionsGrid');
+      grid.innerHTML='';
+      ['A','B','C','D'].forEach((lbl,i) => {
+        const btn = document.createElement('button');
+        btn.className='option-btn';
+        btn.innerHTML=`<span class="option-label">${lbl}</span><span class="option-text">${q.ops[i]}</span>`;
+        btn.onclick=()=>selectAnswer(i,btn);
+        btn.style.animationDelay=(i*0.1)+'s';
+        grid.appendChild(btn);
+      });
+      startTimer();
+    }
+
+    function startTimer() {
+      document.getElementById('timerBar').style.cssText='width:100%;transition:none';
+      document.getElementById('timerDisplay').textContent=`⏱ ${timeLeft}s`;
+      document.getElementById('timerDisplay').style.color='';
+      setTimeout(()=>{ document.getElementById('timerBar').style.cssText=`width:0%;transition:width ${timeLeft}s linear`; },50);
+      timer=setInterval(()=>{
+        timeLeft--;
+        document.getElementById('timerDisplay').textContent=`⏱ ${timeLeft}s`;
+        if(timeLeft<=5) document.getElementById('timerDisplay').style.color='#ff4444';
+        if(timeLeft<=0){clearInterval(timer);timeOut();}
+      },1000);
+    }
+
+    function timeOut(){
+      if(answered) return; answered=true;
+      document.querySelectorAll('.option-btn').forEach(b=>b.disabled=true);
+      document.querySelectorAll('.option-btn')[questions[current].c].classList.add('correct');
+      showFeedback(false,'⏰ Tempo esgotado!');
+      setTimeout(nextQuestion,2000);
+    }
+
+    function selectAnswer(index,btn){
+      if(answered) return; answered=true; clearInterval(timer);
+      const correct=questions[current].c;
+      document.querySelectorAll('.option-btn').forEach(b=>b.disabled=true);
+      if(index===correct){
+        btn.classList.add('correct');
+        const pts=10+timeLeft+(diffBonus[diff]||0);
+        score+=pts;
+        document.getElementById('scoreDisplay').textContent=score;
+        showFeedback(true,`✅ Correto! +${pts} pts`);
+      } else {
+        btn.classList.add('wrong');
+        document.querySelectorAll('.option-btn')[correct].classList.add('correct');
+        showFeedback(false,'❌ Errou! Correta: '+String.fromCharCode(65+correct));
+      }
+      setTimeout(nextQuestion,2200);
+    }
+
+    function showFeedback(ok,msg){
+      const o=document.getElementById('feedbackOverlay');
+      o.className='feedback-overlay '+(ok?'correct-feedback':'wrong-feedback');
+      document.getElementById('feedbackText').textContent=msg;
+      setTimeout(()=>o.classList.add('hidden'),2000);
+    }
+
+    async function salvarRankingFirebase() {
+      try {
+        await addDoc(collection(db, 'ranking'), {
+          nome:      player,
+          pontos:    score,
+          disciplina: subjectNames[subject],
+          dificuldade: diffLabel[diff],
+          data:      new Date().toLocaleDateString('pt-BR'),
+          timestamp: new Date()
+        });
+      } catch(e) { console.log('Erro ao salvar ranking:', e); }
+    }
+
+    async function nextQuestion(){
+      current++;
+      document.getElementById('feedbackOverlay').className='feedback-overlay hidden';
+      if(current<questions.length){
+        loadQuestion();
+      } else {
+        localStorage.setItem('eq_score', score);
+        localStorage.setItem('eq_subject_name', subjectNames[subject]);
+        localStorage.setItem('eq_diff_label', diffLabel[diff]);
+        await salvarRankingFirebase();
+        location.href='ranking.html';
+      }
+    }
+
+    carregarQuestoes();
+  </script>
+</body>
+</html>

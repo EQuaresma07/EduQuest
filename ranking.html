@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EduQuest — Ranking 🏆</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet"/>
+</head>
+<body class="ranking-page">
+  <div class="stars"></div>
+
+  <div class="container ranking-container">
+
+    <!-- RESULTADO DO JOGO ATUAL -->
+    <div id="resultSection" class="result-section hidden">
+      <div class="result-trophy" id="resultTrophy">🏆</div>
+      <h2 class="result-title" id="resultTitle">Incrível!</h2>
+      <p class="result-player" id="resultPlayer"></p>
+      <div class="result-score-box">
+        <div class="result-score" id="resultScore">0</div>
+        <div class="result-label">pontos</div>
+      </div>
+      <p class="result-msg" id="resultMsg"></p>
+      <div class="result-actions">
+        <button class="btn-play" onclick="location.href='index.html'">🔄 Jogar Novamente</button>
+      </div>
+    </div>
+
+    <!-- RANKING GLOBAL -->
+    <div class="ranking-section">
+      <div class="ranking-header-area">
+        <h2 class="ranking-title">🌐 Ranking Global Online</h2>
+        <button class="btn-refresh" onclick="carregarRanking()" id="btnRefresh">🔄 Atualizar</button>
+      </div>
+
+      <!-- FILTROS -->
+      <div class="ranking-filters">
+        <select id="filtDisc" onchange="carregarRanking()">
+          <option value="">Todas as disciplinas</option>
+          <option value="💻 Informática">💻 Informática</option>
+          <option value="📐 Matemática">📐 Matemática</option>
+          <option value="📖 Português">📖 Português</option>
+          <option value="🔬 Ciências">🔬 Ciências</option>
+        </select>
+        <select id="filtDiff" onchange="carregarRanking()">
+          <option value="">Todos os níveis</option>
+          <option value="🟢 Fácil">🟢 Fácil</option>
+          <option value="🟡 Médio">🟡 Médio</option>
+          <option value="🔴 Difícil">🔴 Difícil</option>
+        </select>
+      </div>
+
+      <div id="rankingLoading" class="loading-ranking">🔄 Carregando ranking...</div>
+      <div class="ranking-list" id="rankingList"></div>
+    </div>
+
+    <button class="btn-home" onclick="location.href='index.html'">🏠 Voltar ao Início</button>
+
+  </div>
+
+  <script type="module">
+    import { db, collection, getDocs } from './js/firebase.js';
+
+    // Mostra resultado do jogo atual
+    const score  = parseInt(localStorage.getItem('eq_score'));
+    const player = localStorage.getItem('eq_player');
+
+    if (!isNaN(score) && player) {
+      const section = document.getElementById('resultSection');
+      section.classList.remove('hidden');
+      document.getElementById('resultPlayer').textContent = '👤 ' + player;
+      document.getElementById('resultScore').textContent  = score;
+
+      let trophy='🥉', title='Bom trabalho!', msg='Continue praticando para melhorar!';
+      if      (score >= 200) { trophy='🏆'; title='Lendário!';    msg='Você dominou o quiz! Está pronto para o TCC! 🚀'; }
+      else if (score >= 120) { trophy='🥇'; title='Excelente!';   msg='Ótimo desempenho! Você tem muito conhecimento!'; }
+      else if (score >= 70)  { trophy='🥈'; title='Muito bom!';   msg='Mais um pouco de estudo e você chega lá!'; }
+
+      document.getElementById('resultTrophy').textContent = trophy;
+      document.getElementById('resultTitle').textContent  = title;
+      document.getElementById('resultMsg').textContent    = msg;
+
+      localStorage.removeItem('eq_score');
+    }
+
+    // Carrega ranking do Firebase
+    window.carregarRanking = async function() {
+      const filtDisc = document.getElementById('filtDisc').value;
+      const filtDiff = document.getElementById('filtDiff').value;
+      const lista    = document.getElementById('rankingList');
+      const loading  = document.getElementById('rankingLoading');
+      const btnR     = document.getElementById('btnRefresh');
+
+      lista.innerHTML = '';
+      loading.style.display = 'block';
+      btnR.textContent = '⏳';
+      btnR.disabled = true;
+
+      try {
+        const snap = await getDocs(collection(db, 'ranking'));
+        let dados = [];
+        snap.forEach(d => dados.push({ id: d.id, ...d.data() }));
+
+        // Filtros
+        if (filtDisc) dados = dados.filter(r => r.disciplina === filtDisc);
+        if (filtDiff) dados = dados.filter(r => r.dificuldade === filtDiff);
+
+        // Ordena por pontuação
+        dados.sort((a, b) => b.pontos - a.pontos);
+
+        // Top 20
+        dados = dados.slice(0, 20);
+
+        loading.style.display = 'none';
+        btnR.textContent = '🔄 Atualizar';
+        btnR.disabled = false;
+
+        if (!dados.length) {
+          lista.innerHTML = '<div class="no-ranking">Nenhuma partida registrada ainda.<br>Seja o primeiro a jogar! 🎮</div>';
+          return;
+        }
+
+        const medals = ['🥇','🥈','🥉'];
+
+        dados.forEach((r, i) => {
+          const div = document.createElement('div');
+          div.className = `ranking-item ${i < 3 ? 'top-'+(i+1) : ''}`;
+
+          // Destaca o jogador atual
+          const isCurrentPlayer = r.nome === player;
+
+          div.innerHTML = `
+            <div class="rank-pos">${medals[i] || (i+1)}</div>
+            <div class="rank-info">
+              <div class="rank-name ${isCurrentPlayer ? 'rank-me' : ''}">
+                ${r.nome} ${isCurrentPlayer ? '← você' : ''}
+              </div>
+              <div class="rank-details">${r.disciplina || ''} • ${r.dificuldade || ''} • ${r.data || ''}</div>
+            </div>
+            <div class="rank-score">${r.pontos} pts</div>
+          `;
+          lista.appendChild(div);
+        });
+
+      } catch(e) {
+        loading.style.display = 'none';
+        btnR.textContent = '🔄 Atualizar';
+        btnR.disabled = false;
+        lista.innerHTML = '<div class="no-ranking">❌ Erro ao carregar ranking.<br>' + e.message + '</div>';
+      }
+    };
+
+    carregarRanking();
+  </script>
+</body>
+</html>

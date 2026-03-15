@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EduQuest 🎮</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet"/>
+</head>
+<body class="home-page">
+  <div class="stars"></div>
+  <div class="particles" id="particles"></div>
+
+  <div class="container home-container">
+
+    <div class="logo-area">
+      <div class="logo-icon">🎮</div>
+      <h1 class="logo-title">Edu<span>Quest</span></h1>
+      <p class="logo-sub">O quiz que transforma estudo em aventura</p>
+    </div>
+
+    <div class="card setup-card">
+      <div class="card-inner">
+
+        <div class="form-group">
+          <label for="playerName">👤 Seu nome de jogador</label>
+          <input type="text" id="playerName" placeholder="Ex: DevMaster99" maxlength="20" />
+        </div>
+
+        <div class="form-group">
+          <label>📚 Escolha a disciplina</label>
+          <div class="subject-grid">
+            <button class="subject-btn active" data-subject="informatica">💻 Informática</button>
+            <button class="subject-btn" data-subject="matematica">📐 Matemática</button>
+            <button class="subject-btn" data-subject="portugues">📖 Português</button>
+            <button class="subject-btn" data-subject="ciencias">🔬 Ciências</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>⚡ Nível de dificuldade</label>
+          <div class="difficulty-grid">
+            <button class="diff-btn active" data-diff="facil">🟢 Fácil</button>
+            <button class="diff-btn" data-diff="medio">🟡 Médio</button>
+            <button class="diff-btn" data-diff="dificil">🔴 Difícil</button>
+          </div>
+        </div>
+
+        <button class="btn-play" id="btnPlay" onclick="startGame()">
+          <span>▶ INICIAR JOGO</span>
+          <div class="btn-glow"></div>
+        </button>
+
+      </div>
+    </div>
+
+    <div style="display:flex;gap:0.75rem;flex-wrap:wrap;justify-content:center;">
+      <button class="btn-ranking" onclick="location.href='ranking.html'">🏆 Ver Ranking</button>
+    </div>
+
+    <!-- CAMPO DE CÓDIGO DE PROVA -->
+    <div class="card" style="width:100%;max-width:480px;">
+      <div class="card-inner" style="padding:1.5rem;">
+        <h3 style="font-family:var(--font-head);color:var(--cyan);letter-spacing:2px;font-size:0.9rem;margin-bottom:1rem;text-align:center;">
+          📝 TENHO UM CÓDIGO DE PROVA
+        </h3>
+        <div style="display:flex;gap:0.75rem;">
+          <input type="text" id="codigoProva" placeholder="Ex: PROVA-2025"
+            style="text-transform:uppercase;letter-spacing:2px;font-family:var(--font-head);font-size:0.9rem;"
+            maxlength="15"/>
+          <button class="btn-play" onclick="entrarProva()"
+            style="width:auto;padding:0 1.5rem;white-space:nowrap;margin-top:0;">
+            <span>Entrar</span>
+          </button>
+        </div>
+        <div id="msgCodigo" class="msg hidden" style="margin-top:0.75rem;"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const container = document.getElementById('particles');
+    for (let i = 0; i < 30; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      p.style.left = Math.random() * 100 + '%';
+      p.style.animationDelay = Math.random() * 8 + 's';
+      p.style.animationDuration = (6 + Math.random() * 6) + 's';
+      p.style.width = p.style.height = (4 + Math.random() * 8) + 'px';
+      container.appendChild(p);
+    }
+
+    document.querySelectorAll('.subject-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.subject-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+
+    document.querySelectorAll('.diff-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+
+    function startGame() {
+      const name = document.getElementById('playerName').value.trim();
+      if (!name) {
+        document.getElementById('playerName').classList.add('shake');
+        setTimeout(() => document.getElementById('playerName').classList.remove('shake'), 500);
+        document.getElementById('playerName').placeholder = '⚠️ Digite seu nome!';
+        return;
+      }
+      const subject = document.querySelector('.subject-btn.active').dataset.subject;
+      const diff = document.querySelector('.diff-btn.active').dataset.diff;
+      localStorage.setItem('eq_player', name);
+      localStorage.setItem('eq_subject', subject);
+      localStorage.setItem('eq_diff', diff);
+      document.querySelector('.btn-play').innerHTML = '<span>Carregando...</span>';
+      setTimeout(() => location.href = 'quiz.html', 600);
+    }
+
+    function entrarProva() {
+      const codigo = document.getElementById('codigoProva').value.trim().toUpperCase();
+      const msg    = document.getElementById('msgCodigo');
+      if (!codigo) {
+        msg.textContent = '⚠️ Digite o código da prova!';
+        msg.className   = 'msg msg-erro';
+        return;
+      }
+      localStorage.setItem('eq_prova_codigo', codigo);
+      location.href = 'prova.html?codigo=' + codigo;
+    }
+
+    // Enter no campo de código
+    document.getElementById('codigoProva').addEventListener('keydown', e => {
+      if (e.key === 'Enter') entrarProva();
+    });
+  </script>
+</body>
+</html>
