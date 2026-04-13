@@ -1,0 +1,212 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ─────────────────────────────────────────────
+    // HELPERS
+    // ─────────────────────────────────────────────
+
+    // Verifica se o usuário é admin (documento existe em /admins)
+    function isAdmin() {
+      return request.auth != null
+        && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    // Verifica se o usuário é professor (documento com uid na coleção /professores)
+    // Nota: usamos get() pois professores não usam o uid como document ID
+    function isProfessor() {
+      return request.auth != null
+        && exists(/databases/$(database)/documents/admins/$(request.auth.uid)) == false
+        && request.auth != null;
+      // Verificação real de professor é feita no onAuthStateChanged do painel —
+      // aqui usamos isAdmin() para writes privilegiados.
+    }
+
+    // ─────────────────────────────────────────────
+    // ADMINS
+    // Somente o próprio admin lê o seu doc.
+    // Write apenas pelo Console do Firebase.
+    // ─────────────────────────────────────────────
+    match /admins/{uid} {
+      allow read: if request.auth != null && request.auth.uid == uid;
+      allow write: if false;
+    }
+
+    // ─────────────────────────────────────────────
+    // ALUNOS
+    // ─────────────────────────────────────────────
+    match /alunos/{uid} {
+      // Qualquer autenticado lê perfil básico (necessário para busca de amigos,
+      // exibição de avatar/apelido no ranking, batalhas, etc.)
+      allow read: if request.auth != null;
+
+      // Somente o próprio aluno escreve no seu documento
+      allow write: if request.auth != null && request.auth.uid == uid;
+
+      // ── Histórico de partidas ──
+      // Somente o próprio aluno acessa
+      match /historico/{docId} {
+        allow read, write: if request.auth != null && request.auth.uid == uid;
+      }
+
+      // ── Sistema de amigos ──
+      // Leitura: somente o dono da subcoleção
+      // Escrita: o próprio dono OU quem está enviando/aceitando a solicitação
+      // Escrita bidirecional necessária para o sistema de amizade:
+      // - O dono da subcoleção (uid) pode sempre escrever
+      // - Outro usuário autenticado pode escrever SE for o solicitante OU o amigoUid
+      //   (necessário para aceitar/recusar/remover amizade reciprocamente)
+      match /amigos/{amigoId} {
+        allow read: if request.auth != null && request.auth.uid == uid;
+        allow write: if request.auth != null
+          && (request.auth.uid == uid
+          || (request.resource != null
+              && (request.resource.data.solicitanteUid == request.auth.uid
+               || request.resource.data.amigoUid == request.auth.uid))
+          || resource != null); // permite delete recíproco (remover amigo)
+      }
+    }
+
+    // ─────────────────────────────────────────────
+    // DISCIPLINAS
+    // Leitura pública (necessária antes do login na tela de lobby).
+    // Write restrito a admins.
+    // ─────────────────────────────────────────────
+    match /disciplinas/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // ─────────────────────────────────────────────
+    // QUESTÕES (banco geral)
+    // Leitura: qualquer autenticado
+    // Write: qualquer autenticado (professores adicionam questões ao banco)
+    // Delete: apenas quem criou a questão ou admin
+    // ─────────────────────────────────────────────
+    match /questoes/{id} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null;
+      allow update: if request.auth != null
+        && (resource.data.professorUid == request.auth.uid || isAdmin());
+      allow delete: if request.auth != null
+        && (resource.data.professorUid == request.auth.uid || isAdmin());
+    }
+
+    // ─────────────────────────────────────────────
+    // QUESTÕES DO PROFESSOR (banco personalizado)
+    // Cada professor só acessa/edita as próprias
+    // ─────────────────────────────────────────────
+    match /questoes_professor/{id} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null
+        && request.resource.data.professorUid == request.auth.uid;
+      allow update, delete: if request.auth != null
+        && resource.data.professorUid == request.auth.uid;
+    }
+
+    // ─────────────────────────────────────────────
+    // RANKING
+    // Leitura: qualquer autenticado
+    // Create: qualquer autenticado, mas valida campos mínimos e pontos ≥ 0
+    // Update/Delete: ninguém (imutável pelo client)
+    // ─────────────────────────────────────────────
+    match /ranking/{id} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null
+        && request.resource.data.pontos is int
+        && request.resource.data.pontos >= 0
+        && request.resource.data.keys().hasAll(['nome','pontos','disciplina','dificuldade','data','timestamp']);
+      allow update, delete: if false;
+    }
+
+    // ─────────────────────────────────────────────
+    // PROVAS
+    // Leitura: qualquer autenticado (alunos precisam buscar por código)
+    // Create: qualquer autenticado com uid de professor no payload
+    // Update/Delete: somente quem criou a prova ou admin
+    // ─────────────────────────────────────────────
+    match /provas/{id} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null
+        && request.resource.data.professorUid == request.auth.uid;
+      allow update, delete: if request.auth != null
+        && (resource.data.professorUid == request.auth.uid || isAdmin());
+    }
+
+    // ─────────────────────────────────────────────
+    // RESULTADOS DE PROVAS
+    // Leitura: qualquer autenticado (professores precisam ver resultados de alunos)
+    // Create: aluno autenticado, vinculando ao próprio uid
+    // Update/Delete: somente admin ou professor que criou a prova
+    // ─────────────────────────────────────────────
+    match /resultados_provas/{id} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null
+        && request.resource.data.alunoUid == request.auth.uid;
+      allow delete: if request.auth != null && isAdmin();
+      allow update: if false;
+    }
+
+    // ─────────────────────────────────────────────
+    // BATALHAS
+    // Leitura: qualquer autenticado (necessário para lobby e notificações)
+    // Create: o anfitrião, que deve ser o auth.uid
+    // Update: somente os dois jogadores da batalha
+    // Delete: ninguém pelo client
+    // ─────────────────────────────────────────────
+    match /batalhas/{id} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null
+        && request.resource.data.anfitriaoUid == request.auth.uid;
+      allow update: if request.auth != null
+        && (request.auth.uid == resource.data.anfitriaoUid
+         || request.auth.uid == resource.data.desafiadoUid);
+      allow delete: if false;
+    }
+
+    // ─────────────────────────────────────────────
+    // PROFESSORES
+    // Leitura: qualquer autenticado (o onAuthStateChanged do painel verifica se é professor)
+    // Write: somente admin
+    // ─────────────────────────────────────────────
+    match /professores/{id} {
+      allow read: if request.auth != null;
+      allow write: if isAdmin();
+    }
+
+    // ─────────────────────────────────────────────
+    // SOLICITAÇÕES DE SENHA
+    // Leitura/Update/Delete: somente admin
+    // Create: aberto (professores sem login precisam enviar solicitação),
+    //         mas valida campos e status inicial
+    // ─────────────────────────────────────────────
+    match /solicitacoes_senha/{id} {
+      allow read, update, delete: if isAdmin();
+      allow create: if request.resource.data.keys().hasAll(['nome','mensagem','status','timestamp'])
+        && request.resource.data.status == 'pendente'
+        && request.resource.data.nome is string
+        && request.resource.data.mensagem is string;
+    }
+
+    // ─────────────────────────────────────────────
+    // ANÚNCIOS
+    // Leitura: qualquer autenticado (alunos veem pop-ups)
+    // Write: somente admin
+    // ─────────────────────────────────────────────
+    match /anuncios/{id} {
+      allow read: if request.auth != null;
+      allow write: if isAdmin();
+    }
+
+    // ─────────────────────────────────────────────
+    // FEEDBACKS
+    // Create: qualquer autenticado
+    // Read/Update/Delete: somente admin
+    // ─────────────────────────────────────────────
+    match /feedbacks/{id} {
+      allow create: if request.auth != null;
+      allow read, update, delete: if isAdmin();
+    }
+
+  }
+}

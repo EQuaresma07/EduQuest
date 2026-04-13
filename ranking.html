@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cognix — Ranking</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet"/>
+  <script>
+    // Limpa dados de partida se tiverem mais de 30s — roda antes do DOM carregar
+    var ts = parseInt(localStorage.getItem('eq_partida_ts') || '0');
+    if ((Date.now() - ts) >= 30000) {
+      localStorage.removeItem('eq_score');
+      localStorage.removeItem('eq_player');
+      localStorage.removeItem('eq_partida_ts');
+    }
+  </script>
+</head>
+<body class="ranking-page">
+  <div class="stars"></div>
+
+  <div class="container ranking-container">
+
+    <!-- RESULTADO DO JOGO ATUAL — criado via JS apenas quando necessário -->
+    <div id="resultSection"></div>
+
+    <!-- RANKING GLOBAL -->
+    <div class="ranking-section">
+      <div class="ranking-header-area">
+        <h2 class="ranking-title">🌐 Ranking Global Online</h2>
+        <button class="btn-refresh" onclick="carregarRanking()" id="btnRefresh">🔄 Atualizar</button>
+      </div>
+
+      <!-- FILTROS -->
+      <div class="ranking-filters">
+        <select id="filtDisc" onchange="carregarRanking()">
+          <option value="">Todas as disciplinas</option>
+        </select>
+        <select id="filtDiff" onchange="carregarRanking()">
+          <option value="">Todos os níveis</option>
+          <option value="🟢 Fácil">🟢 Fácil</option>
+          <option value="🟡 Médio">🟡 Médio</option>
+          <option value="🔴 Difícil">🔴 Difícil</option>
+        </select>
+      </div>
+
+      <div id="rankingLoading" class="loading-ranking">🔄 Carregando ranking...</div>
+      <div class="ranking-list" id="rankingList"></div>
+    </div>
+
+    <button class="btn-home" onclick="location.href='index.html'">🏠 Voltar ao Início</button>
+
+  </div>
+
+  <script type="module">
+    import { db, auth, collection, getDocs, addDoc, doc, getDoc, query, where, orderBy, limit, onAuthStateChanged } from './js/firebase.js';
+    import { iniciarNotificacoes } from './js/notificacoes.js';
+
+    const DISCIPLINAS_PADRAO = [
+      { id:'informatica', emoji:'💻', nome:'Informática' },
+      { id:'matematica',  emoji:'📐', nome:'Matemática' },
+      { id:'portugues',   emoji:'📖', nome:'Português' },
+      { id:'ciencias',    emoji:'🔬', nome:'Ciências' },
+      { id:'geografia',   emoji:'🌍', nome:'Geografia' },
+      { id:'biologia',    emoji:'🧬', nome:'Biologia' },
+      { id:'educacaofisica', emoji:'⚽', nome:'Educação Física' },
+      { id:'quimica',     emoji:'⚗️', nome:'Química' },
+      { id:'fisica',      emoji:'⚡', nome:'Física' },
+      { id:'historia',    emoji:'📜', nome:'História' },
+      { id:'artes',       emoji:'🎨', nome:'Artes' },
+    ];
+
+    async function carregarFiltrosDisciplinas() {
+      const sel = document.getElementById('filtDisc');
+      let todasDiscs = [...DISCIPLINAS_PADRAO];
+      try {
+        const snap = await getDocs(collection(db,'disciplinas'));
+        snap.forEach(d => {
+          if (!todasDiscs.some(f => f.id === d.id)) {
+            todasDiscs.push({ id:d.id, emoji:d.data().emoji||'📚', nome:d.data().nome });
+          }
+        });
+      } catch(e) {}
+      // Popula o select com todas as disciplinas
+      // O valor do filtro usa o nome completo com emoji (como salvo no ranking)
+      todasDiscs.forEach(d => {
+        const opt = document.createElement('option');
+        opt.value = `${d.emoji} ${d.nome}`;
+        opt.textContent = `${d.emoji} ${d.nome}`;
+        sel.appendChild(opt);
+      });
+    }
+
+    carregarFiltrosDisciplinas();
+
+    // Inicia notificações se logado
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const snap = await getDoc(doc(db,'alunos',user.uid));
+        if (snap.exists()) iniciarNotificacoes(auth, user, onAuthStateChanged);
+      }
+    });
+
+    // Level Up overlay
+    const lvlUp = localStorage.getItem('eq_levelup');
+    if (lvlUp) {
+      const lv = JSON.parse(lvlUp);
+      localStorage.removeItem('eq_levelup');
+      const overlay = document.createElement('div');
+      overlay.className = 'levelup-overlay';
+      overlay.innerHTML = `
+        <div class="levelup-box">
+          <div class="levelup-emoji">${lv.emoji}</div>
+          <div class="levelup-title">⬆ LEVEL UP!</div>
+          <div class="levelup-nome">Você é agora um <strong>${lv.nome}</strong> — Nível ${lv.nivel}</div>
+          <button class="btn-play" onclick="this.closest('.levelup-overlay').remove()" style="margin:0 auto;">
+            <span>🎉 Continuar</span><div class="btn-glow"></div>
+          </button>
+        </div>`;
+      document.body.appendChild(overlay);
+    }
+
+    // Mostra resultado só se veio de uma partida nos últimos 30s
+    const score  = parseInt(localStorage.getItem('eq_score'));
+    const player = localStorage.getItem('eq_player');
+    const ts     = parseInt(localStorage.getItem('eq_partida_ts') || '0');
+    const recente = (Date.now() - ts) < 30000;
+
+    // Limpa SEMPRE
+    localStorage.removeItem('eq_score');
+    localStorage.removeItem('eq_player');
+    localStorage.removeItem('eq_partida_ts');
+
+    // Só injeta o HTML se realmente veio de uma partida recente
+    if (recente && !isNaN(score) && score > 0 && player) {
+      let trophy='🥉', title='Bom trabalho!', msg='Continue praticando para melhorar!';
+      if      (score >= 200) { trophy='🏆'; title='Lendário!';    msg='Você dominou o quiz! Está pronto para o TCC! 🚀'; }
+      else if (score >= 120) { trophy='🥇'; title='Excelente!';   msg='Ótimo desempenho! Você tem muito conhecimento!'; }
+      else if (score >= 70)  { trophy='🥈'; title='Muito bom!';   msg='Mais um pouco de estudo e você chega lá!'; }
+
+      document.getElementById('resultSection').innerHTML = `
+        <div class="result-section">
+          <div class="result-trophy">${trophy}</div>
+          <h2 class="result-title">${title}</h2>
+          <p class="result-player">👤 ${player}</p>
+          <div class="result-score-box">
+            <div class="result-score" style="color:var(--cyan);">${score}</div>
+            <div class="result-label">pontos</div>
+          </div>
+          <p class="result-msg">${msg}</p>
+          <div class="result-actions">
+            <button class="btn-play" onclick="location.href='index.html'">🔄 Jogar Novamente</button>
+          </div>
+        </div>`;
+    }
+
+    // Carrega ranking do Firebase — otimizado: filtra e limita no servidor
+    window.carregarRanking = async function() {
+      const filtDisc = document.getElementById('filtDisc').value;
+      const filtDiff = document.getElementById('filtDiff').value;
+      const lista    = document.getElementById('rankingList');
+      const loading  = document.getElementById('rankingLoading');
+      const btnR     = document.getElementById('btnRefresh');
+
+      lista.innerHTML = '';
+      loading.style.display = 'block';
+      btnR.textContent = '⏳';
+      btnR.disabled = true;
+
+      try {
+        // Monta a query com filtros opcionais no servidor
+        // Busca mais do que 20 para poder agrupar por melhor pontuação por jogador
+        let constraints = [orderBy('pontos', 'desc'), limit(200)];
+        if (filtDisc) constraints = [where('disciplina','==',filtDisc), ...constraints];
+        if (filtDiff) constraints = [where('dificuldade','==',filtDiff), ...constraints];
+
+        const snap = await getDocs(query(collection(db, 'ranking'), ...constraints));
+        let todos = [];
+        snap.forEach(d => todos.push({ id: d.id, ...d.data() }));
+
+        // Agrupa por jogador: mantém apenas a MAIOR pontuação de cada um
+        const melhorPorJogador = {};
+        todos.forEach(r => {
+          const chave = r.nome + '|' + (r.disciplina||'') + '|' + (r.dificuldade||'');
+          if (!melhorPorJogador[chave] || r.pontos > melhorPorJogador[chave].pontos) {
+            melhorPorJogador[chave] = r;
+          }
+        });
+        let dados = Object.values(melhorPorJogador)
+          .sort((a, b) => b.pontos - a.pontos)
+          .slice(0, 20);
+
+        loading.style.display = 'none';
+        btnR.textContent = '🔄 Atualizar';
+        btnR.disabled = false;
+
+        if (!dados.length) {
+          lista.innerHTML = '<div class="no-ranking">Nenhuma partida registrada ainda.<br>Seja o primeiro a jogar! 🎮</div>';
+          return;
+        }
+
+        const medals = ['🥇','🥈','🥉'];
+
+        dados.forEach((r, i) => {
+          const div = document.createElement('div');
+          div.className = `ranking-item ${i < 3 ? 'top-'+(i+1) : ''}`;
+
+          // Destaca o jogador atual
+          const isCurrentPlayer = r.nome === player;
+
+          div.innerHTML = `
+            <div class="rank-pos">${medals[i] || (i+1)}</div>
+            <div class="rank-info">
+              <div class="rank-name ${isCurrentPlayer ? 'rank-me' : ''}">
+                ${r.nome} ${isCurrentPlayer ? '← você' : ''}
+              </div>
+              <div class="rank-details">${r.disciplina || ''} • ${r.dificuldade || ''} • ${r.data || ''}</div>
+            </div>
+            <div class="rank-score">${r.pontos} pts</div>
+          `;
+          lista.appendChild(div);
+        });
+
+      } catch(e) {
+        loading.style.display = 'none';
+        btnR.textContent = '🔄 Atualizar';
+        btnR.disabled = false;
+        lista.innerHTML = '<div class="no-ranking">❌ Erro ao carregar ranking.<br>' + e.message + '</div>';
+      }
+    };
+
+    carregarRanking();
+
+    // ===== FEEDBACK =====
+    if (localStorage.getItem('eq_pedir_feedback') === '1') {
+      localStorage.removeItem('eq_pedir_feedback');
+      setTimeout(() => mostrarModalFeedback(), 1200);
+    }
+
+    function mostrarModalFeedback() {
+      const overlay = document.createElement('div');
+      overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:999;display:flex;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(4px);animation:fadeInDown 0.3s ease;';
+      overlay.innerHTML = `
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:20px;padding:2rem;max-width:400px;width:100%;text-align:center;box-shadow:var(--glow-purple);">
+          <div style="font-size:2.5rem;margin-bottom:0.5rem;">💬</div>
+          <h3 style="font-family:var(--font-head);color:white;letter-spacing:2px;font-size:1rem;margin-bottom:0.3rem;">O QUE ACHOU DO COGNIX?</h3>
+          <p style="color:var(--text2);font-size:0.85rem;margin-bottom:1.25rem;line-height:1.5;">Sua opinião nos ajuda a melhorar! Leva menos de 1 minuto.</p>
+
+          <!-- ESTRELAS -->
+          <div id="estrelasContainer" style="display:flex;justify-content:center;gap:0.5rem;margin-bottom:1.25rem;font-size:2rem;cursor:pointer;">
+            ${[1,2,3,4,5].map(n=>`<span class="estrela" data-v="${n}" style="opacity:0.3;transition:all 0.15s;">⭐</span>`).join('')}
+          </div>
+
+          <!-- TEXTO OPCIONAL -->
+          <textarea id="feedbackTexto" placeholder="Deixe um comentário (opcional)..." rows="3"
+            style="width:100%;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:10px;padding:0.75rem;color:var(--text);font-family:var(--font-body);font-size:0.85rem;resize:none;margin-bottom:1rem;box-sizing:border-box;"></textarea>
+
+          <div style="display:flex;gap:0.75rem;">
+            <button id="btnEnviarFeedback" class="btn-play" style="flex:1;"><span>📤 Enviar</span><div class="btn-glow"></div></button>
+            <button id="btnPularFeedback" class="btn-ranking" style="flex:0 0 auto;">Pular</button>
+          </div>
+          <div id="msgFeedback" class="msg hidden" style="margin-top:0.75rem;"></div>
+        </div>`;
+      document.body.appendChild(overlay);
+
+      let notaSelecionada = 0;
+      overlay.querySelectorAll('.estrela').forEach(el => {
+        el.onmouseover = () => overlay.querySelectorAll('.estrela').forEach(e => e.style.opacity = e.dataset.v <= el.dataset.v ? '1' : '0.3');
+        el.onmouseleave = () => overlay.querySelectorAll('.estrela').forEach(e => e.style.opacity = e.dataset.v <= notaSelecionada ? '1' : '0.3');
+        el.onclick = () => { notaSelecionada = parseInt(el.dataset.v); overlay.querySelectorAll('.estrela').forEach(e => e.style.opacity = e.dataset.v <= notaSelecionada ? '1' : '0.3'); };
+      });
+
+      overlay.querySelector('#btnPularFeedback').onclick = () => overlay.remove();
+      overlay.querySelector('#btnEnviarFeedback').onclick = async () => {
+        if (!notaSelecionada) { const m=overlay.querySelector('#msgFeedback'); m.textContent='⚠️ Selecione uma nota!'; m.className='msg msg-erro'; return; }
+        const btn = overlay.querySelector('#btnEnviarFeedback');
+        btn.querySelector('span').textContent = '🔄 Enviando...'; btn.disabled = true;
+        try {
+          const uid = localStorage.getItem('eq_uid') || '';
+          await addDoc(collection(db,'feedbacks'), {
+            nota: notaSelecionada,
+            comentario: overlay.querySelector('#feedbackTexto').value.trim(),
+            uid,
+            data: new Date(),
+            dataHora: new Date().toLocaleString('pt-BR')
+          });
+          const m = overlay.querySelector('#msgFeedback');
+          m.textContent = '✅ Obrigado pelo feedback!'; m.className = 'msg msg-sucesso';
+          setTimeout(() => overlay.remove(), 1500);
+        } catch(e) {
+          const m=overlay.querySelector('#msgFeedback'); m.textContent='❌ Erro ao enviar.'; m.className='msg msg-erro';
+          btn.querySelector('span').textContent='📤 Enviar'; btn.disabled=false;
+        }
+      };
+    }
+  </script>
+</body>
+</html>

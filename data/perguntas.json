@@ -1,0 +1,5124 @@
+{
+  "informatica": {
+    "facil": [
+      {
+        "p": "O que significa HTML?",
+        "ops": [
+          "HyperText Markup Language",
+          "High Transfer Machine",
+          "HyperTool Multi Logic",
+          "Home Text Master"
+        ],
+        "c": 0
+      },
+      {
+        "p": "Qual linguagem estiliza páginas web?",
+        "ops": [
+          "JavaScript",
+          "PHP",
+          "CSS",
+          "Python"
+        ],
+        "c": 2
+      },
+      {
+        "p": "O que é um algoritmo?",
+        "ops": [
+          "Um vírus",
+          "Sequência de passos para resolver um problema",
+          "Um hardware",
+          "Um sistema operacional"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que significa CPU?",
+        "ops": [
+          "Central Processing Unit",
+          "Computer Power Unit",
+          "Core Program Utility",
+          "Central Power Upload"
+        ],
+        "c": 0
+      },
+      {
+        "p": "Extensão de arquivos JavaScript?",
+        "ops": [
+          ".java",
+          ".js",
+          ".jscript",
+          ".script"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é um banco de dados?",
+        "ops": [
+          "Um tipo de rede",
+          "Conjunto organizado de informações",
+          "Um antivírus",
+          "Um tipo de memória"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Qual tag HTML cria um link?",
+        "ops": [
+          "<link>",
+          "<url>",
+          "<a>",
+          "<href>"
+        ],
+        "c": 2
+      },
+      {
+        "p": "O que significa 'open source'?",
+        "ops": [
+          "Software pago",
+          "Código aberto para uso",
+          "Software empresarial",
+          "Sistema operacional"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é a internet?",
+        "ops": [
+          "Um computador",
+          "Rede mundial de computadores",
+          "Editor de texto",
+          "Sistema operacional"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Qual é um sistema operacional?",
+        "ops": [
+          "Microsoft Word",
+          "Google Chrome",
+          "Windows 10",
+          "Adobe Photoshop"
+        ],
+        "c": 2
+      },
+      {
+        "p": "O que faz a tecla 'Delete'?",
+        "ops": [
+          "Salva arquivo",
+          "Apaga caractere à frente",
+          "Copia texto",
+          "Desfaz ação"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que significa WWW?",
+        "ops": [
+          "World Wide Web",
+          "World Wire Web",
+          "Wide World Wire",
+          "Web World Wide"
+        ],
+        "c": 0
+      },
+      {
+        "p": "Dispositivo para imprimir documentos?",
+        "ops": [
+          "Scanner",
+          "Monitor",
+          "Impressora",
+          "Teclado"
+        ],
+        "c": 2
+      },
+      {
+        "p": "Arquivo com extensão .pdf é:",
+        "ops": [
+          "Arquivo de imagem",
+          "Arquivo de áudio",
+          "Documento portátil",
+          "Arquivo de vídeo"
+        ],
+        "c": 2
+      },
+      {
+        "p": "Atalho para copiar?",
+        "ops": [
+          "Ctrl+X",
+          "Ctrl+V",
+          "Ctrl+C",
+          "Ctrl+Z"
+        ],
+        "c": 2
+      },
+      {
+        "p": "O que é RAM?",
+        "ops": [
+          "Memória de acesso aleatório",
+          "Disco rígido",
+          "Processador",
+          "Placa de vídeo"
+        ],
+        "c": 0
+      },
+      {
+        "p": "O que faz o botão direito do mouse?",
+        "ops": [
+          "Abre um arquivo",
+          "Exibe menu de contexto",
+          "Fecha uma janela",
+          "Move um arquivo"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Qual é um navegador de internet?",
+        "ops": [
+          "Windows",
+          "Notepad",
+          "Google Chrome",
+          "Microsoft Excel"
+        ],
+        "c": 2
+      },
+      {
+        "p": "O que é um pixel?",
+        "ops": [
+          "Um processador",
+          "Menor unidade de imagem digital",
+          "Um cabo de rede",
+          "Um tipo de memória"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Para que serve o teclado?",
+        "ops": [
+          "Exibir imagens",
+          "Emitir sons",
+          "Inserir dados",
+          "Imprimir documentos"
+        ],
+        "c": 2
+      },
+      {
+        "p": "O que significa 'download'?",
+        "ops": [
+          "Enviar para nuvem",
+          "Baixar da internet",
+          "Deletar arquivo",
+          "Compactar arquivo"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é o disco rígido (HD)?",
+        "ops": [
+          "Dispositivo de entrada",
+          "Armazenamento permanente",
+          "Dispositivo de saída",
+          "Memória temporária"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Qual é um editor de texto?",
+        "ops": [
+          "VLC Player",
+          "Microsoft Word",
+          "Google Chrome",
+          "WinRAR"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que faz o atalho Ctrl+Z?",
+        "ops": [
+          "Salva arquivo",
+          "Desfaz última ação",
+          "Refaz ação",
+          "Fecha programa"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é e-mail?",
+        "ops": [
+          "Um vírus",
+          "Correio eletrônico",
+          "Um navegador",
+          "Sistema operacional"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Quantos bits tem 1 byte?",
+        "ops": [
+          "4",
+          "16",
+          "8",
+          "2"
+        ],
+        "c": 2
+      },
+      {
+        "p": "O que é o monitor?",
+        "ops": [
+          "Dispositivo de entrada",
+          "Dispositivo de armazenamento",
+          "Exibe imagens na tela",
+          "Processador"
+        ],
+        "c": 2
+      },
+      {
+        "p": "Extensão de imagens JPEG?",
+        "ops": [
+          ".mp3",
+          ".jpg",
+          ".doc",
+          ".exe"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é um vírus de computador?",
+        "ops": [
+          "Programa de proteção",
+          "Programa malicioso",
+          "Um hardware",
+          "Um driver"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que significa USB?",
+        "ops": [
+          "Universal Serial Bus",
+          "Unified System Base",
+          "Universal System Bridge",
+          "Unified Serial Boot"
+        ],
+        "c": 0
+      },
+      {
+        "p": "O que é o Explorador de Arquivos?",
+        "ops": [
+          "Navegador de internet",
+          "Gerencia arquivos e pastas",
+          "Um antivírus",
+          "Editor de texto"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Para que serve um antivírus?",
+        "ops": [
+          "Acelerar o PC",
+          "Proteger contra malware",
+          "Editar vídeos",
+          "Gerenciar arquivos"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é upload?",
+        "ops": [
+          "Baixar da internet",
+          "Enviar para servidor",
+          "Deletar arquivos",
+          "Copiar arquivos"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Tecla para confirmar ou pular linha?",
+        "ops": [
+          "Esc",
+          "Backspace",
+          "Tab",
+          "Enter"
+        ],
+        "c": 3
+      },
+      {
+        "p": "O que é uma pasta (diretório)?",
+        "ops": [
+          "Um arquivo de texto",
+          "Local para organizar arquivos",
+          "Um vírus",
+          "Um programa"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que faz o atalho Ctrl+S?",
+        "ops": [
+          "Seleciona tudo",
+          "Salva o arquivo",
+          "Fecha arquivo",
+          "Abre arquivo"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Qual a função do mouse?",
+        "ops": [
+          "Inserir texto",
+          "Emitir sons",
+          "Controlar o cursor",
+          "Imprimir documentos"
+        ],
+        "c": 2
+      },
+      {
+        "p": "O que é wi-fi?",
+        "ops": [
+          "Um cabo de rede",
+          "Conexão sem fio à internet",
+          "Programa de segurança",
+          "Sistema operacional"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é software?",
+        "ops": [
+          "Componentes físicos",
+          "Programas do computador",
+          "O monitor",
+          "O gabinete"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é hardware?",
+        "ops": [
+          "Programas do PC",
+          "Componentes físicos",
+          "Arquivos do sistema",
+          "Antivírus"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Extensão de executáveis no Windows?",
+        "ops": [
+          ".txt",
+          ".jpg",
+          ".exe",
+          ".mp3"
+        ],
+        "c": 2
+      },
+      {
+        "p": "O que é a área de trabalho (desktop)?",
+        "ops": [
+          "A memória RAM",
+          "Tela inicial do sistema",
+          "O disco rígido",
+          "O processador"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é um atalho na área de trabalho?",
+        "ops": [
+          "Cópia do arquivo",
+          "Link para abrir rapidamente",
+          "Um vírus",
+          "Um tipo de pasta"
+        ],
+        "c": 1
+      }
+    ],
+    "medio": [
+      {
+        "p": "O que faz 'display: flex' no CSS?",
+        "ops": [
+          "Deixa texto em negrito",
+          "Oculta o elemento",
+          "Organiza elementos flexíveis",
+          "Adiciona bordas"
+        ],
+        "c": 2
+      },
+      {
+        "p": "O que é o protocolo HTTP?",
+        "ops": [
+          "Transferência de hipertexto",
+          "Protocolo de segurança",
+          "Linguagem de programação",
+          "Sistema de arquivos"
+        ],
+        "c": 0
+      },
+      {
+        "p": "Para que serve a tag <div>?",
+        "ops": [
+          "Criar links",
+          "Agrupar blocos de conteúdo",
+          "Inserir imagens",
+          "Criar listas"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é um loop em programação?",
+        "ops": [
+          "Um erro de código",
+          "Estrutura que repete instruções",
+          "Uma variável",
+          "Um tipo de função"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que significa IDE?",
+        "ops": [
+          "Internet Data Engine",
+          "Integrated Development Environment",
+          "Internal Design Editor",
+          "Interface Development Engine"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Diferença entre == e === no JavaScript?",
+        "ops": [
+          "Não há diferença",
+          "== valor, === valor e tipo",
+          "=== só valor",
+          "São atribuições"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é uma função em programação?",
+        "ops": [
+          "Um erro no código",
+          "Bloco de código reutilizável",
+          "Um tipo de variável",
+          "Estrutura de repetição"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é SQL?",
+        "ops": [
+          "Linguagem web",
+          "Linguagem para bancos de dados",
+          "Sistema operacional",
+          "Protocolo de rede"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que significa IP?",
+        "ops": [
+          "Internal Program",
+          "Internet Protocol",
+          "Integrated Processor",
+          "Input Parameter"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é responsive design?",
+        "ops": [
+          "Design só para desktop",
+          "Adapta-se a diferentes telas",
+          "Design com muitas cores",
+          "Design minimalista"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Para que serve o Git?",
+        "ops": [
+          "Editar imagens",
+          "Controle de versão",
+          "Gerenciar banco de dados",
+          "Criar sites"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é uma API?",
+        "ops": [
+          "Um banco de dados",
+          "Interface entre sistemas",
+          "Sistema operacional",
+          "Editor de código"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que faz o SELECT no SQL?",
+        "ops": [
+          "Apaga dados",
+          "Insere dados",
+          "Consulta dados de tabela",
+          "Cria tabelas"
+        ],
+        "c": 2
+      },
+      {
+        "p": "O que é o DOM?",
+        "ops": [
+          "Estrutura da página HTML",
+          "Database Object Manager",
+          "Design Of Modules",
+          "Display Output Mode"
+        ],
+        "c": 0
+      },
+      {
+        "p": "Método para adicionar ao final de array?",
+        "ops": [
+          "push()",
+          "pop()",
+          "shift()",
+          "splice()"
+        ],
+        "c": 0
+      },
+      {
+        "p": "O que é uma variável?",
+        "ops": [
+          "Um tipo de loop",
+          "Espaço na memória para dados",
+          "Função matemática",
+          "Erro de código"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que significa DNS?",
+        "ops": [
+          "Data Network Security",
+          "Domain Name System",
+          "Dynamic Network Service",
+          "Digital Name Server"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é o backend web?",
+        "ops": [
+          "Interface visual",
+          "Servidor que processa lógica",
+          "Banco de imagens",
+          "Design do site"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Estrutura para decisões no código?",
+        "ops": [
+          "For loop",
+          "While loop",
+          "If/else",
+          "Array"
+        ],
+        "c": 2
+      },
+      {
+        "p": "O que é o localStorage?",
+        "ops": [
+          "Banco remoto",
+          "Dados no navegador do usuário",
+          "Servidor de arquivos",
+          "Biblioteca JS"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é uma classe em CSS?",
+        "ops": [
+          "Um tipo de tag",
+          "Seletor que aplica estilos",
+          "Atributo de cor",
+          "Tipo de fonte"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Para que serve o atributo 'alt'?",
+        "ops": [
+          "Definir tamanho",
+          "Texto alternativo para imagens",
+          "Definir cor",
+          "Definir link"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é git commit?",
+        "ops": [
+          "Envia para repositório remoto",
+          "Salva snapshot das alterações",
+          "Cria repositório",
+          "Apaga histórico"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Função do index.html?",
+        "ops": [
+          "Armazenar banco de dados",
+          "Página principal do site",
+          "Definir os estilos",
+          "Conter o JavaScript"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é o operador ternário?",
+        "ops": [
+          "Um loop",
+          "Forma compacta do if/else",
+          "Método de array",
+          "Tipo de função"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que significa CRUD?",
+        "ops": [
+          "Create, Read, Update, Delete",
+          "Copy, Run, Upload, Download",
+          "Code, Run, Use, Deploy",
+          "Create, Remove, Update, Deploy"
+        ],
+        "c": 0
+      },
+      {
+        "p": "O que é JSON?",
+        "ops": [
+          "Java Standard Object Notation",
+          "Formato de troca de dados JS",
+          "Java Server Object Network",
+          "JavaScript Online Notation"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Propriedade CSS para espaço interno?",
+        "ops": [
+          "margin",
+          "border",
+          "padding",
+          "spacing"
+        ],
+        "c": 2
+      },
+      {
+        "p": "O que é um evento no JavaScript?",
+        "ops": [
+          "Erro de execução",
+          "Ação do usuário detectável",
+          "Tipo de variável",
+          "Função assíncrona"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é o operador &&?",
+        "ops": [
+          "OU lógico",
+          "E lógico — ambos verdadeiros",
+          "Negação",
+          "Atribuição"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é uma lista no HTML?",
+        "ops": [
+          "Tabela de dados",
+          "Organiza itens (ul/ol)",
+          "Um formulário",
+          "Um link"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que significa HTTP 404?",
+        "ops": [
+          "Servidor indisponível",
+          "Recurso não encontrado",
+          "Requisição OK",
+          "Redirecionamento"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Para que serve o atributo 'href'?",
+        "ops": [
+          "Cor do link",
+          "Destino do link",
+          "Tamanho do texto",
+          "Título"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é addEventListener?",
+        "ops": [
+          "Adiciona ao DOM",
+          "Registra função para evento",
+          "Remove elemento",
+          "Cria variável"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é um array?",
+        "ops": [
+          "Variável simples",
+          "Armazena múltiplos valores",
+          "Tipo de função",
+          "Banco de dados"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é o GitHub?",
+        "ops": [
+          "Sistema operacional",
+          "Hospeda repositórios Git",
+          "Editor de código",
+          "Banco de dados"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Qual tag define uma tabela HTML?",
+        "ops": [
+          "<list>",
+          "<grid>",
+          "<table>",
+          "<data>"
+        ],
+        "c": 2
+      },
+      {
+        "p": "O que é o método fetch()?",
+        "ops": [
+          "Busca no DOM",
+          "Requisições HTTP assíncronas",
+          "Cria animações",
+          "Manipula arrays"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que faz o atributo 'required'?",
+        "ops": [
+          "Campo somente leitura",
+          "Campo obrigatório",
+          "Campo desativado",
+          "Campo oculto"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Para que serve media query CSS?",
+        "ops": [
+          "Adicionar animações",
+          "Estilos por tamanho de tela",
+          "Efeitos de sombra",
+          "Definir fontes"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é o método map() em JS?",
+        "ops": [
+          "Cria mapa visual",
+          "Transforma array e retorna novo",
+          "Remove duplicados",
+          "Ordena array"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é programação orientada a objetos?",
+        "ops": [
+          "Tipo de banco de dados",
+          "Paradigma baseado em objetos",
+          "Uma linguagem",
+          "Protocolo de rede"
+        ],
+        "c": 1
+      }
+    ],
+    "dificil": [
+      {
+        "p": "O que é 'closure' em JavaScript?",
+        "ops": [
+          "Função sem retorno",
+          "Função que lembra seu escopo de criação",
+          "Um tipo de loop",
+          "Uma classe"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é o padrão MVC?",
+        "ops": [
+          "Model View Controller",
+          "Módulo Virtual Computacional",
+          "Method Value Component",
+          "Multi View Controller"
+        ],
+        "c": 0
+      },
+      {
+        "p": "Diferença entre processo e thread?",
+        "ops": [
+          "São a mesma coisa",
+          "Processo é programa, thread é unidade de execução",
+          "Thread é mais pesada",
+          "Processo é mais rápido"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que diferencia HTTPS do HTTP?",
+        "ops": [
+          "São iguais",
+          "HTTPS usa criptografia SSL/TLS",
+          "HTTP é mais seguro",
+          "HTTPS é mais lento"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é Big O Notation?",
+        "ops": [
+          "Uma linguagem",
+          "Descreve complexidade de algoritmos",
+          "Tipo de banco de dados",
+          "Protocolo de rede"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é imutabilidade funcional?",
+        "ops": [
+          "Objetos alterados livremente",
+          "Valor não modificado — cria-se novo",
+          "Uma classe abstrata",
+          "Tipo de herança"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é um índice em banco de dados?",
+        "ops": [
+          "Coluna obrigatória",
+          "Acelera consultas ao banco",
+          "Tipo de join",
+          "Restrição de chave"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é 'debounce' no frontend?",
+        "ops": [
+          "Animação CSS",
+          "Atrasa função até evento parar",
+          "Tipo de cache",
+          "Protocolo HTTP"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é uma Promise em JavaScript?",
+        "ops": [
+          "Tipo de variável",
+          "Representa operação assíncrona futura",
+          "Função síncrona",
+          "Tipo de array"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é normalização em banco de dados?",
+        "ops": [
+          "Aumentar o banco",
+          "Reduz redundância e dependências",
+          "Criptografar dados",
+          "Fazer backup"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é WebSocket?",
+        "ops": [
+          "Um protocolo HTTP",
+          "Comunicação bidirecional em tempo real",
+          "Tipo de banco de dados",
+          "Biblioteca JavaScript"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é 'lazy loading'?",
+        "ops": [
+          "Carregamento antecipado",
+          "Carrega recursos quando necessário",
+          "Tipo de cache",
+          "Animação CSS"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é SQL Injection?",
+        "ops": [
+          "Tipo de banco de dados",
+          "Ataque com código SQL malicioso",
+          "Comando SQL válido",
+          "Protocolo de segurança"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é o 'event loop' no JS?",
+        "ops": [
+          "Um for loop",
+          "Gerencia fila de eventos e callbacks",
+          "Função assíncrona",
+          "Tipo de array"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é Docker?",
+        "ops": [
+          "Editor de código",
+          "Executa apps em contêineres",
+          "Um banco de dados",
+          "Sistema operacional"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é herança em POO?",
+        "ops": [
+          "Cria objetos idênticos",
+          "Classe herda de outra classe",
+          "Ocultação de dados",
+          "Sobrescrita de métodos"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é o método reduce()?",
+        "ops": [
+          "Remove elementos",
+          "Reduz array a um valor",
+          "Filtra elementos",
+          "Ordena elementos"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é REST?",
+        "ops": [
+          "Linguagem de programação",
+          "Arquitetura para APIs HTTP",
+          "Um banco de dados",
+          "Sistema operacional"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é encapsulamento em POO?",
+        "ops": [
+          "Reutilizar código",
+          "Ocultar detalhes internos",
+          "Criar múltiplas instâncias",
+          "Herdar propriedades"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é o JOIN no SQL?",
+        "ops": [
+          "Apaga registros",
+          "Combina tabelas por coluna",
+          "Cria nova tabela",
+          "Atualiza registros"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é polimorfismo em POO?",
+        "ops": [
+          "Classe sem métodos",
+          "Objetos respondem ao método de formas distintas",
+          "Herança múltipla",
+          "Encapsulamento"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é um CDN?",
+        "ops": [
+          "Um banco de dados",
+          "Rede que entrega conteúdo próximo",
+          "Protocolo de segurança",
+          "Editor de código"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é async/await em JavaScript?",
+        "ops": [
+          "Tipo de loop",
+          "Sintaxe para Promises legível",
+          "Tipo de variável",
+          "Método de array"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é virtual DOM no React?",
+        "ops": [
+          "Banco de dados virtual",
+          "DOM em memória para otimizar updates",
+          "Tipo de componente",
+          "Um hook"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é cache em computação?",
+        "ops": [
+          "Tipo de vírus",
+          "Armazenamento temporário rápido",
+          "Protocolo de rede",
+          "Tipo de banco"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é recursão em programação?",
+        "ops": [
+          "Um loop simples",
+          "Função que chama a si mesma",
+          "Erro de programação",
+          "Tipo de array"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é o protocolo TCP/IP?",
+        "ops": [
+          "Sistema operacional",
+          "Governa transmissão de dados",
+          "Linguagem de programação",
+          "Banco de dados"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é o padrão Singleton?",
+        "ops": [
+          "Permite múltiplas instâncias",
+          "Garante uma única instância",
+          "Tipo de herança",
+          "Padrão de banco"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é 'tree shaking'?",
+        "ops": [
+          "Animação de árvore",
+          "Elimina código não utilizado",
+          "Tipo de algoritmo",
+          "Ordena arrays"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é memoization?",
+        "ops": [
+          "Tipo de loop",
+          "Armazena resultados para evitar recalcular",
+          "Animação CSS",
+          "Tipo de banco"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Diferença entre SQL e NoSQL?",
+        "ops": [
+          "São iguais",
+          "SQL relacional, NoSQL flexível",
+          "NoSQL é mais antigo",
+          "SQL é mais rápido"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é middleware web?",
+        "ops": [
+          "Um banco de dados",
+          "Intermediário entre cliente e servidor",
+          "Tipo de frontend",
+          "Protocolo de rede"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é um token JWT?",
+        "ops": [
+          "Tipo de cookie",
+          "Padrão seguro de autenticação",
+          "Um banco de dados",
+          "Protocolo HTTP"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é deadlock?",
+        "ops": [
+          "Tipo de vírus",
+          "Processos bloqueados esperando recursos",
+          "Loop infinito",
+          "Erro de memória"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é busca binária?",
+        "ops": [
+          "Busca em listas desordenadas",
+          "Divide lista ao meio a cada comparação",
+          "Tipo de ordenação",
+          "Estrutura de dados"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é injeção de dependência?",
+        "ops": [
+          "Um ataque",
+          "Dependências fornecidas externamente",
+          "Tipo de herança",
+          "Padrão de banco"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que são microserviços?",
+        "ops": [
+          "Serviço monolítico",
+          "Serviços independentes divididos",
+          "Tipo de banco",
+          "Protocolo"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é hash em segurança?",
+        "ops": [
+          "Cópia de dados",
+          "Transforma dados em string fixa",
+          "Criptografia simétrica",
+          "Protocolo de rede"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é CORS?",
+        "ops": [
+          "Tipo de ataque",
+          "Controla requisições entre origens",
+          "Um banco de dados",
+          "Tipo de cache"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é garbage collection?",
+        "ops": [
+          "Limpeza de arquivos",
+          "Libera memória não utilizada",
+          "Tipo de vírus",
+          "Protocolo de rede"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é o padrão Observer?",
+        "ops": [
+          "Padrão de banco de dados",
+          "Notifica objetos sobre mudanças",
+          "Tipo de herança",
+          "Padrão de segurança"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é Big Data?",
+        "ops": [
+          "Banco pequeno",
+          "Dados enormes com tecnologias especiais",
+          "Tipo de SQL",
+          "Sistema operacional"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é continuous integration?",
+        "ops": [
+          "Linguagem de programação",
+          "Integra código com verificações automáticas",
+          "Tipo de banco",
+          "Protocolo de rede"
+        ],
+        "c": 1
+      }
+    ]
+  },
+  "matematica": {
+    "facil": [
+      {
+        "p": "Quanto é 15% de 200?",
+        "ops": [
+          "25",
+          "30",
+          "35",
+          "20"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Fórmula da área do triângulo?",
+        "ops": [
+          "base × altura",
+          "(base × altura) / 2",
+          "base²",
+          "2 × (base + altura)"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Quanto é 2³?",
+        "ops": [
+          "6",
+          "9",
+          "8",
+          "12"
+        ],
+        "c": 2
+      },
+      {
+        "p": "Raiz quadrada de 144?",
+        "ops": [
+          "11",
+          "13",
+          "14",
+          "12"
+        ],
+        "c": 3
+      },
+      {
+        "p": "Se x + 5 = 12, quanto é x?",
+        "ops": [
+          "5",
+          "8",
+          "7",
+          "6"
+        ],
+        "c": 2
+      },
+      {
+        "p": "Quantos lados tem um hexágono?",
+        "ops": [
+          "5",
+          "7",
+          "6",
+          "8"
+        ],
+        "c": 2
+      },
+      {
+        "p": "Quanto é 20% de 500?",
+        "ops": [
+          "50",
+          "150",
+          "100",
+          "200"
+        ],
+        "c": 2
+      },
+      {
+        "p": "O ângulo reto mede quantos graus?",
+        "ops": [
+          "45°",
+          "180°",
+          "60°",
+          "90°"
+        ],
+        "c": 3
+      },
+      {
+        "p": "Quanto é 3/4 + 1/4?",
+        "ops": [
+          "4/8",
+          "1",
+          "2/4",
+          "3/8"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Valor aproximado de π (pi)?",
+        "ops": [
+          "3,14",
+          "2,71",
+          "1,61",
+          "4,13"
+        ],
+        "c": 0
+      },
+      {
+        "p": "Quanto é 7 × 8?",
+        "ops": [
+          "54",
+          "56",
+          "64",
+          "48"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Quanto é 100 ÷ 4?",
+        "ops": [
+          "20",
+          "30",
+          "25",
+          "15"
+        ],
+        "c": 2
+      },
+      {
+        "p": "Qual é o dobro de 37?",
+        "ops": [
+          "64",
+          "74",
+          "84",
+          "54"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Quantos centímetros tem 1 metro?",
+        "ops": [
+          "10",
+          "1000",
+          "100",
+          "500"
+        ],
+        "c": 2
+      },
+      {
+        "p": "Quanto é 12²?",
+        "ops": [
+          "124",
+          "144",
+          "132",
+          "114"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Ângulos do triângulo equilátero?",
+        "ops": [
+          "45°",
+          "90°",
+          "60°",
+          "30°"
+        ],
+        "c": 2
+      },
+      {
+        "p": "Antecessor de 100?",
+        "ops": [
+          "101",
+          "99",
+          "98",
+          "102"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Quanto é 50% de 80?",
+        "ops": [
+          "30",
+          "50",
+          "40",
+          "20"
+        ],
+        "c": 2
+      },
+      {
+        "p": "Quanto é 9 × 9?",
+        "ops": [
+          "81",
+          "72",
+          "91",
+          "63"
+        ],
+        "c": 0
+      },
+      {
+        "p": "Soma dos ângulos internos do triângulo?",
+        "ops": [
+          "360°",
+          "270°",
+          "180°",
+          "90°"
+        ],
+        "c": 2
+      },
+      {
+        "p": "Quanto é 1/2 de 60?",
+        "ops": [
+          "20",
+          "30",
+          "40",
+          "15"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Qual número é primo?",
+        "ops": [
+          "9",
+          "15",
+          "4",
+          "7"
+        ],
+        "c": 3
+      },
+      {
+        "p": "Quantos minutos tem 1 hora?",
+        "ops": [
+          "100",
+          "30",
+          "60",
+          "90"
+        ],
+        "c": 2
+      },
+      {
+        "p": "Quanto é 144 ÷ 12?",
+        "ops": [
+          "11",
+          "14",
+          "12",
+          "13"
+        ],
+        "c": 2
+      },
+      {
+        "p": "Soma dos ângulos do quadrilátero?",
+        "ops": [
+          "180°",
+          "270°",
+          "360°",
+          "90°"
+        ],
+        "c": 2
+      },
+      {
+        "p": "Quanto é 3 × 3 × 3?",
+        "ops": [
+          "9",
+          "18",
+          "27",
+          "12"
+        ],
+        "c": 2
+      },
+      {
+        "p": "Quanto é 500 − 275?",
+        "ops": [
+          "215",
+          "225",
+          "235",
+          "245"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Quantas horas tem um dia?",
+        "ops": [
+          "12",
+          "48",
+          "24",
+          "36"
+        ],
+        "c": 2
+      },
+      {
+        "p": "Quanto é 25% de 400?",
+        "ops": [
+          "80",
+          "100",
+          "75",
+          "125"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Qual é o menor número primo?",
+        "ops": [
+          "0",
+          "1",
+          "3",
+          "2"
+        ],
+        "c": 3
+      },
+      {
+        "p": "Perímetro de quadrado com lado 5?",
+        "ops": [
+          "10",
+          "25",
+          "15",
+          "20"
+        ],
+        "c": 3
+      },
+      {
+        "p": "Quanto é 8 + 9 × 2?",
+        "ops": [
+          "34",
+          "26",
+          "17",
+          "30"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Fração equivalente a 0,5?",
+        "ops": [
+          "1/4",
+          "2/3",
+          "1/2",
+          "3/4"
+        ],
+        "c": 2
+      },
+      {
+        "p": "Quantos segundos tem 1 minuto?",
+        "ops": [
+          "100",
+          "30",
+          "120",
+          "60"
+        ],
+        "c": 3
+      },
+      {
+        "p": "Raiz quadrada de 81?",
+        "ops": [
+          "7",
+          "8",
+          "9",
+          "11"
+        ],
+        "c": 2
+      },
+      {
+        "p": "Quanto é 40% de 250?",
+        "ops": [
+          "80",
+          "90",
+          "100",
+          "110"
+        ],
+        "c": 2
+      },
+      {
+        "p": "Quanto é 3/5 − 1/5?",
+        "ops": [
+          "2/5",
+          "1/5",
+          "4/5",
+          "3/10"
+        ],
+        "c": 0
+      },
+      {
+        "p": "Quantos lados tem um pentágono?",
+        "ops": [
+          "4",
+          "6",
+          "7",
+          "5"
+        ],
+        "c": 3
+      },
+      {
+        "p": "Qual é o MMC de 4 e 6?",
+        "ops": [
+          "8",
+          "24",
+          "12",
+          "6"
+        ],
+        "c": 2
+      },
+      {
+        "p": "Quanto é 2/3 de 90?",
+        "ops": [
+          "45",
+          "60",
+          "30",
+          "75"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Pizza em 8 partes, comeu 3. Sobrou?",
+        "ops": [
+          "3/8",
+          "4/8",
+          "5/8",
+          "6/8"
+        ],
+        "c": 2
+      },
+      {
+        "p": "Perímetro de retângulo 8×3?",
+        "ops": [
+          "24",
+          "11",
+          "22",
+          "16"
+        ],
+        "c": 2
+      },
+      {
+        "p": "Quanto é 10³?",
+        "ops": [
+          "30",
+          "100",
+          "300",
+          "1000"
+        ],
+        "c": 3
+      }
+    ],
+    "medio": [
+      {
+        "p": "Valor de x em 3x − 7 = 14?",
+        "ops": [
+          "5",
+          "7",
+          "9",
+          "3"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Área do triângulo base 10, altura 6?",
+        "ops": [
+          "60",
+          "15",
+          "30",
+          "20"
+        ],
+        "c": 2
+      },
+      {
+        "p": "Quanto é log₁₀(1000)?",
+        "ops": [
+          "2",
+          "10",
+          "4",
+          "3"
+        ],
+        "c": 3
+      },
+      {
+        "p": "Discriminante de x² − 5x + 6 = 0?",
+        "ops": [
+          "1",
+          "−1",
+          "4",
+          "0"
+        ],
+        "c": 0
+      },
+      {
+        "p": "Soma da PA: a₁=2, r=3, n=5?",
+        "ops": [
+          "30",
+          "40",
+          "20",
+          "35"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Quanto é sen(30°)?",
+        "ops": [
+          "1",
+          "√2/2",
+          "√3/2",
+          "1/2"
+        ],
+        "c": 3
+      },
+      {
+        "p": "y = 2x + 3 com x = 4?",
+        "ops": [
+          "9",
+          "10",
+          "11",
+          "12"
+        ],
+        "c": 2
+      },
+      {
+        "p": "Solução de 2x + 8 = 0?",
+        "ops": [
+          "4",
+          "−4",
+          "2",
+          "−2"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Raiz quadrada de 169?",
+        "ops": [
+          "12",
+          "14",
+          "11",
+          "13"
+        ],
+        "c": 3
+      },
+      {
+        "p": "PG com a₁=2 e q=3, 4º termo?",
+        "ops": [
+          "18",
+          "54",
+          "27",
+          "36"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Coeficiente angular de y = 3x − 5?",
+        "ops": [
+          "−5",
+          "5",
+          "3",
+          "−3"
+        ],
+        "c": 2
+      },
+      {
+        "p": "Quanto é cos(60°)?",
+        "ops": [
+          "1",
+          "√3/2",
+          "1/2",
+          "0"
+        ],
+        "c": 2
+      },
+      {
+        "p": "Área do círculo raio 7 (π=3,14)?",
+        "ops": [
+          "153,86",
+          "43,96",
+          "21,98",
+          "307,72"
+        ],
+        "c": 0
+      },
+      {
+        "p": "30% maior que 200 vale quanto?",
+        "ops": [
+          "230",
+          "240",
+          "260",
+          "250"
+        ],
+        "c": 2
+      },
+      {
+        "p": "Quanto é 5! (fatorial de 5)?",
+        "ops": [
+          "25",
+          "60",
+          "100",
+          "120"
+        ],
+        "c": 3
+      },
+      {
+        "p": "Hipotenusa do triângulo 3-4-?",
+        "ops": [
+          "6",
+          "7",
+          "5",
+          "8"
+        ],
+        "c": 2
+      },
+      {
+        "p": "Solução de x² − 9 = 0?",
+        "ops": [
+          "±3",
+          "±9",
+          "3",
+          "9"
+        ],
+        "c": 0
+      },
+      {
+        "p": "Quanto é tg(45°)?",
+        "ops": [
+          "0",
+          "√3",
+          "1/2",
+          "1"
+        ],
+        "c": 3
+      },
+      {
+        "p": "Área do trapézio bases 8 e 4, altura 5?",
+        "ops": [
+          "20",
+          "40",
+          "30",
+          "60"
+        ],
+        "c": 2
+      },
+      {
+        "p": "Resultado de C(5,2)?",
+        "ops": [
+          "20",
+          "5",
+          "15",
+          "10"
+        ],
+        "c": 3
+      },
+      {
+        "p": "3 operários em 12 dias. 6 operários?",
+        "ops": [
+          "8",
+          "4",
+          "6",
+          "3"
+        ],
+        "c": 2
+      },
+      {
+        "p": "Quanto é 2⁵?",
+        "ops": [
+          "10",
+          "16",
+          "32",
+          "64"
+        ],
+        "c": 2
+      },
+      {
+        "p": "8º termo da PA 3, 7, 11, 15...?",
+        "ops": [
+          "27",
+          "31",
+          "35",
+          "29"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Quanto é log₂(64)?",
+        "ops": [
+          "4",
+          "8",
+          "6",
+          "32"
+        ],
+        "c": 2
+      },
+      {
+        "p": "Produto escalar (2,3)·(4,−1)?",
+        "ops": [
+          "−5",
+          "8",
+          "5",
+          "2"
+        ],
+        "c": 2
+      },
+      {
+        "p": "Uma torneira em 6h. Duas em?",
+        "ops": [
+          "3h",
+          "4h",
+          "12h",
+          "2h"
+        ],
+        "c": 0
+      },
+      {
+        "p": "Reta por (0,2) com coef. angular 3?",
+        "ops": [
+          "y=3x",
+          "y=2x+3",
+          "y=3x+2",
+          "y=2x"
+        ],
+        "c": 2
+      },
+      {
+        "p": "Permutação de 4 elementos P(4)?",
+        "ops": [
+          "12",
+          "24",
+          "8",
+          "16"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Quanto é (−3)²?",
+        "ops": [
+          "−9",
+          "6",
+          "9",
+          "−6"
+        ],
+        "c": 2
+      },
+      {
+        "p": "Razão da PG 2, 6, 18, 54...?",
+        "ops": [
+          "2",
+          "4",
+          "3",
+          "6"
+        ],
+        "c": 2
+      },
+      {
+        "p": "Soma da PG infinita 1, 1/2, 1/4...?",
+        "ops": [
+          "3",
+          "4",
+          "2",
+          "1"
+        ],
+        "c": 2
+      },
+      {
+        "p": "Formas de organizar 5 pessoas em fila?",
+        "ops": [
+          "25",
+          "60",
+          "100",
+          "120"
+        ],
+        "c": 3
+      },
+      {
+        "p": "Volume do cubo com aresta 4?",
+        "ops": [
+          "48",
+          "64",
+          "16",
+          "32"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Quanto é sen(90°)?",
+        "ops": [
+          "0",
+          "√2/2",
+          "1/2",
+          "1"
+        ],
+        "c": 3
+      },
+      {
+        "p": "MDC de 48 e 36?",
+        "ops": [
+          "6",
+          "18",
+          "8",
+          "12"
+        ],
+        "c": 3
+      },
+      {
+        "p": "Quanto é log₁₀(0,01)?",
+        "ops": [
+          "−1",
+          "2",
+          "−2",
+          "1"
+        ],
+        "c": 2
+      },
+      {
+        "p": "f(x) = x²−2x+1, qual é f(3)?",
+        "ops": [
+          "2",
+          "4",
+          "6",
+          "8"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Setor circular raio 6, ângulo 60°?",
+        "ops": [
+          "9,42",
+          "18,84",
+          "6,28",
+          "12,57"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Quanto é i² (número imaginário)?",
+        "ops": [
+          "1",
+          "0",
+          "2",
+          "−1"
+        ],
+        "c": 3
+      },
+      {
+        "p": "Quanto é C(8,3)?",
+        "ops": [
+          "56",
+          "24",
+          "168",
+          "40"
+        ],
+        "c": 0
+      },
+      {
+        "p": "Diagonais de um hexágono?",
+        "ops": [
+          "6",
+          "9",
+          "12",
+          "15"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Quanto é 3/4 × 8/9?",
+        "ops": [
+          "1/3",
+          "11/13",
+          "2/3",
+          "24/72"
+        ],
+        "c": 2
+      }
+    ],
+    "dificil": [
+      {
+        "p": "Limite de (x²−1)/(x−1) quando x→1?",
+        "ops": [
+          "1",
+          "0",
+          "Indefinido",
+          "2"
+        ],
+        "c": 3
+      },
+      {
+        "p": "Derivada de f(x) = 3x²?",
+        "ops": [
+          "6x",
+          "3x",
+          "9x²",
+          "x³"
+        ],
+        "c": 0
+      },
+      {
+        "p": "Integral de 2x dx?",
+        "ops": [
+          "2x²+C",
+          "x+C",
+          "2+C",
+          "x²+C"
+        ],
+        "c": 3
+      },
+      {
+        "p": "Determinante de [[2,3],[1,4]]?",
+        "ops": [
+          "5",
+          "11",
+          "8",
+          "−5"
+        ],
+        "c": 0
+      },
+      {
+        "p": "P(A∩B) com P(A)=0,4 e P(B)=0,5?",
+        "ops": [
+          "0,9",
+          "0,2",
+          "0,1",
+          "0,45"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Soma da PG infinita a₁=3, r=1/2?",
+        "ops": [
+          "5",
+          "4",
+          "6",
+          "8"
+        ],
+        "c": 2
+      },
+      {
+        "p": "Quanto é tg(30°)?",
+        "ops": [
+          "1",
+          "√3",
+          "√3/3",
+          "1/2"
+        ],
+        "c": 2
+      },
+      {
+        "p": "Circunferência centro (2,−3) raio 5?",
+        "ops": [
+          "(x+2)²+(y−3)²=25",
+          "(x−2)²+(y+3)²=25",
+          "(x−2)²+(y+3)²=5",
+          "x²+y²=25"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Quanto é ∫₀¹ x² dx?",
+        "ops": [
+          "1/2",
+          "1",
+          "1/4",
+          "1/3"
+        ],
+        "c": 3
+      },
+      {
+        "p": "Derivada de sen(x)?",
+        "ops": [
+          "−cos(x)",
+          "tan(x)",
+          "cos(x)",
+          "−sen(x)"
+        ],
+        "c": 2
+      },
+      {
+        "p": "Módulo de z = 3 + 4i?",
+        "ops": [
+          "7",
+          "1",
+          "25",
+          "5"
+        ],
+        "c": 3
+      },
+      {
+        "p": "Sistema x+y=5 e x−y=1?",
+        "ops": [
+          "x=2,y=3",
+          "x=3,y=2",
+          "x=4,y=1",
+          "x=1,y=4"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Laplace de f(t)=e^(at)?",
+        "ops": [
+          "1/s",
+          "s/(s−a)",
+          "1/(s−a)",
+          "1/(s+a)"
+        ],
+        "c": 2
+      },
+      {
+        "p": "Quanto é (1+i)²?",
+        "ops": [
+          "1+2i",
+          "2+2i",
+          "2i",
+          "2"
+        ],
+        "c": 2
+      },
+      {
+        "p": "10º termo da PA −3, 2, 7, 12...?",
+        "ops": [
+          "37",
+          "42",
+          "47",
+          "52"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Derivada de ln(x)?",
+        "ops": [
+          "1",
+          "x",
+          "e^x",
+          "1/x"
+        ],
+        "c": 3
+      },
+      {
+        "p": "P(A∩B) com P(A|B)=0,3 e P(B)=0,4?",
+        "ops": [
+          "0,7",
+          "0,075",
+          "0,12",
+          "0,3"
+        ],
+        "c": 2
+      },
+      {
+        "p": "Solução de x² + 2x − 8 = 0?",
+        "ops": [
+          "x=2 e x=−4",
+          "x=4 e x=−2",
+          "x=−2 e x=4",
+          "x=2 e x=4"
+        ],
+        "c": 0
+      },
+      {
+        "p": "Integral de cos(x) dx?",
+        "ops": [
+          "−cos(x)+C",
+          "cos(x)+C",
+          "−sen(x)+C",
+          "sen(x)+C"
+        ],
+        "c": 3
+      },
+      {
+        "p": "Fórmula de Euler: e^(iπ) = ?",
+        "ops": [
+          "1",
+          "i",
+          "0",
+          "−1"
+        ],
+        "c": 3
+      },
+      {
+        "p": "[[1,2],[3,4]] × [[2,0],[1,1]] = ?",
+        "ops": [
+          "[[4,2],[10,4]]",
+          "[[2,0],[3,4]]",
+          "[[3,1],[10,4]]",
+          "[[4,3],[10,3]]"
+        ],
+        "c": 0
+      },
+      {
+        "p": "Variância de {2,4,4,4,5,5,7,9}?",
+        "ops": [
+          "2,5",
+          "3",
+          "4",
+          "2"
+        ],
+        "c": 3
+      },
+      {
+        "p": "Limite de sen(x)/x quando x→0?",
+        "ops": [
+          "0",
+          "Indefinido",
+          "∞",
+          "1"
+        ],
+        "c": 3
+      },
+      {
+        "p": "Quanto é C(n,0)?",
+        "ops": [
+          "n",
+          "n!",
+          "0",
+          "1"
+        ],
+        "c": 3
+      },
+      {
+        "p": "Derivada de x^n?",
+        "ops": [
+          "x^(n−1)",
+          "n⋅x",
+          "n⋅x^(n−1)",
+          "n^x"
+        ],
+        "c": 2
+      },
+      {
+        "p": "det(2A) se det(A)=3 (matriz 2×2)?",
+        "ops": [
+          "6",
+          "12",
+          "9",
+          "3"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Integral de 1/x dx?",
+        "ops": [
+          "x+C",
+          "−1/x²+C",
+          "1/(2x²)+C",
+          "ln|x|+C"
+        ],
+        "c": 3
+      },
+      {
+        "p": "Elipse com a=5 e b=3?",
+        "ops": [
+          "x²/25+y²/9=1",
+          "x²/5+y²/3=1",
+          "x²/9+y²/25=1",
+          "x²/25−y²/9=1"
+        ],
+        "c": 0
+      },
+      {
+        "p": "Derivada de e^x?",
+        "ops": [
+          "x⋅e^(x−1)",
+          "1/e^x",
+          "x",
+          "e^x"
+        ],
+        "c": 3
+      },
+      {
+        "p": "Quanto é log₃(81)?",
+        "ops": [
+          "3",
+          "9",
+          "5",
+          "4"
+        ],
+        "c": 3
+      },
+      {
+        "p": "Soma PA n=10, a₁=1, aₙ=19?",
+        "ops": [
+          "90",
+          "100",
+          "200",
+          "110"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Derivada de f(x) = x³ − 3x?",
+        "ops": [
+          "3x−3",
+          "x²−3",
+          "3x²+3",
+          "3x²−3"
+        ],
+        "c": 3
+      },
+      {
+        "p": "Quanto é (3+4i)(3−4i)?",
+        "ops": [
+          "9−16",
+          "0",
+          "25",
+          "7"
+        ],
+        "c": 2
+      },
+      {
+        "p": "Escolher 3 de 10 pessoas?",
+        "ops": [
+          "30",
+          "720",
+          "120",
+          "210"
+        ],
+        "c": 3
+      },
+      {
+        "p": "Período de f(x) = sen(2x)?",
+        "ops": [
+          "4π",
+          "π",
+          "2π",
+          "π/2"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Integral de e^x dx?",
+        "ops": [
+          "x⋅e^x+C",
+          "e^(x+1)+C",
+          "1/(e^x)+C",
+          "e^x+C"
+        ],
+        "c": 3
+      },
+      {
+        "p": "Máximo de f(x) = −x²+4x−3?",
+        "ops": [
+          "1",
+          "3",
+          "4",
+          "2"
+        ],
+        "c": 0
+      },
+      {
+        "p": "Regra da cadeia para derivadas?",
+        "ops": [
+          "f'(x)⋅g'(x)",
+          "f'(g(x))⋅g'(x)",
+          "f'(x)+g'(x)",
+          "g'(f(x))"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Limite de (1+1/n)^n quando n→∞?",
+        "ops": [
+          "1",
+          "π",
+          "∞",
+          "e"
+        ],
+        "c": 3
+      },
+      {
+        "p": "Distância entre (1,2) e (4,6)?",
+        "ops": [
+          "5",
+          "6",
+          "3",
+          "7"
+        ],
+        "c": 0
+      },
+      {
+        "p": "Diagonais de polígono n lados?",
+        "ops": [
+          "n(n−1)/2",
+          "n(n−3)",
+          "n(n−2)/2",
+          "n(n−3)/2"
+        ],
+        "c": 3
+      },
+      {
+        "p": "Inverso de [[1,2],[3,4]]?",
+        "ops": [
+          "[[4,−2],[−3,1]]",
+          "[[−2,1],[3/2,−1/2]]",
+          "[[−4,2],[3,−1]]",
+          "[[2,−1],[−3,1]]"
+        ],
+        "c": 1
+      }
+    ]
+  },
+  "portugues": {
+    "facil": [
+      {
+        "p": "O que é um substantivo?",
+        "ops": [
+          "Indica ação",
+          "Nomeia seres e coisas",
+          "Qualifica",
+          "Liga orações"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Plural de 'cidadão'?",
+        "ops": [
+          "cidadões",
+          "cidadãos",
+          "cidadons",
+          "cidadoes"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é um adjetivo?",
+        "ops": [
+          "Substitui substantivo",
+          "Indica ação",
+          "Qualifica o substantivo",
+          "Conecta orações"
+        ],
+        "c": 2
+      },
+      {
+        "p": "Pontuação de frase interrogativa?",
+        "ops": [
+          "Ponto final",
+          "Exclamação",
+          "Interrogação",
+          "Reticências"
+        ],
+        "c": 2
+      },
+      {
+        "p": "O que é sinônimo?",
+        "ops": [
+          "Sentido oposto",
+          "Sentido semelhante",
+          "Sem sentido",
+          "Palavras compostas"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Sujeito de 'Os alunos estudaram muito'?",
+        "ops": [
+          "estudaram",
+          "muito",
+          "Os alunos",
+          "alunos muito"
+        ],
+        "c": 2
+      },
+      {
+        "p": "O que é um verbo?",
+        "ops": [
+          "Nomeia seres",
+          "Exprime ação ou estado",
+          "Qualifica",
+          "Indica lugar"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Qual está escrito corretamente?",
+        "ops": [
+          "meia-noite",
+          "meiaNoite",
+          "meia noite",
+          "meia_noite"
+        ],
+        "c": 0
+      },
+      {
+        "p": "O que é antônimo?",
+        "ops": [
+          "Sentido semelhante",
+          "Sentido oposto",
+          "Mesmo som",
+          "Palavra composta"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Feminino de 'ator'?",
+        "ops": [
+          "atora",
+          "atriz",
+          "atrisa",
+          "atrice"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Qual palavra é pronome?",
+        "ops": [
+          "Correr",
+          "Bonito",
+          "Ele",
+          "Mesa"
+        ],
+        "c": 2
+      },
+      {
+        "p": "O que é uma vírgula?",
+        "ops": [
+          "Pausa longa",
+          "Pausa breve que separa",
+          "Encerramento",
+          "Continuidade"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Diminutivo de 'casa'?",
+        "ops": [
+          "casona",
+          "casinha",
+          "casarão",
+          "casada"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é uma preposição?",
+        "ops": [
+          "Expressa ação",
+          "Liga palavras ou orações",
+          "Qualifica",
+          "Substitui substantivo"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Qual tem erro ortográfico?",
+        "ops": [
+          "exceção",
+          "acidente",
+          "exercício",
+          "excessão"
+        ],
+        "c": 3
+      },
+      {
+        "p": "O que é parágrafo?",
+        "ops": [
+          "Letra maiúscula",
+          "Bloco que desenvolve ideia",
+          "Pontuação",
+          "Um conectivo"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Plural de 'mão'?",
+        "ops": [
+          "mãos",
+          "mãoes",
+          "mãs",
+          "mãs"
+        ],
+        "c": 0
+      },
+      {
+        "p": "O que significa 'conotação'?",
+        "ops": [
+          "Sentido literal",
+          "Sentido figurado",
+          "Pontuação",
+          "Figura de linguagem"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Aumentativo de 'livro'?",
+        "ops": [
+          "livrinho",
+          "livrão",
+          "livrete",
+          "livretão"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é texto narrativo?",
+        "ops": [
+          "Descreve características",
+          "Conta uma história",
+          "Argumenta",
+          "Instrui"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Qual palavra é advérbio?",
+        "ops": [
+          "Mesa",
+          "Bonito",
+          "Rapidamente",
+          "Correr"
+        ],
+        "c": 2
+      },
+      {
+        "p": "O que é homonímia?",
+        "ops": [
+          "Mesmo significado",
+          "Mesmo som, sentidos diferentes",
+          "Palavras derivadas",
+          "Palavras compostas"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Coletivo de 'peixes'?",
+        "ops": [
+          "matilha",
+          "cardume",
+          "alcateia",
+          "enxame"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que são reticências?",
+        "ops": [
+          "Pausa definitiva",
+          "Continuação ou suspense",
+          "Delimitam expressões",
+          "Ligam palavras"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Plural de 'leão'?",
+        "ops": [
+          "leãos",
+          "leões",
+          "leãoes",
+          "leoes"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é texto descritivo?",
+        "ops": [
+          "Narra eventos",
+          "Apresenta características",
+          "Argumenta",
+          "Instrui"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Qual é substantivo abstrato?",
+        "ops": [
+          "Mesa",
+          "Cadeira",
+          "Felicidade",
+          "Rio"
+        ],
+        "c": 2
+      },
+      {
+        "p": "O que é uma conjunção?",
+        "ops": [
+          "Nomeia",
+          "Liga palavras ou orações",
+          "Qualifica",
+          "Intensifica"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Qual é a grafia correta?",
+        "ops": [
+          "nascer",
+          "nascer",
+          "nacer",
+          "nasser"
+        ],
+        "c": 0
+      },
+      {
+        "p": "O que é texto dissertativo?",
+        "ops": [
+          "Conta história",
+          "Descreve lugares",
+          "Defende ponto de vista",
+          "Dá instruções"
+        ],
+        "c": 2
+      },
+      {
+        "p": "Qual alternativa está correta?",
+        "ops": [
+          "ele veio onti",
+          "ele veiu ontem",
+          "ele veio ontem",
+          "ele vejo ontem"
+        ],
+        "c": 2
+      },
+      {
+        "p": "O que é denotação?",
+        "ops": [
+          "Sentido figurado",
+          "Sentido literal",
+          "Ironia",
+          "Metáfora"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Plural correto de 'lápis'?",
+        "ops": [
+          "lápises",
+          "lápiss",
+          "lápis",
+          "lápins"
+        ],
+        "c": 2
+      },
+      {
+        "p": "Qual palavra é verbo?",
+        "ops": [
+          "Azul",
+          "Correr",
+          "Rápido",
+          "Livro"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é conjunção adversativa?",
+        "ops": [
+          "Indica adição",
+          "Indica contraste",
+          "Indica causa",
+          "Indica conclusão"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Qual forma está correta?",
+        "ops": [
+          "a gente vamos",
+          "a gente vai",
+          "a gente vão",
+          "a gente foram"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é texto instrucional?",
+        "ops": [
+          "Conta história",
+          "Descreve algo",
+          "Argumenta",
+          "Ensina passo a passo"
+        ],
+        "c": 3
+      },
+      {
+        "p": "Qual deriva de 'feliz'?",
+        "ops": [
+          "infeliz",
+          "flor",
+          "correr",
+          "mesa"
+        ],
+        "c": 0
+      },
+      {
+        "p": "Qual é escrita com acento?",
+        "ops": [
+          "cafe",
+          "agua",
+          "voce",
+          "pé"
+        ],
+        "c": 3
+      },
+      {
+        "p": "O que são aspas?",
+        "ops": [
+          "Indicam pausa",
+          "Delimitam citações e falas",
+          "Só indicam ironia",
+          "Conectam palavras"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Masculino de 'vaca'?",
+        "ops": [
+          "vacão",
+          "boi",
+          "vacuo",
+          "bovino"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é uma fábula?",
+        "ops": [
+          "Poema sobre natureza",
+          "Conto com lição moral",
+          "Romance histórico",
+          "Texto jornalístico"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Qual contém um adjetivo?",
+        "ops": [
+          "Correu rapidamente",
+          "O cão esperto latiu",
+          "Mesa de madeira",
+          "Ela dançou"
+        ],
+        "c": 1
+      }
+    ],
+    "medio": [
+      {
+        "p": "O que é uma metáfora?",
+        "ops": [
+          "Comparação com 'como'",
+          "Comparação implícita",
+          "Repetição de sons",
+          "Exagero"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que significa 'efêmero'?",
+        "ops": [
+          "Eterno",
+          "Passageiro, breve",
+          "Muito grande",
+          "Muito forte"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é oração subordinada substantiva?",
+        "ops": [
+          "Modifica substantivo",
+          "Exerce função de substantivo",
+          "Coordenada",
+          "Independente"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Figura em 'a vida é uma viagem'?",
+        "ops": [
+          "Comparação",
+          "Hipérbole",
+          "Metáfora",
+          "Metonímia"
+        ],
+        "c": 2
+      },
+      {
+        "p": "O que é catacrese?",
+        "ops": [
+          "Repetição de palavras",
+          "Expressão desgastada (ex: pé da mesa)",
+          "Comparação direta",
+          "Ironia"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é sujeito desinencial?",
+        "ops": [
+          "Expresso por substantivo",
+          "Indicado pela terminação verbal",
+          "Inexistente",
+          "Indeterminado"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é metonímia?",
+        "ops": [
+          "Sentido oposto",
+          "Substituição por proximidade",
+          "Comparação implícita",
+          "Exagero"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Complemento de verbo transitivo direto?",
+        "ops": [
+          "Adjunto adverbial",
+          "Objeto direto",
+          "Objeto indireto",
+          "Predicativo"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é um oxímoro?",
+        "ops": [
+          "Sinônimos juntos",
+          "Termos contraditórios juntos",
+          "Repetição de sons",
+          "Comparação"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é a norma culta?",
+        "ops": [
+          "Dialeto popular",
+          "Variedade formal da língua",
+          "Linguajar regional",
+          "Jargão técnico"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é aliteração?",
+        "ops": [
+          "Repetição de vogais",
+          "Repetição de consoantes",
+          "Comparação sonora",
+          "Inversão de palavras"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Período composto por coordenação?",
+        "ops": [
+          "Orações dependentes",
+          "Orações independentes ligadas",
+          "Uma única oração",
+          "Oração subordinada"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é o vocativo?",
+        "ops": [
+          "Complemento verbal",
+          "Dirige-se a alguém",
+          "Sujeito da oração",
+          "Adjunto adnominal"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é eufemismo?",
+        "ops": [
+          "Exagero irônico",
+          "Suavização da expressão",
+          "Comparação direta",
+          "Repetição"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Diferença entre 'onde' e 'aonde'?",
+        "ops": [
+          "São iguais",
+          "Onde=posição, aonde=movimento",
+          "Aonde é mais formal",
+          "Onde é moderno"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é período simples?",
+        "ops": [
+          "Muitas orações",
+          "Uma única oração",
+          "Sem sujeito",
+          "Coordenado"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é hipérbole?",
+        "ops": [
+          "Comparação direta",
+          "Exagero expressivo",
+          "Inversão de palavras",
+          "Repetição"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é adjunto adnominal?",
+        "ops": [
+          "Modifica o verbo",
+          "Modifica o substantivo",
+          "Complementa verbo",
+          "Indica circunstância"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é ironia?",
+        "ops": [
+          "Diz o que pensa",
+          "Diz o oposto com crítica",
+          "Uma comparação",
+          "Uma metáfora"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é voz passiva analítica?",
+        "ops": [
+          "Sujeito pratica",
+          "Sujeito recebe a ação",
+          "Ação sem sujeito",
+          "Sujeito indeterminado"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é anáfora?",
+        "ops": [
+          "Repetição no final",
+          "Repetição no início das frases",
+          "Figura semântica",
+          "Inversão sintática"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é predicado verbal?",
+        "ops": [
+          "Com verbo de ligação",
+          "Núcleo é verbo de ação",
+          "Sem verbo",
+          "Com adjunto"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é crase?",
+        "ops": [
+          "Fusão do 'a' preposição + artigo",
+          "Uma pontuação",
+          "Tipo de acento",
+          "Figura de linguagem"
+        ],
+        "c": 0
+      },
+      {
+        "p": "Diferença entre 'mal' e 'mau'?",
+        "ops": [
+          "São sinônimos",
+          "Mal=advérbio, mau=adjetivo",
+          "Mau é advérbio",
+          "São antônimos"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é personificação?",
+        "ops": [
+          "Compara humanos",
+          "Atribui características humanas a não humanos",
+          "Repetição de sons",
+          "Exagero"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é texto jornalístico informativo?",
+        "ops": [
+          "Ficção",
+          "Relata fatos objetivamente",
+          "Argumenta",
+          "Descreve personagens"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é silepse de gênero?",
+        "ops": [
+          "Concordância pelo sentido",
+          "Concordância normal",
+          "Erro ortográfico",
+          "Pontuação incorreta"
+        ],
+        "c": 0
+      },
+      {
+        "p": "Função do travessão?",
+        "ops": [
+          "Pausa breve",
+          "Indica fala ou expressão intercalada",
+          "Indica ironia",
+          "Finaliza frases"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é texto épico?",
+        "ops": [
+          "Texto lírico",
+          "Narra feitos heroicos",
+          "Texto argumentativo",
+          "Descritivo"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é elipse?",
+        "ops": [
+          "Repetição desnecessária",
+          "Omissão de termo subentendido",
+          "Figura sonora",
+          "Inversão sintática"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é polissemia?",
+        "ops": [
+          "Um único significado",
+          "Múltiplos significados",
+          "Sons iguais",
+          "Palavras compostas"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Período composto por subordinação?",
+        "ops": [
+          "Orações independentes",
+          "Uma depende da outra",
+          "Sem conectivo",
+          "Coordenadas"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é predicativo do sujeito?",
+        "ops": [
+          "Complemento verbal",
+          "Caracteriza o sujeito",
+          "Adjunto adverbial",
+          "Objeto indireto"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que são parônimos?",
+        "ops": [
+          "Mesmo significado",
+          "Grafia parecida, sentidos diferentes",
+          "São antônimos",
+          "São sinônimos"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é discurso direto?",
+        "ops": [
+          "Narrador conta",
+          "Fala reproduzida literalmente",
+          "Mistura fala e narração",
+          "Fala indireta"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é conjunção causal?",
+        "ops": [
+          "Indica adição",
+          "Indica a causa (porque, pois)",
+          "Indica contraste",
+          "Indica conclusão"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é sujeito indeterminado?",
+        "ops": [
+          "Expresso claramente",
+          "Existe mas não identificado",
+          "Sem verbo",
+          "Verbo sem sujeito"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é oração adverbial temporal?",
+        "ops": [
+          "Indica causa",
+          "Indica tempo da ação",
+          "Indica condição",
+          "Indica concessão"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é texto de propaganda?",
+        "ops": [
+          "Texto neutro",
+          "Linguagem persuasiva",
+          "Texto narrativo",
+          "Descritivo"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é zeugma?",
+        "ops": [
+          "Repetição de palavras",
+          "Omissão de palavra já dita",
+          "Inversão de ordem",
+          "Comparação"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é complemento nominal?",
+        "ops": [
+          "Complementa verbo",
+          "Complementa nome ou adjetivo",
+          "Modifica advérbio",
+          "Adjunto adverbial"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é oração adjetiva restritiva?",
+        "ops": [
+          "Informação dispensável",
+          "Restringe o substantivo",
+          "Vem entre vírgulas",
+          "Oração independente"
+        ],
+        "c": 1
+      }
+    ],
+    "dificil": [
+      {
+        "p": "O que é enunciado performativo?",
+        "ops": [
+          "Frase declarativa",
+          "Ao dito, realiza uma ação",
+          "Pergunta retórica",
+          "Frase exclamativa"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é a teoria da relevância?",
+        "ops": [
+          "Gramática normativa",
+          "Equilíbrio entre esforço e efeito",
+          "Teoria fonológica",
+          "Morfologia"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é o princípio cooperativo de Grice?",
+        "ops": [
+          "Regra gramatical",
+          "Máximas da comunicação eficiente",
+          "Figura de linguagem",
+          "Norma ortográfica"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é análise do discurso?",
+        "ops": [
+          "Gramática normativa",
+          "Estuda produção e sentido dos discursos",
+          "Análise morfológica",
+          "Figuras de linguagem"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é dialogismo em Bakhtin?",
+        "ops": [
+          "Textos monológicos",
+          "Texto permeado por outras vozes",
+          "Técnica narrativa",
+          "Gênero textual"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é enálage?",
+        "ops": [
+          "Inversão sintática",
+          "Uso de forma gramatical por outra",
+          "Elipse verbal",
+          "Anacoluto"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é anacoluto?",
+        "ops": [
+          "Repetição de palavras",
+          "Ruptura sintática na frase",
+          "Omissão de termo",
+          "Inversão"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é intertextualidade?",
+        "ops": [
+          "Texto sem referências",
+          "Relação entre textos",
+          "Figura sonora",
+          "Gênero textual"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é silepse de pessoa?",
+        "ops": [
+          "Concordância de gênero",
+          "Concordância pelo sentido da pessoa",
+          "Elipse de sujeito",
+          "Voz passiva"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Diferença entre língua e discurso em Saussure?",
+        "ops": [
+          "São equivalentes",
+          "Língua=sistema, discurso=uso individual",
+          "Discurso é coletivo",
+          "Língua é individual"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é hipotaxe?",
+        "ops": [
+          "Coordenação",
+          "Subordinação entre orações",
+          "Justaposição",
+          "Elipse"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é polifonia textual?",
+        "ops": [
+          "Uma única voz",
+          "Múltiplas vozes no texto",
+          "Gênero musical",
+          "Figura de linguagem"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é epanadiplose?",
+        "ops": [
+          "Repetição no meio",
+          "Frase começa e termina igual",
+          "Inversão sintática",
+          "Omissão de verbo"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é coesão textual?",
+        "ops": [
+          "Organização visual",
+          "Liga as partes do texto",
+          "O tema",
+          "A argumentação"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é coerência textual?",
+        "ops": [
+          "Ligação gramatical",
+          "Unidade lógica de sentido",
+          "Pontuação correta",
+          "Ortografia"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é gradação (clímax)?",
+        "ops": [
+          "Inversão de ideias",
+          "Progressão crescente ou decrescente",
+          "Repetição sonora",
+          "Omissão"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é antítese?",
+        "ops": [
+          "Sinônimos em sequência",
+          "Oposição de ideias",
+          "Figura sonora",
+          "Elipse"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é gênero discursivo em Bakhtin?",
+        "ops": [
+          "Estrutura gramatical",
+          "Enunciados em situações recorrentes",
+          "Figura de linguagem",
+          "Estilo literário"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é paronomásia?",
+        "ops": [
+          "Uso de sinônimos",
+          "Palavras parecidas com efeito",
+          "Repetição idêntica",
+          "Antítese"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é funcionalismo linguístico?",
+        "ops": [
+          "Gramática histórica",
+          "Língua em uso com funções comunicativas",
+          "Análise fonológica",
+          "Morfologia"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é quiasmo?",
+        "ops": [
+          "Repetição simples",
+          "Inversão cruzada (ABBA)",
+          "Figura sonora",
+          "Gradação"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é intencionalidade textual?",
+        "ops": [
+          "Clareza ortográfica",
+          "Intenção do produtor no texto",
+          "O tema central",
+          "A pontuação"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é a estilística?",
+        "ops": [
+          "Gramática normativa",
+          "Recursos expressivos da língua",
+          "Fonologia",
+          "Morfologia"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é sinonímia contextual?",
+        "ops": [
+          "Mesmo significado dicionarizado",
+          "Substituíveis no contexto",
+          "Sons iguais",
+          "Antonímia"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é acepção?",
+        "ops": [
+          "O som de uma palavra",
+          "Cada significado da palavra",
+          "A etimologia",
+          "A classificação"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é paradoxo?",
+        "ops": [
+          "Afirmações absurdas com verdade",
+          "Erro lógico",
+          "Comparação",
+          "Metáfora"
+        ],
+        "c": 0
+      },
+      {
+        "p": "O que é estilo indireto livre?",
+        "ops": [
+          "Discurso direto",
+          "Narrador e personagem misturados",
+          "Discurso indireto formal",
+          "Monólogo"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é derivação prefixal?",
+        "ops": [
+          "Formação por sufixo",
+          "Adição de prefixo ao radical",
+          "Composição",
+          "Justaposição"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é isotopia?",
+        "ops": [
+          "Mudança de tema",
+          "Traços semânticos recorrentes",
+          "Figura sonora",
+          "Gênero textual"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é texto multimodal?",
+        "ops": [
+          "Só verbal",
+          "Combina linguagens diferentes",
+          "Texto poético",
+          "Jornalístico"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é pragmática linguística?",
+        "ops": [
+          "Estudo dos sons",
+          "Língua em contexto e intenções",
+          "Morfologia",
+          "Sintaxe"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é zeugma nominal?",
+        "ops": [
+          "Repetição do substantivo",
+          "Omissão de substantivo subentendido",
+          "Inversão do sujeito",
+          "Pleonasmo"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é 'stream of consciousness'?",
+        "ops": [
+          "Narrador onisciente",
+          "Pensamento livre do personagem",
+          "Narrador personagem",
+          "Discurso direto"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é teoria dos protótipos?",
+        "ops": [
+          "Classificação gramatical",
+          "Categorização por exemplares típicos",
+          "Estudo de metáforas",
+          "Fonologia"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é nominalização?",
+        "ops": [
+          "Verbo em adjetivo",
+          "Ações transformadas em substantivos",
+          "Criar neologismos",
+          "Inversão"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é ambiguidade linguística?",
+        "ops": [
+          "Texto sem sentido",
+          "Mais de uma leitura possível",
+          "Uso de metáforas",
+          "Coerência"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é pleonasmo vicioso?",
+        "ops": [
+          "Repetição para ênfase",
+          "Repetição redundante e desnecessária",
+          "Figura de estilo",
+          "Elipse"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é registro linguístico?",
+        "ops": [
+          "A ortografia",
+          "Variedade conforme a situação",
+          "Um dialeto",
+          "Uma norma"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é hibridismo lexical?",
+        "ops": [
+          "Palavra latina pura",
+          "Combina elementos de línguas diferentes",
+          "Palavra popular",
+          "Neologismo"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é topos retórico?",
+        "ops": [
+          "Tipo de pontuação",
+          "Argumento para persuadir",
+          "Figura sonora",
+          "Gênero textual"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é enunciação em Benveniste?",
+        "ops": [
+          "O texto escrito",
+          "Ato de produzir o enunciado",
+          "Gramática normativa",
+          "Morfologia"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é heteroglossia em Bakhtin?",
+        "ops": [
+          "Um único estilo",
+          "Multiplicidade de vozes e estilos",
+          "Figura de linguagem",
+          "Gênero épico"
+        ],
+        "c": 1
+      }
+    ]
+  },
+  "ciencias": {
+    "facil": [
+      {
+        "p": "Gás que humanos respiram para sobreviver?",
+        "ops": [
+          "CO₂",
+          "Hidrogênio",
+          "Oxigênio",
+          "Nitrogênio"
+        ],
+        "c": 2
+      },
+      {
+        "p": "Quantos planetas tem o Sistema Solar?",
+        "ops": [
+          "7",
+          "9",
+          "8",
+          "10"
+        ],
+        "c": 2
+      },
+      {
+        "p": "Maior órgão do corpo humano?",
+        "ops": [
+          "Fígado",
+          "Cérebro",
+          "Coração",
+          "Pele"
+        ],
+        "c": 3
+      },
+      {
+        "p": "O que a fotossíntese produz?",
+        "ops": [
+          "Oxigênio a partir de luz",
+          "Consome oxigênio",
+          "Produz CO₂",
+          "Decompõe matéria"
+        ],
+        "c": 0
+      },
+      {
+        "p": "Fórmula química da água?",
+        "ops": [
+          "CO₂",
+          "NaCl",
+          "H₂O",
+          "O₂"
+        ],
+        "c": 2
+      },
+      {
+        "p": "Quantos cromossomos têm as células humanas?",
+        "ops": [
+          "23",
+          "36",
+          "46",
+          "48"
+        ],
+        "c": 2
+      },
+      {
+        "p": "Planeta mais próximo do Sol?",
+        "ops": [
+          "Vênus",
+          "Terra",
+          "Mercúrio",
+          "Marte"
+        ],
+        "c": 2
+      },
+      {
+        "p": "O que é uma célula?",
+        "ops": [
+          "Unidade básica da vida",
+          "Tipo de vírus",
+          "Partícula atômica",
+          "Tecido muscular"
+        ],
+        "c": 0
+      },
+      {
+        "p": "O que é um átomo?",
+        "ops": [
+          "Menor partícula de um elemento",
+          "Tipo de molécula",
+          "Tipo de célula",
+          "Partícula subatômica"
+        ],
+        "c": 0
+      },
+      {
+        "p": "Camada mais externa da Terra?",
+        "ops": [
+          "Manto",
+          "Núcleo",
+          "Crosta",
+          "Astenosfera"
+        ],
+        "c": 2
+      },
+      {
+        "p": "Maior planeta do Sistema Solar?",
+        "ops": [
+          "Saturno",
+          "Urano",
+          "Netuno",
+          "Júpiter"
+        ],
+        "c": 3
+      },
+      {
+        "p": "O que é a gravidade?",
+        "ops": [
+          "Força de repulsão",
+          "Força de atração entre massas",
+          "Energia elétrica",
+          "Força magnética"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Símbolo químico do ouro?",
+        "ops": [
+          "Or",
+          "Go",
+          "Ag",
+          "Au"
+        ],
+        "c": 3
+      },
+      {
+        "p": "O que é evaporação?",
+        "ops": [
+          "Líquido → sólido",
+          "Sólido → líquido",
+          "Líquido → gás",
+          "Gás → líquido"
+        ],
+        "c": 2
+      },
+      {
+        "p": "Quantos ossos tem o adulto?",
+        "ops": [
+          "106",
+          "206",
+          "306",
+          "406"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é a clorofila?",
+        "ops": [
+          "Pigmento verde das plantas",
+          "Um mineral",
+          "Proteína animal",
+          "Vitamina"
+        ],
+        "c": 0
+      },
+      {
+        "p": "Símbolo químico do ferro?",
+        "ops": [
+          "Fe",
+          "Fr",
+          "Fo",
+          "Fi"
+        ],
+        "c": 0
+      },
+      {
+        "p": "O que é um ecossistema?",
+        "ops": [
+          "Só os animais",
+          "Seres vivos e ambiente interagindo",
+          "Tipo de bioma",
+          "Uma espécie"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é respiração celular?",
+        "ops": [
+          "O ato de respirar",
+          "Produz energia nas células",
+          "A fotossíntese",
+          "A digestão"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Planeta mais frio do Sistema Solar?",
+        "ops": [
+          "Plutão",
+          "Saturno",
+          "Netuno",
+          "Urano"
+        ],
+        "c": 2
+      },
+      {
+        "p": "O que são decompositores?",
+        "ops": [
+          "Produtores de alimento",
+          "Decompõem matéria morta",
+          "Predadores",
+          "Herbívoros"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Símbolo químico do oxigênio?",
+        "ops": [
+          "Ox",
+          "O",
+          "Og",
+          "Oz"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é o ciclo da água?",
+        "ops": [
+          "Purificação da água",
+          "Circulação por evaporação e precipitação",
+          "Filtração industrial",
+          "Poluição"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é herbívoro?",
+        "ops": [
+          "Come animais",
+          "Come plantas",
+          "Come tudo",
+          "Fungo"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Unidade básica do sistema nervoso?",
+        "ops": [
+          "Músculo",
+          "Hormônio",
+          "Neurônio",
+          "Osso"
+        ],
+        "c": 2
+      },
+      {
+        "p": "O que é metamorfose?",
+        "ops": [
+          "Tipo de reprodução",
+          "Transformação ao longo da vida",
+          "Tipo de alimentação",
+          "Migração"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Símbolo químico do sódio?",
+        "ops": [
+          "Sd",
+          "So",
+          "Na",
+          "Sa"
+        ],
+        "c": 2
+      },
+      {
+        "p": "O que é cadeia alimentar?",
+        "ops": [
+          "Dieta de um animal",
+          "Cada ser serve de alimento ao próximo",
+          "Tipo de ecossistema",
+          "Teia de aranha"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Estado da água a 0°C?",
+        "ops": [
+          "Gasoso",
+          "Líquido",
+          "Sólido",
+          "Plasma"
+        ],
+        "c": 2
+      },
+      {
+        "p": "O que é o DNA?",
+        "ops": [
+          "Tipo de proteína",
+          "Carrega informações genéticas",
+          "Tipo de lipídio",
+          "Enzima digestiva"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é um mineral?",
+        "ops": [
+          "Tipo de animal",
+          "Substância inorgânica natural",
+          "Planta fóssil",
+          "Tipo de vitamina"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Principal fonte de energia do corpo?",
+        "ops": [
+          "Gorduras",
+          "Vitaminas",
+          "Proteínas",
+          "Carboidratos"
+        ],
+        "c": 3
+      },
+      {
+        "p": "O que é o efeito estufa natural?",
+        "ops": [
+          "Só prejudicial",
+          "Mantém a Terra aquecida",
+          "Tipo de poluição",
+          "Buraco de ozônio"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Gás produzido na fotossíntese?",
+        "ops": [
+          "CO₂",
+          "N₂",
+          "O₂",
+          "H₂"
+        ],
+        "c": 2
+      },
+      {
+        "p": "O que é um vírus?",
+        "ops": [
+          "Ser unicelular",
+          "Precisa de hospedeiro para reproduzir",
+          "Uma bactéria",
+          "Um fungo"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é biodiversidade?",
+        "ops": [
+          "Só habitats",
+          "Variedade de formas de vida",
+          "Diversidade climática",
+          "Diversidade mineral"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Principal gás da atmosfera?",
+        "ops": [
+          "Oxigênio",
+          "Argônio",
+          "Nitrogênio",
+          "CO₂"
+        ],
+        "c": 2
+      },
+      {
+        "p": "O que é energia solar?",
+        "ops": [
+          "Energia do vento",
+          "Energia do interior da Terra",
+          "Energia da radiação do Sol",
+          "Energia hídrica"
+        ],
+        "c": 2
+      },
+      {
+        "p": "O que é pasteurização?",
+        "ops": [
+          "Tipo de fermentação",
+          "Aquecimento para eliminar microrganismos",
+          "Refrigeração",
+          "Processo químico"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é predação?",
+        "ops": [
+          "Mutualismo",
+          "Predador captura e come a presa",
+          "Competição",
+          "Parasitismo"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Símbolo do carbono?",
+        "ops": [
+          "Ca",
+          "Co",
+          "Cr",
+          "C"
+        ],
+        "c": 3
+      },
+      {
+        "p": "O que é endotérmico?",
+        "ops": [
+          "Sangue frio",
+          "Regula a própria temperatura",
+          "Animal aquático",
+          "Animal noturno"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é a camada de ozônio?",
+        "ops": [
+          "Nuvem de poluição",
+          "Protege da radiação UV",
+          "O CO₂ da atmosfera",
+          "A troposfera"
+        ],
+        "c": 1
+      }
+    ],
+    "medio": [
+      {
+        "p": "O que é a Lei de Lavoisier?",
+        "ops": [
+          "Massa é criada",
+          "Massa total é conservada",
+          "Energia é conservada",
+          "Volume é conservado"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é seleção natural?",
+        "ops": [
+          "Seleção artificial",
+          "Adaptados sobrevivem mais",
+          "Mutação aleatória",
+          "Migração"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é número atômico?",
+        "ops": [
+          "Número de nêutrons",
+          "Elétrons externos",
+          "Número de prótons",
+          "Massa do átomo"
+        ],
+        "c": 2
+      },
+      {
+        "p": "O que é valência química?",
+        "ops": [
+          "Massa molar",
+          "Capacidade de combinação",
+          "Número de prótons",
+          "Carga elétrica"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é osmose?",
+        "ops": [
+          "Difusão de sólidos",
+          "Solvente por membrana semipermeável",
+          "Transporte ativo",
+          "Difusão de gases"
+        ],
+        "c": 1
+      },
+      {
+        "p": "Fórmula do gás carbônico?",
+        "ops": [
+          "CO",
+          "CO₂",
+          "C₂O",
+          "CO₃"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que são isótopos?",
+        "ops": [
+          "Mesmo número de prótons, nêutrons diferentes",
+          "Mesma massa",
+          "Átomos carregados",
+          "Moléculas iguais"
+        ],
+        "c": 0
+      },
+      {
+        "p": "O que é mitose?",
+        "ops": [
+          "Gera gametas",
+          "Gera células-filhas idênticas",
+          "Fusão de células",
+          "Morte celular"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é meiose?",
+        "ops": [
+          "Gera células somáticas",
+          "Gera quatro células haploides",
+          "Duplicação do DNA",
+          "Fissão celular"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é a 2ª Lei da Termodinâmica?",
+        "ops": [
+          "Energia conservada",
+          "Entropia tende a aumentar",
+          "Força e aceleração",
+          "Pressão e volume"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é um catalisador?",
+        "ops": [
+          "Substância consumida",
+          "Acelera sem ser consumido",
+          "Reagente principal",
+          "Produto da reação"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é pH?",
+        "ops": [
+          "% de hidrogênio",
+          "Mede acidez de solução (0-14)",
+          "Pressão hidrostática",
+          "Potencial elétrico"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é a Lei de Ohm?",
+        "ops": [
+          "V = IR",
+          "F = ma",
+          "E = mc²",
+          "P = W/t"
+        ],
+        "c": 0
+      },
+      {
+        "p": "O que é ligação covalente?",
+        "ops": [
+          "Transferência de elétrons",
+          "Compartilhamento de elétrons",
+          "Força eletrostática",
+          "Ligação metálica"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é efeito fotoelétrico?",
+        "ops": [
+          "Luz criando calor",
+          "Elétrons emitidos por luz",
+          "Reflexão de luz",
+          "Difração de ondas"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é endossimbiose?",
+        "ops": [
+          "Competição",
+          "Mitocôndrias vieram de bactérias internas",
+          "Parasitismo",
+          "Mutualismo"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é pressão osmótica?",
+        "ops": [
+          "Pressão mecânica",
+          "Impede fluxo por osmose",
+          "Pressão atmosférica",
+          "Hidrostática"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é especiação?",
+        "ops": [
+          "Extinção",
+          "Novas espécies se formam",
+          "Mutação de genes",
+          "Hibridação"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é a Lei da Gravitação Universal?",
+        "ops": [
+          "F = ma",
+          "Atração proporcional às massas",
+          "E = mc²",
+          "PV = nRT"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é fermentação?",
+        "ops": [
+          "Respiração aeróbica",
+          "Energia sem oxigênio",
+          "Fotossíntese",
+          "Digestão"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é a Tabela Periódica?",
+        "ops": [
+          "Lista de organismos",
+          "Organiza elementos químicos",
+          "Tabela de reações",
+          "Lista de compostos"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é homeostase?",
+        "ops": [
+          "Reprodução celular",
+          "Mantém equilíbrio interno",
+          "Metabolismo acelerado",
+          "Digestão"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que são ondas eletromagnéticas?",
+        "ops": [
+          "Precisam de meio material",
+          "Campo elétrico e magnético",
+          "Só luz visível",
+          "Só ondas de rádio"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é E=mc²?",
+        "ops": [
+          "Energia cinética",
+          "Massa equivale a energia",
+          "Lei da termodinâmica",
+          "Força gravitacional"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é mutação genética?",
+        "ops": [
+          "Reprodução normal",
+          "Alteração no DNA",
+          "Divisão celular",
+          "Transcrição"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é a teoria celular?",
+        "ops": [
+          "Todos os seres têm células como unidade básica",
+          "Teoria sobre átomos",
+          "Lei da termodinâmica",
+          "Teoria gravitacional"
+        ],
+        "c": 0
+      },
+      {
+        "p": "O que é difusão?",
+        "ops": [
+          "Transporte ativo",
+          "De maior para menor concentração",
+          "Osmose",
+          "Endocitose"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é a Lei dos Gases Ideais?",
+        "ops": [
+          "Pressão e temperatura",
+          "PV=nRT relaciona pressão, volume, T",
+          "Lei gravitacional",
+          "1ª lei termodinâmica"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é um anticorpo?",
+        "ops": [
+          "Uma bactéria",
+          "Proteína que combate antígenos",
+          "Um vírus",
+          "Um hormônio"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é o efeito Doppler?",
+        "ops": [
+          "Reflexo da luz",
+          "Mudança de frequência por movimento",
+          "Difração sonora",
+          "Refração"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é genótipo?",
+        "ops": [
+          "Características visíveis",
+          "Composição genética do organismo",
+          "O ambiente",
+          "O fenótipo"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é fenótipo?",
+        "ops": [
+          "Os genes",
+          "Expressão visível das características",
+          "O DNA",
+          "O cromossomo"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é a Lei de Mendel da Segregação?",
+        "ops": [
+          "Genes se misturam",
+          "Alelos se separam na formação dos gametas",
+          "Genes dominantes",
+          "Genes ambientais"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é biomassa?",
+        "ops": [
+          "Massa de minerais",
+          "Matéria orgânica viva no ecossistema",
+          "Gases atmosféricos",
+          "Litosfera"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é movimento browniano?",
+        "ops": [
+          "Movimento planejado",
+          "Movimento aleatório de partículas",
+          "Movimento orbital",
+          "Ondulatório"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é um hormônio?",
+        "ops": [
+          "Enzima digestiva",
+          "Regula funções fisiológicas",
+          "Proteína estrutural",
+          "Um anticorpo"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é pressão atmosférica?",
+        "ops": [
+          "Temperatura do ar",
+          "Peso da coluna de ar",
+          "Umidade do ar",
+          "Velocidade do vento"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é síntese proteica?",
+        "ops": [
+          "Digestão de proteínas",
+          "Produção de proteínas via DNA",
+          "Respiração celular",
+          "Fotossíntese"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é o ciclo do nitrogênio?",
+        "ops": [
+          "Ciclo da água",
+          "Circulação do nitrogênio no ambiente",
+          "Ciclo do carbono",
+          "Cadeia alimentar"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é o teorema de Bernoulli?",
+        "ops": [
+          "Lei da viscosidade",
+          "Velocidade maior, pressão menor",
+          "Lei da gravidade",
+          "Compressibilidade"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que são raios-X?",
+        "ops": [
+          "Ondas de rádio",
+          "Radiação que penetra tecidos moles",
+          "Luz visível",
+          "Infravermelho"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é o empuxo (Archimedes)?",
+        "ops": [
+          "Força gravitacional",
+          "Força de fluido para cima",
+          "Força de atrito",
+          "Força elástica"
+        ],
+        "c": 1
+      }
+    ],
+    "dificil": [
+      {
+        "p": "O que é o princípio de Heisenberg?",
+        "ops": [
+          "Medição ilimitada",
+          "Posição e momento não medidos juntos",
+          "Energia conservada",
+          "Comportamento determinístico"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é superposição quântica?",
+        "ops": [
+          "Dois átomos no mesmo local",
+          "Múltiplos estados simultâneos",
+          "Tipo de ligação",
+          "Fusão nuclear"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é relatividade restrita?",
+        "ops": [
+          "Gravidade curva espaço",
+          "Leis físicas iguais em referenciais inerciais",
+          "Tempo absoluto",
+          "Massa e energia independentes"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é dualidade onda-partícula?",
+        "ops": [
+          "Ondas e partículas distintas",
+          "Elétrons têm comportamento de onda e partícula",
+          "Só fótons têm dualidade",
+          "Só elétrons têm massa"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é emaranhamento quântico?",
+        "ops": [
+          "Partículas se repelem",
+          "Estado de uma afeta outra à distância",
+          "Força eletromagnética",
+          "Fusão de partículas"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é CRISPR-Cas9?",
+        "ops": [
+          "Tipo de vírus",
+          "Edição genética precisa de DNA",
+          "Um hormônio",
+          "Tipo de bactéria"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é a força forte nuclear?",
+        "ops": [
+          "Gravidade ampliada",
+          "Mantém quarks nos prótons",
+          "Força eletromagnética",
+          "Van der Waals"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é entropia termodinâmica?",
+        "ops": [
+          "Energia total",
+          "Medida da desordem do sistema",
+          "Temperatura",
+          "Pressão do sistema"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é a equação de Schrödinger?",
+        "ops": [
+          "Equação clássica",
+          "Descreve evolução do estado quântico",
+          "Lei gravitacional",
+          "Equação de calor"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é matéria escura?",
+        "ops": [
+          "Matéria visível",
+          "Não interage com luz, tem gravidade",
+          "Buracos negros",
+          "Estrelas apagadas"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é deriva genética?",
+        "ops": [
+          "Seleção natural",
+          "Mudança aleatória em populações pequenas",
+          "Mutação dirigida",
+          "Especiação"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é a constante de Planck?",
+        "ops": [
+          "Constante gravitacional",
+          "Relaciona energia do fóton à frequência",
+          "Velocidade da luz",
+          "Carga do elétron"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é o paradoxo de Fermi?",
+        "ops": [
+          "Problema quântico",
+          "Vida extraterrestre provável, mas sem evidência",
+          "Radioatividade",
+          "Termodinâmica"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é a hipótese de Gaia?",
+        "ops": [
+          "Terra é ser vivo",
+          "Terra e biosfera autorregulam condições",
+          "Teoria geológica",
+          "Teoria evolutiva"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é RMN (ressonância magnética)?",
+        "ops": [
+          "Tipo de raio-X",
+          "Usa campos magnéticos para imagens",
+          "Tipo de ultrassom",
+          "Tomografia"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é o modelo padrão?",
+        "ops": [
+          "Modelo de Bohr",
+          "Descreve partículas e forças fundamentais",
+          "Lei da termodinâmica",
+          "Relatividade geral"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é epigenética?",
+        "ops": [
+          "Mutações no DNA",
+          "Expressão gênica sem mudar o DNA",
+          "A genômica",
+          "A proteômica"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é buraco de Schwarzschild?",
+        "ops": [
+          "Um asteroide",
+          "Buraco negro não-rotacionante",
+          "Estrela de nêutrons",
+          "Um quasar"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é a teoria das supercordas?",
+        "ops": [
+          "Teoria sobre DNA",
+          "Partículas são cordas vibrantes",
+          "Teoria atômica clássica",
+          "Relatividade especial"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é condensado de Bose-Einstein?",
+        "ops": [
+          "Reação nuclear",
+          "Estado próximo do zero absoluto",
+          "Tipo de plasma",
+          "Transição normal"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é a constante cosmológica?",
+        "ops": [
+          "Velocidade da luz",
+          "Energia do vácuo ou expansão",
+          "Constante de Planck",
+          "Constante gravitacional"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é o efeito Compton?",
+        "ops": [
+          "Reflexo de ondas",
+          "Fótons espalhados por elétrons",
+          "Difração de ondas",
+          "Efeito fotoelétrico"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é a teoria sintética da evolução?",
+        "ops": [
+          "Teoria de Lamarck",
+          "Darwin + genética mendeliana",
+          "Teoria do criacionismo",
+          "A epigenética"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é a lei de Stefan-Boltzmann?",
+        "ops": [
+          "Lei dos gases",
+          "Potência irradiada ∝ T⁴",
+          "Lei da gravidade",
+          "Lei de Ohm"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é o efeito Hall quântico?",
+        "ops": [
+          "Fenômeno clássico",
+          "Condutância quantizada em campo magnético",
+          "Supercondutividade",
+          "Efeito termoelétrico"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é a equação de Drake?",
+        "ops": [
+          "Equação química",
+          "Estima civilizações tecnológicas",
+          "Equação gravitacional",
+          "Lei termodinâmica"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é física do estado sólido?",
+        "ops": [
+          "Sólidos geológicos",
+          "Estuda propriedades físicas dos sólidos",
+          "Termodinâmica de sólidos",
+          "Mecânica clássica"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é o teorema de Bell?",
+        "ops": [
+          "Teorema gravitacional",
+          "Correlações quânticas sem variáveis ocultas",
+          "Lei da termodinâmica",
+          "Princípio óptico"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é astrofísica de altas energias?",
+        "ops": [
+          "Estuda estrelas normais",
+          "Buracos negros, pulsares, raios gama",
+          "Estudo do Sol",
+          "Cosmologia clássica"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é o princípio antrópico?",
+        "ops": [
+          "Terra é o centro",
+          "Leis físicas compatíveis com observadores",
+          "Lei evolutiva",
+          "Princípio termodinâmico"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é biologia sintética?",
+        "ops": [
+          "Biologia tradicional",
+          "Engenharia de sistemas biológicos",
+          "Biologia molecular",
+          "Genômica"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é a constante de Hubble?",
+        "ops": [
+          "Constante gravitacional",
+          "Taxa de expansão do universo",
+          "Velocidade da luz",
+          "Constante de Planck"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é o modelo ΛCDM?",
+        "ops": [
+          "Modelo atômico",
+          "Energia escura + matéria escura fria",
+          "Modelo nuclear",
+          "Modelo evolutivo"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é o paradoxo do gato de Schrödinger?",
+        "ops": [
+          "Experimento real",
+          "Ilustra o problema da medição quântica",
+          "Experimento de radioatividade",
+          "Contradição lógica"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é a lei de Fick?",
+        "ops": [
+          "Lei gravitacional",
+          "Difusão proporcional ao gradiente",
+          "Lei eletromagnética",
+          "Lei termodinâmica"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é nanociência?",
+        "ops": [
+          "Ciência de objetos grandes",
+          "Manipulação em escala nanométrica",
+          "Astronomia",
+          "Geologia"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é o efeito Meissner?",
+        "ops": [
+          "Expansão por calor",
+          "Expulsão de campo magnético no supercondutor",
+          "Condutividade normal",
+          "Piezoelétrico"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é energia de ponto zero?",
+        "ops": [
+          "Zero absoluto de energia",
+          "Energia mínima do estado fundamental",
+          "Energia cinética nula",
+          "Energia potencial zero"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é a lei de Hardy-Weinberg?",
+        "ops": [
+          "Seleção natural",
+          "Frequências alélicas constantes em equilíbrio",
+          "Lei de Mendel",
+          "Herança quantitativa"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é a hipótese do mundo RNA?",
+        "ops": [
+          "DNA surgiu primeiro",
+          "RNA foi a primeira molécula autorreplicante",
+          "Proteína surgiu primeiro",
+          "Célula surgiu antes"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é astroquímica?",
+        "ops": [
+          "Astronomia clássica",
+          "Moléculas e reações no espaço",
+          "Química orgânica",
+          "Geoquímica"
+        ],
+        "c": 1
+      },
+      {
+        "p": "O que é a massa do neutrino?",
+        "ops": [
+          "Nêutrons sem massa",
+          "Massa pequena — desafia o modelo padrão",
+          "Partículas de luz",
+          "Carregam carga elétrica"
+        ],
+        "c": 1
+      }
+    ]
+  }
+}

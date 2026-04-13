@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cognix — Meu Perfil</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet"/>
+</head>
+<body class="ranking-page">
+  <div class="stars"></div>
+
+  <div class="container ranking-container">
+
+    <!-- CARD PERFIL -->
+    <div class="card" style="width:100%;max-width:520px;" id="cardPerfil">
+      <div class="card-inner" style="padding:2rem;text-align:center;">
+        <div id="perfilAvatar" style="font-size:4rem;line-height:1;margin-bottom:0.5rem;">🦊</div>
+        <h2 id="perfilApelido" style="font-family:var(--font-head);color:white;letter-spacing:3px;font-size:1.4rem;margin:0.25rem 0;">—</h2>
+        <div id="perfilNivel" style="color:var(--cyan);font-family:var(--font-head);font-size:0.9rem;letter-spacing:2px;margin-bottom:1.5rem;">🪖 Recruta — Nível 1</div>
+
+        <!-- BARRA XP -->
+        <div style="margin-bottom:1.5rem;">
+          <div style="display:flex;justify-content:space-between;font-size:0.78rem;color:var(--text2);margin-bottom:6px;">
+            <span id="xpAtual">0 XP</span>
+            <span id="xpProximo">Próximo: 200 XP</span>
+          </div>
+          <div class="progress-bar-bg" style="height:12px;border-radius:6px;">
+            <div class="progress-bar-fill" id="xpBarra" style="width:0%;border-radius:6px;background:linear-gradient(90deg,var(--cyan),var(--purple));transition:width 1s ease;"></div>
+          </div>
+          <div id="xpPct" style="font-size:0.75rem;color:var(--text2);margin-top:4px;text-align:right;">0%</div>
+        </div>
+
+        <!-- STATS -->
+        <div class="stats-grid" style="margin-bottom:1.5rem;" id="statsGrid">
+          <div class="stat-card"><div class="stat-num" id="stPartidas">0</div><div class="stat-label">Partidas</div></div>
+          <div class="stat-card"><div class="stat-num" id="stXP" style="color:var(--cyan);">0</div><div class="stat-label">XP Total</div></div>
+          <div class="stat-card"><div class="stat-num" id="stAcertos" style="color:var(--green);">0</div><div class="stat-label">Acertos</div></div>
+          <div class="stat-card"><div class="stat-num" id="stTaxa" style="color:var(--purple);">0%</div><div class="stat-label">Taxa Acerto</div></div>
+        </div>
+
+        <!-- BOTÕES DE AÇÃO -->
+        <div style="display:flex;gap:0.75rem;margin-bottom:0.75rem;">
+          <button class="btn-ranking" onclick="location.href='amigos.html'" style="flex:1;border-color:rgba(255,68,85,0.4);color:var(--red);">⚔️ Batalhar</button>
+          <button class="btn-ranking" onclick="location.href='amigos.html'" style="flex:1;">👥 Amigos</button>
+          <!-- MENU 3 PONTOS -->
+          <div style="position:relative;">
+            <button id="btnMenuPontos" style="width:40px;height:40px;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:10px;cursor:pointer;font-size:1.2rem;color:var(--text2);transition:all 0.2s;display:flex;align-items:center;justify-content:center;">⋯</button>
+            <div id="menuPontos" style="display:none;position:absolute;right:0;top:48px;background:rgba(10,10,30,0.97);border:1px solid var(--border);border-radius:12px;min-width:200px;z-index:200;box-shadow:0 8px 32px rgba(0,0,0,0.5);overflow:hidden;">
+              <div style="padding:0.6rem 1rem;color:var(--text2);font-size:0.7rem;font-family:var(--font-head);letter-spacing:2px;border-bottom:1px solid var(--border);">CONFIGURAÇÕES</div>
+              <button id="btnMenuEditar" style="width:100%;background:none;border:none;padding:0.75rem 1rem;color:var(--text);font-family:var(--font-body);font-size:0.9rem;cursor:pointer;text-align:left;transition:background 0.2s;display:flex;align-items:center;gap:0.6rem;">✏️ Editar Dados</button>
+              <div style="padding:0.6rem 1rem;color:var(--text2);font-size:0.7rem;font-family:var(--font-head);letter-spacing:2px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);">PRIVACIDADE</div>
+              <button id="btnMenuExcluir" style="width:100%;background:none;border:none;padding:0.75rem 1rem;color:rgba(255,68,85,0.8);font-family:var(--font-body);font-size:0.9rem;cursor:pointer;text-align:left;transition:background 0.2s;display:flex;align-items:center;gap:0.6rem;">🗑️ Excluir meus dados</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- STATS BATALHA -->
+        <div id="statsBatalha" style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--border);">
+          <h3 style="font-family:var(--font-head);color:var(--red);letter-spacing:2px;font-size:0.8rem;margin-bottom:0.75rem;">⚔️ BATALHAS</h3>
+          <div class="stats-grid">
+            <div class="stat-card"><div class="stat-num" id="stBatalhas" style="color:var(--text);">0</div><div class="stat-label">Total</div></div>
+            <div class="stat-card"><div class="stat-num" id="stVitorias" style="color:var(--cyan);">0</div><div class="stat-label">Vitórias</div></div>
+            <div class="stat-card"><div class="stat-num" id="stDerrotas" style="color:var(--red);">0</div><div class="stat-label">Derrotas</div></div>
+            <div class="stat-card"><div class="stat-num" id="stEmpates" style="color:var(--text2);">0</div><div class="stat-label">Empates</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD EDITAR DADOS (oculto por padrão) -->
+    <div class="card" id="cardEditar" style="width:100%;max-width:520px;display:none;">
+      <div class="card-inner" style="padding:1.5rem;">
+        <h3 style="font-family:var(--font-head);color:var(--purple);letter-spacing:2px;font-size:0.9rem;margin-bottom:1.2rem;">✏️ EDITAR DADOS</h3>
+
+        <div class="form-group">
+          <label>👤 Apelido (username)</label>
+          <input type="text" id="editApelido" maxlength="20"/>
+          <small style="color:var(--text2);font-size:0.75rem;margin-top:3px;display:block;">Entre 3 e 20 caracteres, sem espaços.</small>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>🗺️ Estado</label>
+            <select id="editEstado">
+              <option value="">Selecione</option>
+              <option>AC</option><option>AL</option><option>AP</option><option>AM</option>
+              <option>BA</option><option>CE</option><option>DF</option><option>ES</option>
+              <option>GO</option><option>MA</option><option>MT</option><option>MS</option>
+              <option>MG</option><option>PA</option><option>PB</option><option>PR</option>
+              <option>PE</option><option>PI</option><option>RJ</option><option>RN</option>
+              <option>RS</option><option>RO</option><option>RR</option><option>SC</option>
+              <option>SP</option><option>SE</option><option>TO</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>🏙️ Cidade</label>
+            <input type="text" id="editCidade" maxlength="60"/>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>🏛️ Escola / Instituição</label>
+          <input type="text" id="editEscola" maxlength="100" placeholder="Nome da escola (opcional)"/>
+        </div>
+
+        <div class="form-group">
+          <label>📅 Ano / Série que cursa</label>
+          <select id="editAnoEscolar">
+            <option value="">Selecione</option>
+            <optgroup label="Ensino Fundamental">
+              <option>1º ano - EF</option><option>2º ano - EF</option><option>3º ano - EF</option>
+              <option>4º ano - EF</option><option>5º ano - EF</option><option>6º ano - EF</option>
+              <option>7º ano - EF</option><option>8º ano - EF</option><option>9º ano - EF</option>
+            </optgroup>
+            <optgroup label="Ensino Médio">
+              <option>1º ano - EM</option><option>2º ano - EM</option><option>3º ano - EM</option>
+            </optgroup>
+            <optgroup label="Técnico / Superior">
+              <option>Curso Técnico</option><option>Graduação</option><option>Pós-graduação</option>
+            </optgroup>
+          </select>
+        </div>
+
+        <div style="display:flex;gap:0.75rem;margin-top:0.5rem;">
+          <button class="btn-play" id="btnSalvarEdicao" style="flex:1;">
+            <span>💾 Salvar Alterações</span><div class="btn-glow"></div>
+          </button>
+          <button class="btn-ranking" id="btnCancelarEdicao" style="flex:0 0 auto;">✕ Cancelar</button>
+        </div>
+        <div id="msgEditar" class="msg hidden" style="margin-top:0.75rem;"></div>
+      </div>
+    </div>
+
+    <!-- HISTÓRICO -->
+    <div class="card" style="width:100%;max-width:520px;">
+      <div class="card-inner" style="padding:1.5rem;">
+        <h3 style="font-family:var(--font-head);color:var(--cyan);letter-spacing:2px;font-size:0.9rem;margin-bottom:1rem;">📜 HISTÓRICO DE PARTIDAS</h3>
+        <div id="loadingHist" class="loading-ranking">🔄 Carregando...</div>
+        <div id="listaHistorico"></div>
+      </div>
+    </div>
+
+    <button class="btn-home" onclick="location.href='index.html'">🏠 Voltar ao Início</button>
+
+    <!-- BOTÃO SAIR — no rodapé -->
+    <button class="btn-ranking" id="btnSair" style="width:100%;max-width:520px;border-color:rgba(255,68,85,0.4);color:var(--red);margin-top:0.5rem;">🚪 Sair da Conta</button>
+  </div>
+
+  <script type="module">
+    import { auth, db, doc, getDoc, setDoc, getDocs, collection, query, where, orderBy, signOut, onAuthStateChanged, updateDoc, deleteDoc, deleteUser, provider, signInWithPopup } from './js/firebase.js';
+    import { iniciarNotificacoes } from './js/notificacoes.js';
+    import { calcularNivel } from './js/perfil.js';
+
+    let userAtual = null, perfilAtual = null;
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) { location.href='login.html'; return; }
+      const snap = await getDoc(doc(db,'alunos',user.uid));
+      if (!snap.exists()) { location.href='cadastro.html'; return; }
+      userAtual = user;
+      iniciarNotificacoes(auth, user, onAuthStateChanged);
+      carregarPerfil(snap.data());
+      carregarHistorico(user.uid);
+    });
+
+    function carregarPerfil(p) {
+      perfilAtual = p;
+      const nv    = calcularNivel(p.xp || 0);
+      const total = (p.totalAcertos||0) + (p.totalErros||0);
+      const taxa  = total > 0 ? Math.round((p.totalAcertos/total)*100) : 0;
+
+      document.getElementById('perfilApelido').textContent = p.apelido;
+      document.getElementById('perfilNivel').textContent   = `${nv.emoji} ${nv.nome} — Nível ${nv.nivel}`;
+
+      const avatarEl = document.getElementById('perfilAvatar');
+      if (p.avatarTipo === 'imagem' && p.avatar && p.avatar.startsWith('data:')) {
+        avatarEl.innerHTML = `<img src="${p.avatar}" class="perfil-avatar-img-lg" alt="avatar"/>`;
+        avatarEl.style.fontSize = '0';
+      } else {
+        avatarEl.textContent = p.avatar || '🦊';
+      }
+
+      document.getElementById('xpAtual').textContent    = `${p.xp||0} XP`;
+      document.getElementById('xpProximo').textContent  = nv.proximo ? `Próximo: ${nv.proximo.xpMin} XP` : '✨ Nível máximo!';
+      document.getElementById('stPartidas').textContent = p.partidasJogadas || 0;
+      document.getElementById('stXP').textContent       = p.xp || 0;
+      document.getElementById('stAcertos').textContent  = p.totalAcertos || 0;
+      document.getElementById('stTaxa').textContent     = taxa + '%';
+      document.getElementById('stBatalhas').textContent = p.totalBatalhas || 0;
+      document.getElementById('stVitorias').textContent = p.vitoriasB || 0;
+      document.getElementById('stDerrotas').textContent = p.derrotasB || 0;
+      document.getElementById('stEmpates').textContent  = p.empatesB  || 0;
+      document.getElementById('xpPct').textContent      = nv.progresso + '%';
+      setTimeout(() => { document.getElementById('xpBarra').style.width = nv.progresso + '%'; }, 200);
+    }
+
+    async function carregarHistorico(uid) {
+      const loading = document.getElementById('loadingHist');
+      const lista   = document.getElementById('listaHistorico');
+      try {
+        const hSnap = await getDocs(query(collection(db,'alunos',uid,'historico'), orderBy('data','desc')));
+        loading.style.display = 'none';
+        if (hSnap.empty) { lista.innerHTML='<div class="no-ranking">Nenhuma partida registrada ainda.<br>Jogue agora! 🎮</div>'; return; }
+        const diffLabel = { facil:'🟢 Fácil', medio:'🟡 Médio', dificil:'🔴 Difícil' };
+        hSnap.forEach(d => {
+          const h = d.data();
+          const div = document.createElement('div'); div.className='ranking-item';
+          const data = h.data?.toDate?.()?.toLocaleDateString('pt-BR') || '—';
+          div.innerHTML = `
+            <div class="rank-info" style="flex:1;">
+              <div class="rank-name">${h.tipo==='prova'?'📝 Prova':'🎮 Quiz'} — ${h.disciplina||''}
+                ${h.codigoProva?'<span style="color:var(--cyan);font-size:0.75rem;margin-left:6px;">'+h.codigoProva+'</span>':''}
+              </div>
+              <div class="rank-details">${diffLabel[h.dificuldade]||h.dificuldade||''} • ✅ ${h.acertos} acertos • ❌ ${h.erros} erros • ${data}</div>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-family:var(--font-head);color:var(--cyan);font-size:1rem;">${h.xpGanho||0} XP</div>
+              ${h.nota!==undefined?`<div style="font-size:0.8rem;color:var(--text2);">Nota: ${h.nota}</div>`:''}
+            </div>`;
+          lista.appendChild(div);
+        });
+      } catch(e) {
+        loading.style.display='none';
+        lista.innerHTML='<div class="no-ranking">❌ Erro ao carregar histórico.</div>';
+      }
+    }
+
+    // ===== MENU 3 PONTOS =====
+    const btnMenuPontos = document.getElementById('btnMenuPontos');
+    const menuPontos    = document.getElementById('menuPontos');
+    btnMenuPontos.onclick = (e) => {
+      e.stopPropagation();
+      menuPontos.style.display = menuPontos.style.display === 'none' ? 'block' : 'none';
+    };
+    document.addEventListener('click', () => { menuPontos.style.display = 'none'; });
+    menuPontos.addEventListener('click', e => e.stopPropagation());
+
+    // Hover nos itens do menu
+    document.querySelectorAll('#menuPontos button').forEach(b => {
+      b.addEventListener('mouseenter', () => b.style.background = 'rgba(255,255,255,0.06)');
+      b.addEventListener('mouseleave', () => b.style.background = 'none');
+    });
+
+    document.getElementById('btnMenuEditar').onclick = () => {
+      menuPontos.style.display = 'none';
+      const p = perfilAtual;
+      document.getElementById('editApelido').value    = p.apelido || '';
+      document.getElementById('editEstado').value     = p.estado  || '';
+      document.getElementById('editCidade').value     = p.cidade  || '';
+      document.getElementById('editEscola').value     = p.escola  || '';
+      document.getElementById('editAnoEscolar').value = p.anoEscolar || '';
+      document.getElementById('cardEditar').style.display = 'block';
+      document.getElementById('cardEditar').scrollIntoView({ behavior:'smooth', block:'start' });
+    };
+
+    document.getElementById('btnCancelarEdicao').onclick = () => {
+      document.getElementById('cardEditar').style.display = 'none';
+      document.getElementById('msgEditar').className = 'msg hidden';
+    };
+
+    document.getElementById('btnSalvarEdicao').onclick = async () => {
+      const novoApelido  = document.getElementById('editApelido').value.trim();
+      const novoEstado   = document.getElementById('editEstado').value;
+      const novaCidade   = document.getElementById('editCidade').value.trim();
+      const novaEscola   = document.getElementById('editEscola').value.trim();
+      const novoAno      = document.getElementById('editAnoEscolar').value;
+      const msgEl        = document.getElementById('msgEditar');
+      const btn          = document.getElementById('btnSalvarEdicao');
+
+      if (novoApelido.length < 3)    { msgEl.textContent='⚠️ Apelido muito curto!';        msgEl.className='msg msg-erro'; return; }
+      if (/\s/.test(novoApelido))    { msgEl.textContent='⚠️ Apelido sem espaços!';          msgEl.className='msg msg-erro'; return; }
+
+      btn.querySelector('span').textContent = '🔄 Salvando...'; btn.disabled = true;
+      msgEl.textContent='🔄 Verificando...'; msgEl.className='msg msg-info';
+
+      try {
+        // Verifica unicidade do apelido se foi alterado
+        if (novoApelido !== perfilAtual.apelido) {
+          const snap = await getDocs(query(collection(db,'alunos'), where('apelidoLower','==',novoApelido.toLowerCase())));
+          if (!snap.empty) {
+            msgEl.textContent='❌ Esse apelido já está em uso!'; msgEl.className='msg msg-erro';
+            btn.querySelector('span').textContent='💾 Salvar Alterações'; btn.disabled=false; return;
+          }
+        }
+
+        await updateDoc(doc(db,'alunos',userAtual.uid), {
+          apelido:    novoApelido,
+          apelidoLower: novoApelido.toLowerCase(),
+          estado:     novoEstado,
+          cidade:     novaCidade,
+          escola:     novaEscola,
+          anoEscolar: novoAno,
+        });
+
+        // Atualiza dados locais e recarrega exibição
+        perfilAtual = { ...perfilAtual, apelido:novoApelido, estado:novoEstado, cidade:novaCidade, escola:novaEscola, anoEscolar:novoAno };
+        document.getElementById('perfilApelido').textContent = novoApelido;
+
+        msgEl.textContent='✅ Dados atualizados com sucesso!'; msgEl.className='msg msg-sucesso';
+        btn.querySelector('span').textContent='💾 Salvar Alterações'; btn.disabled=false;
+        setTimeout(() => { document.getElementById('cardEditar').style.display='none'; }, 1500);
+      } catch(e) {
+        msgEl.textContent='❌ Erro: '+e.message; msgEl.className='msg msg-erro';
+        btn.querySelector('span').textContent='💾 Salvar Alterações'; btn.disabled=false;
+      }
+    };
+
+    // ===== EXCLUIR MEUS DADOS (LGPD) — via menu =====
+    document.getElementById('btnMenuExcluir').onclick = async () => {
+      menuPontos.style.display = 'none';
+      const confirmacao1 = confirm(
+        '⚠️ ATENÇÃO — Exclusão de dados\n\n' +
+        'Esta ação irá apagar permanentemente:\n' +
+        '• Seu perfil e informações pessoais\n' +
+        '• Todo seu histórico de partidas e XP\n' +
+        '• Suas amizades e batalhas\n' +
+        '• Sua conta de acesso\n\n' +
+        'Esta ação NÃO pode ser desfeita.\n\nDeseja continuar?'
+      );
+      if (!confirmacao1) return;
+
+      const confirmacao2 = confirm('❗ Última confirmação\n\nTem certeza absoluta que deseja excluir todos os seus dados e sua conta?');
+      if (!confirmacao2) return;
+
+      const btn = document.getElementById('btnMenuExcluir');
+      btn.textContent = '🔄 Excluindo dados...';
+      btn.disabled = true;
+
+      try {
+        const uid = userAtual.uid;
+
+        // 1. Exclui subcoleção historico
+        const histSnap = await getDocs(collection(db,'alunos',uid,'historico'));
+        for (const d of histSnap.docs) await deleteDoc(doc(db,'alunos',uid,'historico',d.id));
+
+        // 2. Exclui subcoleção amigos (e vínculos do outro lado)
+        const amigosSnap = await getDocs(collection(db,'alunos',uid,'amigos'));
+        for (const d of amigosSnap.docs) {
+          await deleteDoc(doc(db,'alunos',d.data().amigoUid,'amigos',uid)).catch(()=>{});
+          await deleteDoc(doc(db,'alunos',uid,'amigos',d.id));
+        }
+
+        // 3. Exclui entradas do ranking
+        const rankSnap = await getDocs(query(collection(db,'ranking'), where('uid','==',uid)));
+        for (const d of rankSnap.docs) await deleteDoc(doc(db,'ranking',d.id));
+
+        // 4. Exclui o documento principal do aluno
+        await deleteDoc(doc(db,'alunos',uid));
+
+        // 5. Deleta a conta do Firebase Authentication
+        // Contas Google precisam de reautenticação recente
+        try {
+          await deleteUser(userAtual);
+        } catch(authErr) {
+          if (authErr.code === 'auth/requires-recent-login') {
+            // Reautentica via Google popup e tenta novamente
+            const resultado = await signInWithPopup(auth, provider);
+            await deleteUser(resultado.user);
+          } else {
+            console.warn('Não foi possível deletar conta Auth:', authErr.message);
+            // Dados do Firestore já foram apagados — continua mesmo assim
+          }
+        }
+
+        // 6. Desloga e redireciona
+        await signOut(auth).catch(()=>{});
+        location.href = 'login.html';
+
+      } catch(e) {
+        alert('❌ Erro ao excluir dados: ' + e.message);
+        btn.textContent = '🗑️ Excluir meus dados';
+        btn.disabled = false;
+        btn.style.display = 'flex';
+      }
+    };
+
+    // ===== SAIR =====
+    document.getElementById('btnSair').onclick = async () => {
+      if (confirm('Deseja sair da sua conta?')) {
+        await signOut(auth);
+        location.href = 'login.html';
+      }
+    };
+  </script>
+</body>
+</html>

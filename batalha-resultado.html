@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cognix — Resultado da Batalha</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet"/>
+</head>
+<body class="ranking-page">
+  <div class="stars"></div>
+
+  <div class="container ranking-container">
+
+    <!-- RESULTADO FINAL -->
+    <div id="resultadoCard" class="card" style="width:100%;max-width:520px;">
+      <div class="card-inner" style="padding:2rem;text-align:center;">
+        <div id="resultTrophy" style="font-size:4rem;margin-bottom:0.5rem;">🏆</div>
+        <h2 id="resultTitle" style="font-family:var(--font-head);color:white;letter-spacing:4px;font-size:1.3rem;margin:0.5rem 0;">—</h2>
+        <p id="resultSub" style="color:var(--text2);font-size:0.9rem;margin-bottom:1.5rem;">—</p>
+
+        <!-- VS CARD -->
+        <div class="batalha-vs" style="margin-bottom:1.5rem;">
+          <div class="vs-resultado" id="vrEu"></div>
+          <div style="font-family:var(--font-head);color:var(--red);font-size:1.5rem;letter-spacing:4px;">VS</div>
+          <div class="vs-resultado" id="vrOponente"></div>
+        </div>
+
+        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;justify-content:center;">
+          <button class="btn-play" onclick="location.href='index.html'">
+            <span>🏠 Início</span><div class="btn-glow"></div>
+          </button>
+          <button class="btn-ranking" onclick="location.href='amigos.html'">👥 Amigos</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- REVISÃO DE QUESTÕES -->
+    <div class="card" style="width:100%;max-width:520px;">
+      <div class="card-inner" style="padding:1.5rem;">
+        <h3 style="font-family:var(--font-head);color:var(--cyan);letter-spacing:2px;font-size:0.85rem;margin-bottom:1rem;">📋 REVISÃO DAS QUESTÕES</h3>
+        <div id="revisaoLista"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <script type="module">
+    import { db, auth, doc, getDoc, updateDoc, onAuthStateChanged } from './js/firebase.js';
+    import { calcularNivel, renderAvatar } from './js/perfil.js';
+
+    const batalhaId = localStorage.getItem('batalha_resultado_id') || localStorage.getItem('batalha_id');
+    const lado      = localStorage.getItem('batalha_lado');
+    if (!batalhaId) { location.href='index.html'; }
+
+    let eu = null, meuPerfil = null;
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) { location.href='login.html'; return; }
+      const snap = await getDoc(doc(db,'alunos',user.uid));
+      if (!snap.exists()) { location.href='cadastro.html'; return; }
+      eu = user; meuPerfil = snap.data();
+      carregarResultado();
+    });
+
+    async function carregarResultado() {
+      const snap = await getDoc(doc(db,'batalhas',batalhaId));
+      if (!snap.exists()) { location.href='index.html'; return; }
+      const d = snap.data();
+
+      const euLado  = lado;
+      const opLado  = lado==='A' ? 'B' : 'A';
+      const euPontos= d[`pontos_${euLado}`] || 0;
+      const opPontos= d[`pontos_${opLado}`] || 0;
+      const vencedor= d.vencedor;
+
+      // Perfil do oponente
+      const opUid    = lado==='A' ? d.desafiadoUid : d.anfitriaoUid;
+      const opSnap   = await getDoc(doc(db,'alunos',opUid));
+      const opPerfil = opSnap.exists() ? opSnap.data() : {};
+      const opNv     = calcularNivel(opPerfil.xp||0);
+      const euNv     = calcularNivel(meuPerfil.xp||0);
+
+      // Resultado
+      let trophy='🤝', title='EMPATE!', sub='Vocês estão nivelados!';
+      const euVenceu = (vencedor === euLado);
+      if (vencedor === 'empate') { trophy='🤝'; title='EMPATE!'; sub='Mesma pontuação!'; }
+      else if (euVenceu)         { trophy='🏆'; title='VOCÊ VENCEU!'; sub='Glória é sua! 🎉'; }
+      else                       { trophy='😔'; title='VOCÊ PERDEU!'; sub='Treine mais e volte mais forte!'; }
+
+      document.getElementById('resultTrophy').textContent = trophy;
+      document.getElementById('resultTitle').textContent  = title;
+      document.getElementById('resultSub').textContent    = sub;
+
+      // VS card
+      const euBorda  = euVenceu ? 'var(--cyan)' : vencedor==='empate' ? 'var(--text2)' : 'var(--red)';
+      const opBorda  = !euVenceu && vencedor!=='empate' ? 'var(--cyan)' : vencedor==='empate' ? 'var(--text2)' : 'var(--red)';
+
+      document.getElementById('vrEu').innerHTML = `
+        <div style="border:2px solid ${euBorda};border-radius:50%;width:56px;height:56px;overflow:hidden;display:flex;align-items:center;justify-content:center;margin:0 auto 0.5rem;">
+          ${renderAvatar(meuPerfil.avatar, meuPerfil.avatarTipo)}
+        </div>
+        <div style="font-family:var(--font-head);color:var(--cyan);font-size:0.8rem;">${meuPerfil.apelido}</div>
+        <div style="font-family:var(--font-head);color:white;font-size:1.5rem;margin:0.3rem 0;">${euPontos}</div>
+        <div style="color:var(--text2);font-size:0.75rem;">${euNv.emoji} Nível ${euNv.nivel}</div>
+        ${euVenceu ? '<div style="color:var(--cyan);font-size:0.8rem;margin-top:0.3rem;">👑 Vencedor</div>' : ''}`;
+
+      document.getElementById('vrOponente').innerHTML = `
+        <div style="border:2px solid ${opBorda};border-radius:50%;width:56px;height:56px;overflow:hidden;display:flex;align-items:center;justify-content:center;margin:0 auto 0.5rem;">
+          ${renderAvatar(opPerfil.avatar, opPerfil.avatarTipo)}
+        </div>
+        <div style="font-family:var(--font-head);color:var(--red);font-size:0.8rem;">${opPerfil.apelido||'Oponente'}</div>
+        <div style="font-family:var(--font-head);color:white;font-size:1.5rem;margin:0.3rem 0;">${opPontos}</div>
+        <div style="color:var(--text2);font-size:0.75rem;">${opNv.emoji} Nível ${opNv.nivel}</div>
+        ${!euVenceu && vencedor!=='empate' ? '<div style="color:var(--cyan);font-size:0.8rem;margin-top:0.3rem;">👑 Vencedor</div>' : ''}`;
+
+      // Revisão das questões
+      const lista     = document.getElementById('revisaoLista');
+      const respsEu   = d[`respostas_${euLado}`] || {};
+      const respsOp   = d[`respostas_${opLado}`] || {};
+      const questoes  = d.questoes || [];
+      const labels    = ['A','B','C','D'];
+
+      questoes.forEach((q, i) => {
+        const rEu = respsEu[i];
+        const rOp = respsOp[i];
+        const div = document.createElement('div');
+        div.style.cssText = 'margin-bottom:1rem;padding:1rem;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;';
+        const corretaLabel = labels[q.c] || '?';
+
+        const statusEu = rEu?.pulou ? '⏭️ Expirou' : rEu?.timeout ? '⏰ Tempo' : rEu?.acertou ? '✅' : rEu ? '❌' : '—';
+        const statusOp = rOp?.pulou ? '⏭️ Expirou' : rOp?.timeout ? '⏰ Tempo' : rOp?.acertou ? '✅' : rOp ? '❌' : '—';
+
+        div.innerHTML = `
+          <p style="color:var(--text);font-size:0.85rem;margin-bottom:0.5rem;"><strong>${i+1}.</strong> ${q.p}</p>
+          <div style="color:var(--green);font-size:0.78rem;margin-bottom:0.5rem;">✅ Resposta correta: ${corretaLabel}) ${q.ops[q.c]}</div>
+          <div style="display:flex;gap:1rem;">
+            <div style="flex:1;text-align:center;padding:0.4rem;background:rgba(0,200,255,0.05);border-radius:8px;font-size:0.8rem;">
+              <div style="color:var(--cyan);font-family:var(--font-head);font-size:0.7rem;">VOCÊ</div>
+              <div style="font-size:1rem;">${statusEu}</div>
+              ${rEu && !rEu.pulou && !rEu.timeout ? `<div style="color:var(--text2);font-size:0.7rem;">⏱️ ${rEu.tempo}s restantes</div>` : ''}
+            </div>
+            <div style="flex:1;text-align:center;padding:0.4rem;background:rgba(255,68,85,0.05);border-radius:8px;font-size:0.8rem;">
+              <div style="color:var(--red);font-family:var(--font-head);font-size:0.7rem;">${opPerfil.apelido||'OPONENTE'}</div>
+              <div style="font-size:1rem;">${statusOp}</div>
+              ${rOp && !rOp.pulou && !rOp.timeout ? `<div style="color:var(--text2);font-size:0.7rem;">⏱️ ${rOp.tempo}s restantes</div>` : ''}
+            </div>
+          </div>`;
+        lista.appendChild(div);
+      });
+
+      // Salva no histórico de batalhas
+      await salvarHistoricoBatalha(d, euPontos, opPontos, euVenceu, vencedor);
+
+      // Limpa localStorage
+      localStorage.removeItem('batalha_id');
+      localStorage.removeItem('batalha_lado');
+      localStorage.removeItem('batalha_resultado_id');
+      localStorage.removeItem('batalha_oponente_uid');
+      localStorage.removeItem('batalha_oponente_apelido');
+    }
+
+    async function salvarHistoricoBatalha(d, euPontos, opPontos, euVenceu, vencedor) {
+      try {
+        const opUid = lado==='A' ? d.desafiadoUid : d.anfitriaoUid;
+        const opSnap = await getDoc(doc(db,'alunos',opUid));
+        const opApelido = opSnap.exists() ? opSnap.data().apelido : 'Oponente';
+        await updateDoc(doc(db,'alunos',eu.uid), {
+          totalBatalhas:  (meuPerfil.totalBatalhas||0) + 1,
+          vitoriasB:      (meuPerfil.vitoriasB||0) + (euVenceu?1:0),
+          derrotasB:      (meuPerfil.derrotasB||0) + (!euVenceu && vencedor!=='empate'?1:0),
+          empatesB:       (meuPerfil.empatesB||0) + (vencedor==='empate'?1:0),
+        });
+      } catch(e) { console.log('Erro histórico batalha:', e); }
+    }
+  </script>
+</body>
+</html>

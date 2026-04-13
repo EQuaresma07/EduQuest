@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cognix — Batalha</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet"/>
+</head>
+<body class="home-page">
+  <div class="stars"></div>
+  <div class="container home-container">
+
+    <!-- TELA A: CONFIGURAR -->
+    <div id="telaConfig" style="width:100%;max-width:520px;">
+      <div style="text-align:center;margin-bottom:1.5rem;">
+        <div style="font-size:2.5rem;">⚔️</div>
+        <h2 style="font-family:var(--font-head);color:white;letter-spacing:3px;font-size:1.1rem;margin:0.5rem 0;">BATALHA</h2>
+        <p id="desafiadoLabel" style="color:var(--cyan);font-size:0.9rem;font-family:var(--font-head);letter-spacing:2px;"></p>
+      </div>
+
+      <div class="card"><div class="card-inner">
+
+        <!-- MODO DISCIPLINA: única ou mix -->
+        <label style="display:block;margin-bottom:0.5rem;color:var(--text2);font-size:0.85rem;">📚 Modo de disciplina</label>
+        <div class="difficulty-grid" style="grid-template-columns:1fr 1fr;margin-bottom:1.2rem;">
+          <button type="button" class="diff-btn active" id="btnModoUnica" data-discmodo="unica">📖 Uma disciplina</button>
+          <button type="button" class="diff-btn" id="btnModoMix" data-discmodo="mix">🎲 Mix de disciplinas</button>
+        </div>
+
+        <!-- DISCIPLINA ÚNICA -->
+        <div id="secaoUnica">
+          <div class="form-row">
+            <div class="form-group">
+              <label>📚 Disciplina</label>
+              <select id="bDisciplina"><option value="">🔄 Carregando...</option></select>
+            </div>
+            <div class="form-group">
+              <label>⚡ Dificuldade</label>
+              <select id="bDificuldade">
+                <option value="facil">🟢 Fácil</option>
+                <option value="medio">🟡 Médio</option>
+                <option value="dificil">🔴 Difícil</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- MIX DE DISCIPLINAS -->
+        <div id="secaoMix" style="display:none;">
+          <div class="form-group">
+            <label>⚡ Dificuldade</label>
+            <select id="bDificuldadeMix">
+              <option value="facil">🟢 Fácil</option>
+              <option value="medio">🟡 Médio</option>
+              <option value="dificil">🔴 Difícil</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>🎲 Selecione as disciplinas (mínimo 2)</label>
+            <div id="mixDiscGrid" style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;margin-top:0.5rem;"></div>
+          </div>
+          <div id="msgMix" style="color:var(--text2);font-size:0.8rem;margin-top:0.5rem;text-align:center;"></div>
+        </div>
+
+        <!-- CONFIGURAÇÕES GERAIS -->
+        <div class="form-row" style="margin-top:0.75rem;">
+          <div class="form-group">
+            <label>❓ Questões</label>
+            <select id="bQtd">
+              <option value="5">5 questões</option>
+              <option value="10" selected>10 questões</option>
+              <option value="15">15 questões</option>
+              <option value="20">20 questões</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>⏱️ Tempo/Questão</label>
+            <select id="bTempo">
+              <option value="15">15s</option>
+              <option value="20" selected>20s</option>
+              <option value="30">30s</option>
+            </select>
+          </div>
+        </div>
+
+        <label style="display:block;margin-bottom:0.5rem;color:var(--text2);font-size:0.85rem;">🎮 Modo de batalha</label>
+        <div class="difficulty-grid" style="grid-template-columns:1fr 1fr;margin-bottom:1.2rem;">
+          <button type="button" class="diff-btn active" data-modo="velocidade">⚡ Velocidade</button>
+          <button type="button" class="diff-btn" data-modo="normal">🎯 Normal</button>
+        </div>
+        <div id="descModo" style="color:var(--text2);font-size:0.8rem;margin-bottom:1rem;line-height:1.6;padding:0.75rem;background:rgba(255,255,255,0.03);border-radius:8px;border:1px solid var(--border);">
+          ⚡ <strong>Velocidade:</strong> Após um jogador responder, a questão expira para o outro. Pense rápido!
+        </div>
+
+        <button class="btn-play" id="btnEnviarDesafio">
+          <span>🚀 Enviar Desafio</span>
+          <div class="btn-glow"></div>
+        </button>
+        <div id="msgLobby" class="msg hidden" style="margin-top:0.75rem;"></div>
+      </div></div>
+
+      <button class="btn-home" onclick="location.href='amigos.html'" style="margin-top:1rem;">← Voltar</button>
+    </div>
+
+    <!-- TELA B: AGUARDANDO -->
+    <div id="telaAguardando" style="display:none;width:100%;max-width:500px;text-align:center;">
+      <div style="font-size:3rem;margin-bottom:1rem;">⏳</div>
+      <h2 style="font-family:var(--font-head);color:white;letter-spacing:3px;font-size:1rem;">AGUARDANDO</h2>
+      <p id="aguardandoMsg" style="color:var(--cyan);font-family:var(--font-head);font-size:0.9rem;letter-spacing:2px;margin:1rem 0;"></p>
+      <div class="card"><div class="card-inner" style="padding:1.5rem;">
+        <div class="batalha-vs">
+          <div class="vs-player" id="vsEu"></div>
+          <div style="font-family:var(--font-head);color:var(--red);font-size:2rem;letter-spacing:4px;">VS</div>
+          <div class="vs-player" id="vsOponente"></div>
+        </div>
+        <div style="color:var(--text2);font-size:0.85rem;margin-top:1rem;">⏱️ Expira em <span id="tempoExpira">5:00</span></div>
+      </div></div>
+      <button class="btn-home" id="btnCancelarLobby" style="margin-top:1rem;color:var(--red);border-color:rgba(255,68,85,0.3);">❌ Cancelar Desafio</button>
+    </div>
+
+    <!-- TELA C: RECEBER DESAFIO -->
+    <div id="telaReceber" style="display:none;width:100%;max-width:500px;text-align:center;">
+      <div style="font-size:3rem;margin-bottom:1rem;">⚔️</div>
+      <h2 style="font-family:var(--font-head);color:var(--red);letter-spacing:3px;font-size:1.1rem;">VOCÊ FOI DESAFIADO!</h2>
+      <div class="card"><div class="card-inner" style="padding:1.5rem;">
+        <div class="batalha-vs">
+          <div class="vs-player" id="vsDesafiante"></div>
+          <div style="font-family:var(--font-head);color:var(--red);font-size:2rem;letter-spacing:4px;">VS</div>
+          <div class="vs-player" id="vsVoce"></div>
+        </div>
+        <div id="infoDesafio" style="margin:1.2rem 0;color:var(--text2);font-size:0.9rem;line-height:1.8;"></div>
+        <div style="display:flex;gap:0.75rem;">
+          <button class="btn-play" id="btnAceitar" style="flex:1;"><span>⚔️ Aceitar Batalha</span><div class="btn-glow"></div></button>
+          <button id="btnRecusar" style="flex:1;background:rgba(255,68,85,0.1);border:1px solid rgba(255,68,85,0.3);border-radius:12px;color:var(--red);font-family:var(--font-body);font-size:0.9rem;cursor:pointer;padding:0.75rem;">❌ Recusar</button>
+        </div>
+      </div></div>
+    </div>
+
+  </div>
+
+  <script type="module">
+    import { db, auth, doc, getDoc, setDoc, updateDoc, collection, getDocs, query, where, onSnapshot, onAuthStateChanged } from './js/firebase.js';
+    import { calcularNivel, renderAvatar } from './js/perfil.js';
+    import { iniciarNotificacoes } from './js/notificacoes.js';
+
+    const DISCIPLINAS_PADRAO = [
+      { id:'informatica', emoji:'💻', nome:'Informática' },
+      { id:'matematica',  emoji:'📐', nome:'Matemática' },
+      { id:'portugues',   emoji:'📖', nome:'Português' },
+      { id:'ciencias',    emoji:'🔬', nome:'Ciências' },
+      { id:'geografia',   emoji:'🌍', nome:'Geografia' },
+      { id:'biologia',    emoji:'🧬', nome:'Biologia' },
+      { id:'educacaofisica', emoji:'⚽', nome:'Educação Física' },
+      { id:'quimica',     emoji:'⚗️', nome:'Química' },
+      { id:'fisica',      emoji:'⚡', nome:'Física' },
+      { id:'historia',    emoji:'📜', nome:'História' },
+      { id:'artes',       emoji:'🎨', nome:'Artes' },
+    ];
+    const DIFF_NOMES = { facil:'🟢 Fácil', medio:'🟡 Médio', dificil:'🔴 Difícil' };
+
+    let eu = null, meuPerfil = null;
+    let batalhaId  = null;
+    let unsubLobby = null;
+    let timerExpira= null;
+    let todasDiscs = [];
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) { location.href='login.html'; return; }
+      const snap = await getDoc(doc(db,'alunos',user.uid));
+      if (!snap.exists()) { location.href='cadastro.html'; return; }
+      eu = user; meuPerfil = snap.data();
+      iniciarNotificacoes(auth, user, onAuthStateChanged);
+
+      // Verifica batalha pendente como desafiado
+      const pendSnap = await getDocs(query(collection(db,'batalhas'),
+        where('desafiadoUid','==',eu.uid), where('status','==','aguardando')));
+      if (!pendSnap.empty) {
+        batalhaId = pendSnap.docs[0].id;
+        mostrarTelaReceber(pendSnap.docs[0].data()); return;
+      }
+
+      const oponenteUid     = localStorage.getItem('batalha_oponente_uid');
+      const oponenteApelido = localStorage.getItem('batalha_oponente_apelido');
+      if (!oponenteUid) { location.href='amigos.html'; return; }
+      document.getElementById('desafiadoLabel').textContent = '⚔️ Desafiar: ' + oponenteApelido;
+
+      await carregarDisciplinas();
+      iniciarTelaConfig(oponenteUid, oponenteApelido);
+    });
+
+    // ===== CARREGA DISCIPLINAS DINÂMICAS =====
+    async function carregarDisciplinas() {
+      todasDiscs = [...DISCIPLINAS_PADRAO];
+      try {
+        const snap = await getDocs(collection(db,'disciplinas'));
+        snap.forEach(d => {
+          if (!todasDiscs.some(f => f.id === d.id)) {
+            todasDiscs.push({ id:d.id, emoji:d.data().emoji||'📚', nome:d.data().nome });
+          }
+        });
+      } catch(e) {}
+
+      // Popula select de disciplina única
+      const sel = document.getElementById('bDisciplina');
+      sel.innerHTML = todasDiscs.map(d => `<option value="${d.id}">${d.emoji} ${d.nome}</option>`).join('');
+
+      // Popula grid de mix
+      const grid = document.getElementById('mixDiscGrid');
+      grid.innerHTML = '';
+      todasDiscs.forEach(d => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'avatar-btn';
+        btn.dataset.disc = d.id;
+        btn.style.cssText = 'font-size:0.82rem;padding:0.5rem 0.4rem;display:flex;align-items:center;gap:0.4rem;justify-content:flex-start;text-align:left;';
+        btn.innerHTML = `<span>${d.emoji}</span><span>${d.nome}</span>`;
+        btn.onclick = () => {
+          btn.classList.toggle('active');
+          atualizarMsgMix();
+        };
+        grid.appendChild(btn);
+      });
+    }
+
+    function atualizarMsgMix() {
+      const selecionadas = document.querySelectorAll('#mixDiscGrid .avatar-btn.active').length;
+      const qtd = parseInt(document.getElementById('bQtd').value);
+      const msg = document.getElementById('msgMix');
+      if (selecionadas < 2) { msg.textContent = '⚠️ Selecione pelo menos 2 disciplinas'; return; }
+      const porDisc = Math.ceil(qtd / selecionadas);
+      msg.textContent = `✅ ${selecionadas} disciplinas · ~${porDisc} questões cada`;
+    }
+
+    document.getElementById('bQtd').addEventListener('change', () => {
+      if (document.getElementById('btnModoMix').classList.contains('active')) atualizarMsgMix();
+    });
+
+    // ===== TOGGLE MODO DISCIPLINA =====
+    document.getElementById('btnModoUnica').onclick = () => {
+      document.getElementById('btnModoUnica').classList.add('active');
+      document.getElementById('btnModoMix').classList.remove('active');
+      document.getElementById('secaoUnica').style.display = 'block';
+      document.getElementById('secaoMix').style.display   = 'none';
+    };
+    document.getElementById('btnModoMix').onclick = () => {
+      document.getElementById('btnModoMix').classList.add('active');
+      document.getElementById('btnModoUnica').classList.remove('active');
+      document.getElementById('secaoMix').style.display   = 'block';
+      document.getElementById('secaoUnica').style.display = 'none';
+      atualizarMsgMix();
+    };
+
+    // ===== TOGGLE MODO BATALHA =====
+    const descs = {
+      velocidade: '⚡ <strong>Velocidade:</strong> Após um jogador responder, a questão expira para o outro. Pense rápido!',
+      normal:     '🎯 <strong>Normal:</strong> Ambos respondem todas as questões no próprio ritmo. Vence quem acertar mais.'
+    };
+    document.querySelectorAll('.diff-btn[data-modo]').forEach(btn => {
+      btn.onclick = () => {
+        document.querySelectorAll('.diff-btn[data-modo]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('descModo').innerHTML = descs[btn.dataset.modo];
+      };
+    });
+
+    function iniciarTelaConfig(oponenteUid, oponenteApelido) {
+      document.getElementById('btnEnviarDesafio').onclick = () => enviarDesafio(oponenteUid, oponenteApelido);
+    }
+
+    async function enviarDesafio(oponenteUid, oponenteApelido) {
+      const btn   = document.getElementById('btnEnviarDesafio');
+      const msgEl = document.getElementById('msgLobby');
+      const qtd   = parseInt(document.getElementById('bQtd').value);
+      const tempo = parseInt(document.getElementById('bTempo').value);
+      const modo  = document.querySelector('.diff-btn[data-modo].active').dataset.modo;
+      const isMix = document.getElementById('btnModoMix').classList.contains('active');
+
+      let disc, diff, questoes, modoMix = false, disciplinasMix = [];
+
+      if (isMix) {
+        const selecionadas = [...document.querySelectorAll('#mixDiscGrid .avatar-btn.active')];
+        if (selecionadas.length < 2) {
+          msgEl.textContent='⚠️ Selecione pelo menos 2 disciplinas no modo mix!';
+          msgEl.className='msg msg-erro'; return;
+        }
+        disciplinasMix = selecionadas.map(b => b.dataset.disc);
+        diff  = document.getElementById('bDificuldadeMix').value;
+        modoMix = true;
+      } else {
+        disc = document.getElementById('bDisciplina').value;
+        diff = document.getElementById('bDificuldade').value;
+      }
+
+      btn.disabled=true; btn.querySelector('span').textContent='🔄 Criando...';
+      msgEl.textContent='🔄 Sorteando questões...'; msgEl.className='msg msg-info';
+
+      try {
+        if (modoMix) {
+          questoes = await sortearQuestoesMix(disciplinasMix, diff, qtd);
+        } else {
+          questoes = await sortearQuestoes(disc, diff, qtd);
+        }
+
+        if (questoes.length < 1) {
+          msgEl.textContent='⚠️ Questões insuficientes! Tente outra disciplina ou dificuldade.';
+          msgEl.className='msg msg-erro'; btn.disabled=false;
+          btn.querySelector('span').textContent='🚀 Enviar Desafio'; return;
+        }
+
+        const expira = new Date(Date.now() + 5*60*1000);
+        const ref    = doc(collection(db,'batalhas'));
+        batalhaId    = ref.id;
+
+        await setDoc(ref, {
+          id: ref.id, modo,
+          disciplina:     modoMix ? 'mix' : disc,
+          disciplinasMix: modoMix ? disciplinasMix : [],
+          modoMix,
+          dificuldade: diff, tempoPorQuestao: tempo, questoes,
+          anfitriaoUid: eu.uid, anfitriaoApelido: meuPerfil.apelido,
+          anfitriaoAvatar: meuPerfil.avatar, anfitriaoAvatarTipo: meuPerfil.avatarTipo||'emoji',
+          desafiadoUid: oponenteUid, desafiadoApelido: oponenteApelido,
+          status: 'aguardando',
+          respostas_A:{}, respostas_B:{},
+          questaoAtual_A:0, questaoAtual_B:0,
+          pontos_A:0, pontos_B:0, vencedor:null,
+          criadaEm:new Date(), expiraEm:expira.toISOString()
+        });
+
+        localStorage.setItem('batalha_id',   batalhaId);
+        localStorage.setItem('batalha_lado', 'A');
+        mostrarTelaAguardando(oponenteApelido, expira);
+        escutarLobby();
+        msgEl.className='msg hidden';
+      } catch(e) {
+        msgEl.textContent='❌ Erro: '+e.message; msgEl.className='msg msg-erro';
+        btn.disabled=false; btn.querySelector('span').textContent='🚀 Enviar Desafio';
+      }
+    }
+
+    async function sortearQuestoes(disc, diff, qtd) {
+      const snap = await getDocs(query(collection(db,'questoes'), where('disciplina','==',disc), where('dificuldade','==',diff)));
+      let pool = [];
+      snap.forEach(d => pool.push({ p:d.data().p, ops:d.data().ops, c:d.data().c }));
+      if (pool.length < qtd) {
+        try {
+          const res  = await fetch('data/perguntas.json');
+          const data = await res.json();
+          pool = [...pool, ...(data[disc]?.[diff]||[])];
+        } catch{}
+      }
+      return pool.sort(() => Math.random()-0.5).slice(0, qtd);
+    }
+
+    async function sortearQuestoesMix(discs, diff, qtdTotal) {
+      const porDisc  = Math.ceil(qtdTotal / discs.length);
+      let todasQs    = [];
+      // Carrega JSON local uma vez
+      let jsonData   = null;
+      try { const r = await fetch('data/perguntas.json'); jsonData = await r.json(); } catch{}
+
+      for (const disc of discs) {
+        const snap = await getDocs(query(collection(db,'questoes'), where('disciplina','==',disc), where('dificuldade','==',diff)));
+        let pool = [];
+        snap.forEach(d => pool.push({ p:d.data().p, ops:d.data().ops, c:d.data().c, disciplina:disc }));
+        if (pool.length < porDisc && jsonData) {
+          const local = (jsonData[disc]?.[diff]||[]).map(q => ({ ...q, disciplina:disc }));
+          pool = [...pool, ...local];
+        }
+        pool = pool.sort(() => Math.random()-0.5).slice(0, porDisc);
+        todasQs = [...todasQs, ...pool];
+      }
+      // Embaralha o conjunto final
+      return todasQs.sort(() => Math.random()-0.5).slice(0, qtdTotal);
+    }
+
+    function mostrarTelaAguardando(oponenteApelido, expira) {
+      document.getElementById('telaConfig').style.display     = 'none';
+      document.getElementById('telaAguardando').style.display = 'block';
+      document.getElementById('aguardandoMsg').textContent    = 'Aguardando ' + oponenteApelido + '...';
+      document.getElementById('vsEu').innerHTML = `
+        <div style="font-size:2rem;">${renderAvatar(meuPerfil.avatar,meuPerfil.avatarTipo)}</div>
+        <div style="font-family:var(--font-head);color:var(--cyan);font-size:0.85rem;margin-top:0.3rem;">${meuPerfil.apelido}</div>
+        <div style="color:var(--green);font-size:0.75rem;">✅ Pronto</div>`;
+      document.getElementById('vsOponente').innerHTML = `
+        <div style="font-size:2rem;">❓</div>
+        <div style="font-family:var(--font-head);color:var(--text2);font-size:0.85rem;margin-top:0.3rem;">${oponenteApelido}</div>
+        <div style="color:var(--text2);font-size:0.75rem;">⏳ Aguardando</div>`;
+      timerExpira = setInterval(() => {
+        const d = expira - Date.now();
+        if (d<=0) { clearInterval(timerExpira); cancelarBatalha(); return; }
+        const m=Math.floor(d/60000),s=Math.floor((d%60000)/1000);
+        const el=document.getElementById('tempoExpira');
+        if (el) el.textContent=`${m}:${String(s).padStart(2,'0')}`;
+      }, 1000);
+      document.getElementById('btnCancelarLobby').onclick = cancelarBatalha;
+    }
+
+    function escutarLobby() {
+      if (!batalhaId) return;
+      unsubLobby = onSnapshot(doc(db,'batalhas',batalhaId), snap => {
+        if (!snap.exists()) return;
+        const d = snap.data();
+        if (d.status==='em_andamento') {
+          clearInterval(timerExpira); if(unsubLobby) unsubLobby();
+          location.href='batalha.html';
+        }
+        if (d.status==='cancelada') {
+          clearInterval(timerExpira);
+          alert('Desafio recusado ou expirado.');
+          location.href='amigos.html';
+        }
+      });
+    }
+
+    async function cancelarBatalha() {
+      clearInterval(timerExpira); if(unsubLobby) unsubLobby();
+      if (batalhaId) await updateDoc(doc(db,'batalhas',batalhaId),{status:'cancelada'});
+      localStorage.removeItem('batalha_id'); localStorage.removeItem('batalha_lado');
+      location.href='amigos.html';
+    }
+
+    async function mostrarTelaReceber(data) {
+      document.getElementById('telaConfig').style.display  = 'none';
+      document.getElementById('telaReceber').style.display = 'block';
+      const anfSnap = await getDoc(doc(db,'alunos',data.anfitriaoUid));
+      const anfPerf = anfSnap.exists() ? anfSnap.data() : {};
+      const nv      = calcularNivel(anfPerf.xp||0);
+      document.getElementById('vsDesafiante').innerHTML = `
+        <div style="font-size:2rem;">${renderAvatar(anfPerf.avatar,anfPerf.avatarTipo)}</div>
+        <div style="font-family:var(--font-head);color:var(--red);font-size:0.85rem;margin-top:0.3rem;">${data.anfitriaoApelido}</div>
+        <div style="color:var(--text2);font-size:0.75rem;">${nv.emoji} Nível ${nv.nivel}</div>`;
+      document.getElementById('vsVoce').innerHTML = `
+        <div style="font-size:2rem;">${renderAvatar(meuPerfil.avatar,meuPerfil.avatarTipo)}</div>
+        <div style="font-family:var(--font-head);color:var(--cyan);font-size:0.85rem;margin-top:0.3rem;">${meuPerfil.apelido}</div>
+        <div style="color:var(--green);font-size:0.75rem;">Você</div>`;
+
+      const discLabel = data.modoMix ? '🎲 Mix de disciplinas' : (data.disciplina||'');
+      document.getElementById('infoDesafio').innerHTML = `
+        📚 ${discLabel}<br>⚡ ${DIFF_NOMES[data.dificuldade]||data.dificuldade}<br>
+        ❓ ${data.questoes?.length||0} questões · ⏱️ ${data.tempoPorQuestao}s/questão<br>
+        🎮 ${data.modo==='velocidade'?'⚡ Velocidade':'🎯 Normal'}`;
+
+      document.getElementById('btnAceitar').onclick = async () => {
+        await updateDoc(doc(db,'batalhas',batalhaId),{status:'em_andamento',iniciadaEm:new Date()});
+        localStorage.setItem('batalha_id',batalhaId);
+        localStorage.setItem('batalha_lado','B');
+        location.href='batalha.html';
+      };
+      document.getElementById('btnRecusar').onclick = async () => {
+        await updateDoc(doc(db,'batalhas',batalhaId),{status:'cancelada'});
+        location.href='index.html';
+      };
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cognix — Prova</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet"/>
+</head>
+<body class="quiz-page">
+  <div class="stars"></div>
+  <div class="container quiz-container">
+
+    <!-- TELA DE IDENTIFICAÇÃO -->
+    <div id="telaIdentificacao" class="card" style="width:100%;">
+      <div class="card-inner">
+        <div style="text-align:center;margin-bottom:1.5rem;">
+          <div style="font-size:3rem;">📝</div>
+          <h2 style="font-family:var(--font-head);color:white;letter-spacing:2px;margin:0.5rem 0;" id="provaTituloDisplay">PROVA AVALIATIVA</h2>
+          <div id="provaCodigo" style="color:var(--cyan);font-family:var(--font-head);font-size:1.1rem;letter-spacing:3px;"></div>
+        </div>
+        <div id="provaInfo" class="prova-info-box"></div>
+        <!-- Nome do aluno preenchido automaticamente via login -->
+        <div id="alunoIdentBox" style="display:flex;align-items:center;gap:0.75rem;background:rgba(0,200,255,0.06);border:1px solid rgba(0,200,255,0.2);border-radius:12px;padding:0.9rem 1.2rem;margin-top:1.5rem;">
+          <span style="font-size:1.5rem;">👤</span>
+          <div>
+            <div style="font-size:0.75rem;color:var(--text2);letter-spacing:1px;text-transform:uppercase;">Realizando como</div>
+            <div id="alunoNomeExibido" style="font-family:var(--font-head);color:white;font-size:1rem;letter-spacing:1px;">Carregando...</div>
+          </div>
+        </div>
+        <button class="btn-play" onclick="iniciarProva()" style="margin-top:1.25rem;">
+          <span>📝 Iniciar Prova</span>
+          <div class="btn-glow"></div>
+        </button>
+        <div id="msgIdent" class="msg hidden"></div>
+      </div>
+    </div>
+
+    <!-- TELA DA PROVA -->
+    <div id="telaProva" style="display:none;width:100%;">
+      <div class="quiz-header">
+        <div class="player-info">
+          <span class="player-avatar">👤</span>
+          <span id="nomeDisplay">Aluno</span>
+        </div>
+        <div class="score-display">
+          <span>✅</span>
+          <span id="acertosDisplay">0</span>
+          <span style="color:var(--text2);font-size:0.8rem;">acertos</span>
+        </div>
+        <div class="subject-badge" id="provaSubjectBadge">📝 Prova</div>
+      </div>
+
+      <div class="progress-area">
+        <div class="progress-info">
+          <span id="questaoCounter">Questão 1 de 10</span>
+          <span id="timerDisplay">⏱ 30s</span>
+        </div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="progressBar"></div>
+        </div>
+      </div>
+
+      <div class="timer-bar-bg">
+        <div class="timer-bar-fill" id="timerBar"></div>
+      </div>
+
+      <div class="question-card">
+        <div class="question-number" id="questionNumber">01</div>
+        <p class="question-text" id="questionText">Carregando...</p>
+      </div>
+
+      <div class="options-grid" id="optionsGrid"></div>
+
+      <div class="feedback-overlay hidden" id="feedbackOverlay">
+        <div class="feedback-text" id="feedbackText"></div>
+      </div>
+    </div>
+
+    <!-- TELA DE RESULTADO -->
+    <div id="telaResultado" style="display:none;width:100%;">
+      <div class="result-section">
+        <div class="result-trophy" id="resTrophy">🏆</div>
+        <h2 class="result-title" id="resTitle">Parabéns!</h2>
+        <p class="result-player" id="resNome"></p>
+
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem;margin:1.5rem 0;">
+          <div class="result-score-box">
+            <div class="result-score" id="resNota" style="color:var(--green);">0,0</div>
+            <div class="result-label">NOTA</div>
+          </div>
+          <div class="result-score-box">
+            <div class="result-score" id="resAcertos" style="color:var(--cyan);">0</div>
+            <div class="result-label">ACERTOS</div>
+          </div>
+          <div class="result-score-box">
+            <div class="result-score" id="resErros" style="color:var(--red);">0</div>
+            <div class="result-label">ERROS</div>
+          </div>
+        </div>
+
+        <p class="result-msg" id="resMsg"></p>
+        <p style="color:var(--text2);font-size:0.85rem;margin-top:1rem;">
+          ✅ Sua nota foi enviada ao professor automaticamente!
+        </p>
+        <div class="result-actions" style="margin-top:1.5rem;">
+          <button class="btn-play" onclick="location.href='index.html'">🏠 Voltar ao Início</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script type="module">
+    import { db, auth, collection, getDocs, addDoc, doc, getDoc, query, where, limit, onAuthStateChanged } from './js/firebase.js';
+
+    const params  = new URLSearchParams(window.location.search);
+    const codigo  = params.get('codigo') || localStorage.getItem('eq_prova_codigo');
+    const subjectNames = { informatica:"💻 Informática", matematica:"📐 Matemática", portugues:"📖 Português", ciencias:"🔬 Ciências" };
+
+    let provaData = null;
+    let questions = [];
+    let current = 0, acertos = 0, erros = 0, timer, timeLeft, answered = false;
+    let nomeAluno    = '';
+    let alunoUid     = '';
+    let nomeCompleto = '';
+    let respostas    = [];
+
+    // Aguarda login e carrega prova
+    async function carregarProva() {
+      if (!codigo) { location.href = 'index.html'; return; }
+
+      // Garante que o aluno está logado antes de continuar
+      await new Promise((resolve) => {
+        onAuthStateChanged(auth, async (user) => {
+          if (!user) { location.href = 'login.html'; return; }
+          const perfSnap = await getDoc(doc(db, 'alunos', user.uid));
+          if (!perfSnap.exists()) { location.href = 'cadastro.html'; return; }
+          const perfil = perfSnap.data();
+          nomeAluno    = perfil.apelido || perfil.nome || user.displayName || 'Aluno';
+          alunoUid     = user.uid;
+          nomeCompleto = perfil.nomeCompleto || '';
+          resolve();
+        });
+      });
+
+      try {
+        const snap = await getDocs(query(collection(db,'provas'), where('codigo','==',codigo.toUpperCase()), limit(1)));
+        snap.forEach(d => { provaData = { id: d.id, ...d.data() }; });
+
+        if (!provaData) {
+          alert('Código de prova inválido!');
+          location.href = 'index.html';
+          return;
+        }
+
+        // Verifica expiração
+        const agora = new Date();
+        const expira = new Date(provaData.expiracao);
+        if (agora > expira) {
+          alert('⏰ Esta prova já expirou!');
+          location.href = 'index.html';
+          return;
+        }
+
+        // Verifica se o aluno já fez esta prova
+        const jaFezSnap = await getDocs(query(collection(db,'resultados_provas'), where('provaId','==',provaData.id), where('alunoUid','==',alunoUid), limit(1)));
+        const jaFez = !jaFezSnap.empty;
+        if (jaFez) {
+          document.getElementById('telaIdentificacao').innerHTML = `
+            <div class="card-inner" style="text-align:center;padding:2.5rem 2rem;">
+              <div style="font-size:3rem;margin-bottom:1rem;">⛔</div>
+              <h2 style="font-family:var(--font-head);color:var(--red);letter-spacing:2px;margin-bottom:0.75rem;">PROVA JÁ REALIZADA</h2>
+              <p style="color:var(--text2);line-height:1.7;margin-bottom:1.5rem;">
+                Você já realizou esta prova como <strong style="color:white;">${nomeAluno}</strong>.<br>
+                Cada aluno pode fazer a prova apenas uma vez.
+              </p>
+              <button class="btn-play" onclick="location.href='index.html'">
+                <span>🏠 Voltar ao Início</span>
+                <div class="btn-glow"></div>
+              </button>
+            </div>`;
+          return;
+        }
+
+        // Mostra info da prova
+        document.getElementById('provaCodigo').textContent = '📋 ' + provaData.codigo;
+        if (provaData.titulo) {
+          document.getElementById('provaTituloDisplay').textContent = provaData.titulo;
+        }
+        document.getElementById('provaInfo').innerHTML = `
+          <div class="prova-info-grid">
+            <div class="prova-info-item"><span>📚</span><span>${subjectNames[provaData.disciplina] || provaData.disciplina}</span></div>
+            <div class="prova-info-item"><span>⚡</span><span>${provaData.dificuldade}</span></div>
+            <div class="prova-info-item"><span>❓</span><span>${provaData.quantidade} questões</span></div>
+            <div class="prova-info-item"><span>⏱️</span><span>${provaData.tempoPorQuestao}s por questão</span></div>
+            <div class="prova-info-item"><span>📅</span><span>Expira: ${new Date(provaData.expiracao).toLocaleString('pt-BR')}</span></div>
+            <div class="prova-info-item"><span>👨‍🏫</span><span>Prof: ${provaData.professor || 'Professor'}</span></div>
+          </div>
+        `;
+
+        // Exibe nome do aluno identificado
+        const nomeEl = document.getElementById('alunoNomeExibido');
+        if (nomeEl) nomeEl.textContent = nomeAluno;
+
+        // Carrega questões
+        await carregarQuestoes();
+
+      } catch(e) {
+        alert('Erro ao carregar prova: ' + e.message);
+        location.href = 'index.html';
+      }
+    }
+
+    async function carregarQuestoes() {
+      try {
+        // Se a prova usa questões personalizadas do professor
+        if (provaData.usaPersonalizadas && provaData.professorUid) {
+          const snapP = await getDocs(query(collection(db,'questoes_professor'), where('professorUid','==',provaData.professorUid), where('dificuldade','==',provaData.dificuldadeKey), limit(60)));
+          let poolP = [];
+          snapP.forEach(d => { const q = d.data(); poolP.push({ p:q.p, ops:q.ops, c:q.c }); });
+          poolP = poolP.sort(() => Math.random() - 0.5);
+
+          let poolG = [];
+          if ((provaData.qtdGerais || 0) > 0) {
+            const snapG = await getDocs(query(collection(db,'questoes'), where('disciplina','==',provaData.disciplina), where('dificuldade','==',provaData.dificuldadeKey), limit(60)));
+            snapG.forEach(d => { const q = d.data(); poolG.push({ p:q.p, ops:q.ops, c:q.c }); });
+            // Fallback para JSON local se banco geral tiver poucas
+            if (poolG.length < (provaData.qtdGerais || 0)) {
+              try {
+                const res  = await fetch('data/perguntas.json');
+                const data = await res.json();
+                const local = data[provaData.disciplina]?.[provaData.dificuldadeKey] || [];
+                poolG = [...poolG, ...local];
+              } catch {}
+            }
+            poolG = poolG.sort(() => Math.random() - 0.5);
+          }
+
+          const qtdP = Math.min(provaData.qtdPersonalizadas || 0, poolP.length);
+          const qtdG = Math.min(provaData.qtdGerais         || 0, poolG.length);
+          questions  = [...poolP.slice(0, qtdP), ...poolG.slice(0, qtdG)].sort(() => Math.random() - 0.5);
+
+        } else {
+          // Comportamento original — só banco geral
+          const snap = await getDocs(query(collection(db,'questoes'), where('disciplina','==',provaData.disciplina), where('dificuldade','==',provaData.dificuldadeKey), limit(60)));
+          let pool = [];
+          snap.forEach(d => { const q = d.data(); pool.push({ p:q.p, ops:q.ops, c:q.c }); });
+          if (pool.length < provaData.quantidade) {
+            try {
+              const res  = await fetch('data/perguntas.json');
+              const data = await res.json();
+              const local = data[provaData.disciplina]?.[provaData.dificuldadeKey] || [];
+              pool = [...pool, ...local];
+            } catch {}
+          }
+          questions = pool.sort(() => Math.random() - 0.5).slice(0, provaData.quantidade);
+        }
+      } catch(e) {
+        console.log('Erro questões:', e);
+      }
+    }
+
+    window.iniciarProva = function() {
+      const msgEl = document.getElementById('msgIdent');
+      if (!nomeAluno) {
+        msgEl.textContent = '⚠️ Aguardando identificação do aluno...';
+        msgEl.className = 'msg msg-erro';
+        return;
+      }
+      if (questions.length === 0) {
+        msgEl.textContent = '⚠️ Erro ao carregar questões. Recarregue a página!';
+        msgEl.className = 'msg msg-erro';
+        return;
+      }
+      document.getElementById('telaIdentificacao').style.display = 'none';
+      document.getElementById('telaProva').style.display = 'block';
+      document.getElementById('nomeDisplay').textContent = nomeAluno;
+      document.getElementById('provaSubjectBadge').textContent = subjectNames[provaData.disciplina] || provaData.disciplina;
+      loadQuestion();
+    };
+
+    function embaralharAlternativas(q) {
+      let alts = q.ops.map((texto, idx) => ({ texto, original: idx }));
+      for (let i = alts.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [alts[i], alts[j]] = [alts[j], alts[i]];
+      }
+      const novaCorreta = alts.findIndex(a => a.original === q.c);
+      return { alts, novaCorreta };
+    }
+
+    function loadQuestion() {
+      answered = false;
+      clearInterval(timer);
+      timeLeft = provaData.tempoPorQuestao || 30;
+
+      const q = questions[current];
+      document.getElementById('questionNumber').textContent = String(current + 1).padStart(2, '0');
+      document.getElementById('questionText').textContent   = q.p;
+      document.getElementById('questaoCounter').textContent = `Questão ${current + 1} de ${questions.length}`;
+      document.getElementById('progressBar').style.width    = ((current / questions.length) * 100) + '%';
+
+      const { alts, novaCorreta } = embaralharAlternativas(q);
+      q._correta = novaCorreta;
+      q._alts    = alts;
+
+      const grid = document.getElementById('optionsGrid');
+      grid.innerHTML = '';
+      ['A','B','C','D'].forEach((lbl, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.innerHTML = `<span class="option-label">${lbl}</span><span class="option-text">${alts[i].texto}</span>`;
+        btn.onclick = () => selectAnswer(i, btn);
+        btn.style.animationDelay = (i * 0.1) + 's';
+        grid.appendChild(btn);
+      });
+
+      startTimer();
+    }
+
+    function startTimer() {
+      document.getElementById('timerBar').style.cssText = 'width:100%;transition:none';
+      document.getElementById('timerDisplay').textContent = `⏱ ${timeLeft}s`;
+      document.getElementById('timerDisplay').style.color = '';
+      setTimeout(() => {
+        document.getElementById('timerBar').style.cssText = `width:0%;transition:width ${timeLeft}s linear`;
+      }, 50);
+
+      timer = setInterval(() => {
+        timeLeft--;
+        document.getElementById('timerDisplay').textContent = `⏱ ${timeLeft}s`;
+        if (timeLeft <= 5) document.getElementById('timerDisplay').style.color = '#ff4444';
+        if (timeLeft <= 0) { clearInterval(timer); timeOut(); }
+      }, 1000);
+    }
+
+    function timeOut() {
+      if (answered) return;
+      answered = true;
+      document.querySelectorAll('.option-btn').forEach(b => b.disabled = true);
+      const qT = questions[current];
+      document.querySelectorAll('.option-btn')[qT._correta].classList.add('correct');
+      erros++;
+      respostas.push({ questao: qT.p, respondeu: 'Tempo esgotado', correta: qT._alts[qT._correta].texto, acertou: false });
+      showFeedback(false, '⏰ Tempo esgotado!');
+      setTimeout(nextQuestion, 2000);
+    }
+
+    function selectAnswer(index, btn) {
+      if (answered) return;
+      answered = true;
+      clearInterval(timer);
+
+      const q       = questions[current];
+      const correct = q._correta;  // posição correta após embaralhar
+      document.querySelectorAll('.option-btn').forEach(b => b.disabled = true);
+
+      const acertou = index === correct;
+      if (acertou) {
+        btn.classList.add('correct');
+        acertos++;
+        document.getElementById('acertosDisplay').textContent = acertos;
+        showFeedback(true, '✅ Correto!');
+      } else {
+        btn.classList.add('wrong');
+        document.querySelectorAll('.option-btn')[correct].classList.add('correct');
+        erros++;
+        showFeedback(false, '❌ Errou! Correta: ' + String.fromCharCode(65 + correct));
+      }
+
+      respostas.push({
+        questao:   q.p,
+        respondeu: q._alts[index].texto,
+        correta:   q._alts[correct].texto,
+        acertou
+      });
+
+      setTimeout(nextQuestion, 2000);
+    }
+
+    function showFeedback(ok, msg) {
+      const o = document.getElementById('feedbackOverlay');
+      o.className = 'feedback-overlay ' + (ok ? 'correct-feedback' : 'wrong-feedback');
+      document.getElementById('feedbackText').textContent = msg;
+      setTimeout(() => o.classList.add('hidden'), 1800);
+    }
+
+    async function nextQuestion() {
+      current++;
+      document.getElementById('feedbackOverlay').className = 'feedback-overlay hidden';
+      if (current < questions.length) {
+        loadQuestion();
+      } else {
+        await finalizarProva();
+      }
+    }
+
+    async function finalizarProva() {
+      clearInterval(timer);
+      document.getElementById('telaProva').style.display = 'none';
+      document.getElementById('telaResultado').style.display = 'block';
+
+      const total = questions.length;
+      const nota  = ((acertos / total) * 10).toFixed(1);
+
+      document.getElementById('resNome').textContent    = '👤 ' + nomeAluno;
+      document.getElementById('resNota').textContent    = nota;
+      document.getElementById('resAcertos').textContent = acertos;
+      document.getElementById('resErros').textContent   = erros;
+
+      let trophy = '😔', title = 'Continue estudando!', msg = 'Não desanime, revise o conteúdo e tente novamente!';
+      const n = parseFloat(nota);
+      if      (n >= 9)  { trophy = '🏆'; title = 'Excelente!';       msg = 'Nota incrível! Você dominou o conteúdo!'; }
+      else if (n >= 7)  { trophy = '🥇'; title = 'Muito bom!';       msg = 'Ótimo desempenho! Continue assim!'; }
+      else if (n >= 5)  { trophy = '🥈'; title = 'Aprovado!';        msg = 'Você passou! Mas ainda dá para melhorar!'; }
+      else if (n >= 3)  { trophy = '🥉'; title = 'Quase lá!';        msg = 'Faltou pouco! Revise e tente de novo!'; }
+
+      document.getElementById('resTrophy').textContent = trophy;
+      document.getElementById('resTitle').textContent  = title;
+      document.getElementById('resMsg').textContent    = msg;
+
+      // Salva no Firebase
+      try {
+        await addDoc(collection(db, 'resultados_provas'), {
+          provaId:     provaData.id,
+          provaCodigo: provaData.codigo,
+          provaTitulo: provaData.titulo || provaData.codigo,
+          nomeAluno,
+          nomeCompleto,
+          alunoUid,
+          nota:        parseFloat(nota),
+          acertos,
+          erros,
+          total,
+          disciplina:  provaData.disciplina,
+          dificuldade: provaData.dificuldade,
+          respostas,
+          dataHora:    new Date().toLocaleString('pt-BR'),
+          timestamp:   new Date()
+        });
+      } catch(e) {
+        console.error('Erro ao salvar resultado:', e.message, e.code);
+      }
+    }
+
+    carregarProva();
+  </script>
+
+  <style>
+    .prova-info-box {
+      background: rgba(0,200,255,0.05);
+      border: 1px solid rgba(0,200,255,0.2);
+      border-radius: 12px;
+      padding: 1rem;
+    }
+    .prova-info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.6rem;
+    }
+    .prova-info-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--text);
+      font-weight: 600;
+    }
+  </style>
+</body>
+</html>

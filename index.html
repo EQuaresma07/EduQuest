@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cognix</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet"/>
+</head>
+<body class="home-page">
+  <div class="stars"></div>
+  <div class="particles" id="particles"></div>
+  <div id="perfilBadge" class="perfil-badge-container"></div>
+
+  <div class="container home-container">
+    <div class="logo-area">
+      <div class="logo-icon">🧠</div>
+      <h1 class="logo-title">Cog<span>nix</span></h1>
+      <p class="logo-sub">Aprenda. Evolua. Domine.</p>
+    </div>
+
+    <div class="card setup-card">
+      <div class="card-inner">
+        <div class="form-group">
+          <label>📚 Escolha a disciplina</label>
+          <div class="subject-grid" id="subjectGrid">
+            <div style="color:var(--text2);text-align:center;padding:1rem;grid-column:1/-1;">🔄 Carregando disciplinas...</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>⚡ Nível de dificuldade</label>
+          <div class="difficulty-grid">
+            <button class="diff-btn active" data-diff="facil">🟢 Fácil</button>
+            <button class="diff-btn" data-diff="medio">🟡 Médio</button>
+            <button class="diff-btn" data-diff="dificil">🔴 Difícil</button>
+          </div>
+        </div>
+        <button class="btn-play" id="btnPlay" onclick="startGame()">
+          <span>▶ INICIAR JOGO</span>
+          <div class="btn-glow"></div>
+        </button>
+      </div>
+    </div>
+
+    <!-- CONHECIMENTOS GERAIS — em destaque, logo abaixo do card principal -->
+    <div style="width:100%;max-width:480px;background:linear-gradient(135deg,rgba(0,200,255,0.08),rgba(168,85,247,0.08));border:1.5px solid rgba(0,200,255,0.35);border-radius:16px;padding:1rem 1.25rem;display:flex;align-items:center;gap:1rem;">
+      <div style="font-size:2.2rem;flex-shrink:0;filter:drop-shadow(0 0 8px rgba(0,200,255,0.5));">🌐</div>
+      <div style="flex:1;">
+        <div style="font-family:var(--font-head);color:var(--cyan);font-size:0.8rem;letter-spacing:2px;margin-bottom:2px;">MODO ESPECIAL</div>
+        <div style="font-family:var(--font-head);color:white;font-size:1rem;letter-spacing:1px;">Conhecimentos Gerais</div>
+        <div style="color:var(--text2);font-size:0.78rem;margin-top:2px;">Mix de todas as disciplinas</div>
+      </div>
+      <button class="btn-play" id="btnGeral" style="width:auto;padding:0 1.1rem;margin-top:0;white-space:nowrap;flex-shrink:0;background:linear-gradient(135deg,rgba(0,200,255,0.25),rgba(168,85,247,0.25));border:1px solid rgba(0,200,255,0.4);">
+        <span>▶ Jogar</span>
+        <div class="btn-glow"></div>
+      </button>
+    </div>
+
+    <div style="display:flex;gap:0.75rem;flex-wrap:wrap;justify-content:center;">
+      <button class="btn-ranking" onclick="location.href='ranking.html'">🏆 Ver Ranking</button>
+      <button class="btn-ranking" onclick="location.href='perfil.html'" style="border-color:rgba(168,85,247,0.4);color:var(--purple);">👤 Meu Perfil</button>
+      <button class="btn-batalhar" onclick="location.href='amigos.html'">⚔️ Batalhar</button>
+    </div>
+
+    <div class="card" style="width:100%;max-width:480px;">
+      <div class="card-inner" style="padding:1.5rem;">
+        <h3 style="font-family:var(--font-head);color:var(--cyan);letter-spacing:2px;font-size:0.9rem;margin-bottom:1rem;text-align:center;">
+          📝 TENHO UM CÓDIGO DE PROVA
+        </h3>
+        <div style="display:flex;gap:0.75rem;">
+          <input type="text" id="codigoProva" placeholder="Ex: P-ABC1234"
+            style="text-transform:uppercase;letter-spacing:2px;font-family:var(--font-head);font-size:0.9rem;" maxlength="15"/>
+          <button class="btn-play" onclick="entrarProva()" style="width:auto;padding:0 1.5rem;white-space:nowrap;margin-top:0;">
+            <span>Entrar</span>
+          </button>
+        </div>
+        <div id="msgCodigo" class="msg hidden" style="margin-top:0.75rem;"></div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { db, auth, collection, getDocs, doc, getDoc, onAuthStateChanged } from './js/firebase.js';
+    import { calcularNivel } from './js/perfil.js';
+    import { iniciarNotificacoes } from './js/notificacoes.js';
+
+    let userAtual = null, perfilAtual = null;
+
+    const pc = document.getElementById('particles');
+    for (let i=0;i<30;i++){
+      const p=document.createElement('div'); p.className='particle';
+      p.style.left=Math.random()*100+'%'; p.style.animationDelay=Math.random()*8+'s';
+      p.style.animationDuration=(6+Math.random()*6)+'s';
+      p.style.width=p.style.height=(4+Math.random()*8)+'px'; pc.appendChild(p);
+    }
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) { location.href='login.html'; return; }
+      const snap = await getDoc(doc(db,'alunos',user.uid));
+      if (!snap.exists()) { location.href='cadastro.html'; return; }
+      userAtual=user; perfilAtual=snap.data();
+      iniciarNotificacoes(auth, user, onAuthStateChanged);
+      const nv = calcularNivel(perfilAtual.xp||0);
+      const avatarHtml = (perfilAtual.avatarTipo === 'imagem' && perfilAtual.avatar?.startsWith('data:'))
+        ? `<img src="${perfilAtual.avatar}" class="perfil-avatar-img" alt="avatar"/>`
+        : `<span class="perfil-avatar">${perfilAtual.avatar || '🦊'}</span>`;
+      document.getElementById('perfilBadge').innerHTML = `
+        <a href="perfil.html" class="perfil-badge-link">
+          ${avatarHtml}
+          <div class="perfil-badge-info">
+            <span class="perfil-apelido">${perfilAtual.apelido}</span>
+            <span class="perfil-nivel">${nv.emoji} ${nv.nome} · Nv.${nv.nivel}</span>
+          </div>
+          <span style="color:var(--cyan);font-size:0.72rem;font-family:var(--font-head);white-space:nowrap;">${perfilAtual.xp||0} XP</span>
+        </a>`;
+      carregarDisciplinas();
+      verificarAnuncios();
+    });
+
+    // ===== ANÚNCIOS PUSH =====
+    async function verificarAnuncios() {
+      try {
+        const vistos = JSON.parse(localStorage.getItem('cgnx_anuncios_vistos') || '[]');
+        const snap   = await getDocs(collection(db,'anuncios'));
+        let pendentes = [];
+        snap.forEach(d => {
+          const a = { id: d.id, ...d.data() };
+          const destino = a.destino || 'alunos';
+          // Alunos veem anúncios para 'alunos' ou 'todos'
+          if (!vistos.includes(a.id) && a.ativo !== false && (destino === 'alunos' || destino === 'todos')) {
+            pendentes.push(a);
+          }
+        });
+        if (!pendentes.length) return;
+        pendentes.sort((a,b) => (b.criadoEm?.toMillis?.() || 0) - (a.criadoEm?.toMillis?.() || 0));
+        mostrarAnuncio(pendentes[0], vistos);
+      } catch(e) {}
+    }
+
+    function mostrarAnuncio(anuncio, vistos) {
+      const overlay = document.createElement('div');
+      overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:9999;display:flex;align-items:center;justify-content:center;padding:1.5rem;backdrop-filter:blur(6px);animation:fadeInDown 0.4s ease;';
+      overlay.innerHTML = `
+        <div style="background:var(--card);border:1px solid rgba(0,200,255,0.3);border-radius:24px;padding:2rem;max-width:420px;width:100%;text-align:center;box-shadow:0 0 40px rgba(0,200,255,0.15);position:relative;">
+          <button id="btnFecharAnuncio" style="position:absolute;top:1rem;right:1rem;background:rgba(255,255,255,0.08);border:1px solid var(--border);border-radius:8px;width:32px;height:32px;cursor:pointer;color:var(--text2);font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all 0.2s;">✕</button>
+          <div style="font-size:3rem;margin-bottom:0.75rem;">${anuncio.icone || '🚀'}</div>
+          <div style="font-family:var(--font-head);color:var(--cyan);font-size:0.75rem;letter-spacing:3px;margin-bottom:0.4rem;">NOVIDADE</div>
+          <h3 style="font-family:var(--font-head);color:white;font-size:1.15rem;letter-spacing:1px;margin-bottom:0.75rem;line-height:1.3;">${anuncio.titulo}</h3>
+          <p style="color:var(--text2);font-size:0.88rem;line-height:1.6;margin-bottom:1.5rem;">${anuncio.mensagem}</p>
+          ${anuncio.btnTexto ? `<button id="btnAnuncioAcao" class="btn-play" style="max-width:260px;margin:0 auto 0.75rem;"><span>${anuncio.btnTexto}</span><div class="btn-glow"></div></button><br>` : ''}
+          <button id="btnAnuncioEntendido" style="background:none;border:none;color:var(--text2);font-family:var(--font-body);font-size:0.85rem;cursor:pointer;text-decoration:underline;">Entendido!</button>
+        </div>`;
+      document.body.appendChild(overlay);
+
+      const fechar = async () => {
+        vistos.push(anuncio.id);
+        localStorage.setItem('cgnx_anuncios_vistos', JSON.stringify(vistos));
+        // Incrementa visualizações de alunos no Firestore
+        try {
+          await updateDoc(doc(db,'anuncios',anuncio.id), { visualizacoesAlunos: increment(1) });
+        } catch(e) {}
+        overlay.style.opacity = '0'; overlay.style.transition = 'opacity 0.3s';
+        setTimeout(() => overlay.remove(), 300);
+      };
+
+      overlay.querySelector('#btnFecharAnuncio').onclick = fechar;
+      overlay.querySelector('#btnAnuncioEntendido').onclick = fechar;
+      if (anuncio.btnTexto && anuncio.btnLink) {
+        overlay.querySelector('#btnAnuncioAcao').onclick = () => { fechar(); location.href = anuncio.btnLink; };
+      }
+    }
+
+    document.querySelectorAll('.diff-btn').forEach(btn=>{
+      btn.addEventListener('click',()=>{ document.querySelectorAll('.diff-btn').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); });
+    });
+
+    async function carregarDisciplinas() {
+      const grid = document.getElementById('subjectGrid');
+      try {
+        const snap = await getDocs(collection(db,'disciplinas'));
+        let discs=[]; snap.forEach(d=>discs.push({id:d.id,...d.data()}));
+        discs.sort((a,b)=>(a.ordem||99)-(b.ordem||99));
+        if(!discs.length) throw new Error();
+        grid.innerHTML='';
+        discs.forEach((d,i)=>{ const btn=document.createElement('button'); btn.className='subject-btn'+(i===0?' active':''); btn.dataset.subject=d.id; btn.textContent=(d.emoji||'📚')+' '+d.nome; btn.addEventListener('click',()=>{ document.querySelectorAll('.subject-btn').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); }); grid.appendChild(btn); });
+      } catch(e) {
+        const defaults=[{id:'informatica',emoji:'💻',nome:'Informática'},{id:'matematica',emoji:'📐',nome:'Matemática'},{id:'portugues',emoji:'📖',nome:'Português'},{id:'ciencias',emoji:'🔬',nome:'Ciências'}];
+        grid.innerHTML=''; defaults.forEach((d,i)=>{ const btn=document.createElement('button'); btn.className='subject-btn'+(i===0?' active':''); btn.dataset.subject=d.id; btn.textContent=d.emoji+' '+d.nome; btn.addEventListener('click',()=>{ document.querySelectorAll('.subject-btn').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); }); grid.appendChild(btn); });
+      }
+    }
+
+    window.startGame = function() {
+      if(!userAtual||!perfilAtual) return;
+      const subBtn=document.querySelector('.subject-btn.active');
+      if(!subBtn){ alert('Selecione uma disciplina!'); return; }
+      localStorage.setItem('eq_player', perfilAtual.apelido);
+      localStorage.setItem('eq_uid',    userAtual.uid);
+      localStorage.setItem('eq_subject',      subBtn.dataset.subject);
+      localStorage.setItem('eq_subject_name', subBtn.textContent);
+      localStorage.setItem('eq_diff',         document.querySelector('.diff-btn.active').dataset.diff);
+      localStorage.removeItem('eq_modo_geral');
+      document.querySelector('.btn-play').innerHTML='<span>Carregando...</span>';
+      setTimeout(()=>location.href='quiz.html',600);
+    };
+
+    document.getElementById('btnGeral').onclick = function() {
+      if(!userAtual||!perfilAtual) return;
+      const diff = document.querySelector('.diff-btn.active').dataset.diff;
+      localStorage.setItem('eq_player',       perfilAtual.apelido);
+      localStorage.setItem('eq_uid',          userAtual.uid);
+      localStorage.setItem('eq_subject',      'geral');
+      localStorage.setItem('eq_subject_name', '🌐 Conhecimentos Gerais');
+      localStorage.setItem('eq_diff',         diff);
+      localStorage.setItem('eq_modo_geral',   'true');
+      this.querySelector('span').textContent = 'Carregando...';
+      setTimeout(()=>location.href='quiz.html',600);
+    };
+
+    window.entrarProva = function() {
+      const codigo=document.getElementById('codigoProva').value.trim().toUpperCase();
+      const msg=document.getElementById('msgCodigo');
+      if(!codigo){ msg.textContent='⚠️ Digite o código da prova!'; msg.className='msg msg-erro'; return; }
+      localStorage.setItem('eq_prova_codigo',codigo);
+      location.href='prova.html?codigo='+codigo;
+    };
+
+    document.getElementById('codigoProva').addEventListener('keydown',e=>{ if(e.key==='Enter') window.entrarProva(); });
+  </script>
+</body>
+</html>

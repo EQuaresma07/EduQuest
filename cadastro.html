@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cognix — Criar Perfil</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet"/>
+</head>
+<body class="home-page">
+  <div class="stars"></div>
+
+  <div class="container home-container" style="padding:2rem 1rem;">
+    <div class="logo-area">
+      <div class="logo-icon">🧠</div>
+      <h1 class="logo-title">Cog<span>nix</span></h1>
+      <p class="logo-sub">Crie seu perfil de jogador</p>
+    </div>
+
+    <div class="card" style="width:100%;max-width:560px;">
+      <div class="card-inner" style="padding:2rem;">
+        <h2 style="font-family:var(--font-head);color:white;letter-spacing:3px;font-size:1rem;margin-bottom:1.5rem;text-align:center;">⚔️ CRIAR PERFIL</h2>
+
+        <!-- AVATAR -->
+        <div class="form-group">
+          <label>🎭 Avatar</label>
+          <div class="avatar-upload-area" id="avatarUploadArea">
+            <div class="avatar-preview" id="avatarPreview">🦊</div>
+            <div class="avatar-upload-btns">
+              <button type="button" class="btn-avatar-opt" id="btnEscolherEmoji">😀 Escolher Emoji</button>
+              <button type="button" class="btn-avatar-opt" id="btnUploadImg">📷 Enviar Foto</button>
+            </div>
+            <input type="file" id="inputAvatarImg" accept="image/*" style="display:none;"/>
+          </div>
+          <!-- Grid de emojis (oculto por padrão) -->
+          <div id="avatarGrid" class="avatar-grid" style="display:none;margin-top:0.75rem;"></div>
+          <input type="hidden" id="avatarSelecionado" value="🦊"/>
+          <input type="hidden" id="avatarTipo" value="emoji"/> <!-- emoji | imagem -->
+          <input type="hidden" id="avatarImgBase64" value=""/>
+        </div>
+
+        <!-- APELIDO -->
+        <div class="form-group">
+          <label>👤 Apelido de jogador <span style="color:var(--red);">*</span></label>
+          <input type="text" id="apelido" placeholder="Ex: DevMaster99" maxlength="20"/>
+          <small style="color:var(--text2);font-size:0.78rem;margin-top:4px;display:block;">Entre 3 e 20 caracteres, sem espaços.</small>
+        </div>
+
+        <!-- NOME COMPLETO -->
+        <div class="form-group">
+          <label>📋 Nome completo <span style="color:var(--red);">*</span></label>
+          <input type="text" id="nomeCompleto" placeholder="Seu nome completo" maxlength="80"/>
+        </div>
+
+        <!-- DATA DE NASCIMENTO -->
+        <div class="form-group">
+          <label>🎂 Data de nascimento</label>
+          <input type="date" id="dataNasc" style="color-scheme:dark;"/>
+        </div>
+
+        <!-- ESTADO E CIDADE -->
+        <div class="form-row">
+          <div class="form-group">
+            <label>🗺️ Estado</label>
+            <select id="estado">
+              <option value="">Selecione</option>
+              <option>AC</option><option>AL</option><option>AP</option><option>AM</option>
+              <option>BA</option><option>CE</option><option>DF</option><option>ES</option>
+              <option>GO</option><option>MA</option><option>MT</option><option>MS</option>
+              <option>MG</option><option>PA</option><option>PB</option><option>PR</option>
+              <option>PE</option><option>PI</option><option>RJ</option><option>RN</option>
+              <option>RS</option><option>RO</option><option>RR</option><option>SC</option>
+              <option>SP</option><option>SE</option><option>TO</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>🏙️ Cidade</label>
+            <input type="text" id="cidade" placeholder="Sua cidade" maxlength="60"/>
+          </div>
+        </div>
+
+        <!-- MATRICULADO? -->
+        <div class="form-group">
+          <label>🏫 Está matriculado em alguma rede de ensino?</label>
+          <div class="difficulty-grid" style="grid-template-columns:1fr 1fr;">
+            <button type="button" class="diff-btn active" id="btnSim" data-mat="sim">✅ Sim</button>
+            <button type="button" class="diff-btn" id="btnNao" data-mat="nao">❌ Não</button>
+          </div>
+        </div>
+
+        <!-- CAMPOS DE MATRÍCULA (condicionais) -->
+        <div id="camposMatricula">
+          <div class="form-group">
+            <label>🏛️ Rede de ensino / Escola</label>
+            <input type="text" id="escola" placeholder="Nome da escola ou instituição" maxlength="100"/>
+          </div>
+          <div class="form-group">
+            <label>📅 Ano / Série que cursa</label>
+            <select id="anoEscolar">
+              <option value="">Selecione</option>
+              <optgroup label="Ensino Fundamental">
+                <option>1º ano - EF</option><option>2º ano - EF</option><option>3º ano - EF</option>
+                <option>4º ano - EF</option><option>5º ano - EF</option><option>6º ano - EF</option>
+                <option>7º ano - EF</option><option>8º ano - EF</option><option>9º ano - EF</option>
+              </optgroup>
+              <optgroup label="Ensino Médio">
+                <option>1º ano - EM</option><option>2º ano - EM</option><option>3º ano - EM</option>
+              </optgroup>
+              <optgroup label="Técnico / Superior">
+                <option>Curso Técnico</option><option>Graduação</option><option>Pós-graduação</option>
+              </optgroup>
+            </select>
+          </div>
+        </div>
+
+        <button class="btn-play" id="btnCriar" style="margin-top:0.5rem;">
+          <span>🚀 Começar Aventura</span>
+          <div class="btn-glow"></div>
+        </button>
+        <div id="msgCadastro" class="msg hidden" style="margin-top:0.75rem;"></div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { auth, db, doc, setDoc, getDocs, collection, query, where, onAuthStateChanged, getDoc } from './js/firebase.js';
+    import { AVATARES } from './js/perfil.js';
+
+    let userAtual = null;
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) { location.href = 'login.html'; return; }
+      const snap = await getDoc(doc(db, 'alunos', user.uid));
+      if (snap.exists()) { location.href = 'index.html'; return; }
+      userAtual = user;
+    });
+
+    // ===== AVATAR =====
+    const grid = document.getElementById('avatarGrid');
+    AVATARES.forEach((av, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'avatar-btn' + (i === 0 ? ' active' : '');
+      btn.textContent = av; btn.type = 'button';
+      btn.onclick = () => {
+        document.querySelectorAll('.avatar-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('avatarSelecionado').value = av;
+        document.getElementById('avatarTipo').value = 'emoji';
+        document.getElementById('avatarImgBase64').value = '';
+        document.getElementById('avatarPreview').textContent = av;
+        document.getElementById('avatarPreview').style.backgroundImage = '';
+        document.getElementById('avatarPreview').style.fontSize = '2.5rem';
+      };
+      grid.appendChild(btn);
+    });
+
+    document.getElementById('btnEscolherEmoji').onclick = () => {
+      const g = document.getElementById('avatarGrid');
+      g.style.display = g.style.display === 'none' ? 'grid' : 'none';
+    };
+
+    document.getElementById('btnUploadImg').onclick = () => {
+      document.getElementById('inputAvatarImg').click();
+    };
+
+    document.getElementById('inputAvatarImg').onchange = function() {
+      const file = this.files[0];
+      if (!file) return;
+      if (file.size > 2 * 1024 * 1024) {
+        alert('Imagem muito grande! Máximo 2MB.'); return;
+      }
+      const reader = new FileReader();
+      reader.onload = e => {
+        const base64 = e.target.result;
+        document.getElementById('avatarImgBase64').value = base64;
+        document.getElementById('avatarTipo').value = 'imagem';
+        document.getElementById('avatarSelecionado').value = '';
+        const prev = document.getElementById('avatarPreview');
+        prev.textContent = '';
+        prev.style.backgroundImage = `url(${base64})`;
+        prev.style.backgroundSize = 'cover';
+        prev.style.backgroundPosition = 'center';
+        prev.style.fontSize = '0';
+        document.getElementById('avatarGrid').style.display = 'none';
+      };
+      reader.readAsDataURL(file);
+    };
+
+    // ===== MATRÍCULA TOGGLE =====
+    document.getElementById('btnSim').onclick = () => {
+      document.getElementById('btnSim').classList.add('active');
+      document.getElementById('btnNao').classList.remove('active');
+      document.getElementById('camposMatricula').style.display = 'block';
+    };
+    document.getElementById('btnNao').onclick = () => {
+      document.getElementById('btnNao').classList.add('active');
+      document.getElementById('btnSim').classList.remove('active');
+      document.getElementById('camposMatricula').style.display = 'none';
+    };
+
+    // ===== SALVAR =====
+    document.getElementById('btnCriar').onclick = async () => {
+      const apelido     = document.getElementById('apelido').value.trim();
+      const nomeCompleto= document.getElementById('nomeCompleto').value.trim();
+      const dataNasc    = document.getElementById('dataNasc').value;
+      const estado      = document.getElementById('estado').value;
+      const cidade      = document.getElementById('cidade').value.trim();
+      const matriculado = document.getElementById('btnSim').classList.contains('active');
+      const escola      = document.getElementById('escola').value.trim();
+      const anoEscolar  = document.getElementById('anoEscolar').value;
+      const avatarTipo  = document.getElementById('avatarTipo').value;
+      const avatarEmoji = document.getElementById('avatarSelecionado').value;
+      const avatarImg   = document.getElementById('avatarImgBase64').value;
+      const msg         = document.getElementById('msgCadastro');
+
+      if (!userAtual)         { msg.textContent='⚠️ Aguarde...';                   msg.className='msg msg-erro'; return; }
+      if (apelido.length < 3) { msg.textContent='⚠️ Apelido muito curto!';          msg.className='msg msg-erro'; return; }
+      if (/\s/.test(apelido)) { msg.textContent='⚠️ Apelido sem espaços!';           msg.className='msg msg-erro'; return; }
+      if (!nomeCompleto)      { msg.textContent='⚠️ Informe seu nome completo!';     msg.className='msg msg-erro'; return; }
+
+      msg.textContent='🔄 Verificando apelido...'; msg.className='msg msg-info';
+
+      try {
+        const snap = await getDocs(query(collection(db,'alunos'), where('apelidoLower','==',apelido.toLowerCase())));
+        if (!snap.empty) { msg.textContent='❌ Apelido já em uso!'; msg.className='msg msg-erro'; return; }
+
+        msg.textContent='🔄 Criando perfil...'; msg.className='msg msg-info';
+
+        const avatar = avatarTipo === 'imagem' ? avatarImg : (avatarEmoji || '🦊');
+
+        await setDoc(doc(db,'alunos',userAtual.uid), {
+          uid: userAtual.uid,
+          email: userAtual.email || '',
+          apelido, apelidoLower: apelido.toLowerCase(), nomeCompleto, dataNasc, estado, cidade,
+          matriculado,
+          escola:      matriculado ? escola     : '',
+          anoEscolar:  matriculado ? anoEscolar : '',
+          avatar,
+          avatarTipo,
+          xp: 0, nivel: 1, nomeNivel: 'Recruta',
+          partidasJogadas: 0, totalAcertos: 0, totalErros: 0,
+          criadoEm: new Date()
+        });
+
+        msg.textContent='✅ Perfil criado! Redirecionando...'; msg.className='msg msg-sucesso';
+        setTimeout(() => location.href='index.html', 1000);
+      } catch(e) {
+        msg.textContent='❌ Erro: '+e.message; msg.className='msg msg-erro';
+      }
+    };
+  </script>
+</body>
+</html>

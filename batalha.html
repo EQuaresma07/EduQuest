@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cognix — Batalha ⚔️</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet"/>
+</head>
+<body class="quiz-page">
+  <div class="stars"></div>
+  <div class="container quiz-container">
+
+    <!-- HEADER BATALHA -->
+    <div class="batalha-header">
+      <div class="batalha-player-mini" id="headerEu">
+        <span id="hEuAvatar" style="font-size:1.4rem;">🦊</span>
+        <div>
+          <div id="hEuApelido" style="font-family:var(--font-head);color:var(--cyan);font-size:0.75rem;letter-spacing:1px;">Você</div>
+          <div id="hEuPontos" style="color:white;font-size:1rem;font-family:var(--font-head);">0</div>
+        </div>
+      </div>
+      <div style="font-family:var(--font-head);color:var(--red);font-size:1.2rem;letter-spacing:3px;">VS</div>
+      <div class="batalha-player-mini" id="headerOponente" style="flex-direction:row-reverse;text-align:right;">
+        <span id="hOpAvatar" style="font-size:1.4rem;">🦊</span>
+        <div>
+          <div id="hOpApelido" style="font-family:var(--font-head);color:var(--red);font-size:0.75rem;letter-spacing:1px;">Oponente</div>
+          <div id="hOpPontos" style="color:white;font-size:1rem;font-family:var(--font-head);">0</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROGRESSO -->
+    <div class="progress-area">
+      <div class="progress-info">
+        <span id="questionCounter">Questão 1 de 10</span>
+        <span id="timerDisplay">⏱ 20s</span>
+      </div>
+      <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
+    </div>
+    <div class="timer-bar-bg"><div class="timer-bar-fill" id="timerBar"></div></div>
+
+    <!-- QUESTÃO -->
+    <div class="question-card">
+      <div class="question-number" id="questionNumber">01</div>
+      <p class="question-text" id="questionText">🔄 Iniciando batalha...</p>
+    </div>
+
+    <!-- OPÇÕES -->
+    <div class="options-grid" id="optionsGrid"></div>
+
+    <!-- STATUS MODO VELOCIDADE -->
+    <div id="statusVelocidade" class="hidden"
+      style="text-align:center;padding:0.75rem;background:rgba(255,68,85,0.1);border:1px solid rgba(255,68,85,0.3);border-radius:10px;color:var(--red);font-family:var(--font-head);font-size:0.85rem;letter-spacing:1px;margin-top:0.5rem;">
+    </div>
+
+    <!-- FEEDBACK -->
+    <div class="feedback-overlay hidden" id="feedbackOverlay">
+      <div class="feedback-text" id="feedbackText"></div>
+    </div>
+
+    <!-- AGUARDANDO OPONENTE (modo normal, fim) -->
+    <div id="aguardandoFim" class="hidden"
+      style="text-align:center;padding:2rem;color:var(--text2);">
+      ✅ Você terminou! Aguardando oponente finalizar...
+    </div>
+
+  </div>
+
+  <script type="module">
+    import { db, auth, doc, getDoc, updateDoc, onSnapshot, runTransaction, onAuthStateChanged } from './js/firebase.js';
+    import { renderAvatar } from './js/perfil.js';
+
+    const batalhaId = localStorage.getItem('batalha_id');
+    const lado      = localStorage.getItem('batalha_lado'); // 'A' ou 'B'
+    if (!batalhaId) { location.href='index.html'; }
+
+    let eu = null, meuPerfil = null;
+    let batalha = null;
+    let questoes = [], current = 0, pontos = 0;
+    let timer, timeLeft, answered = false;
+    let unsubBatalha = null;
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) { location.href='login.html'; return; }
+      const snap = await getDoc(doc(db,'alunos',user.uid));
+      if (!snap.exists()) { location.href='cadastro.html'; return; }
+      eu = user; meuPerfil = snap.data();
+      await iniciar();
+    });
+
+    async function iniciar() {
+      const snap = await getDoc(doc(db,'batalhas',batalhaId));
+      if (!snap.exists()) { location.href='index.html'; return; }
+      batalha = snap.data();
+      questoes = batalha.questoes || [];
+
+      // Header avatares
+      const euApelido = lado==='A' ? batalha.anfitriaoApelido : batalha.desafiadoApelido;
+      const opApelido = lado==='A' ? batalha.desafiadoApelido  : batalha.anfitriaoApelido;
+
+      document.getElementById('hEuApelido').textContent = euApelido;
+      document.getElementById('hOpApelido').textContent = opApelido;
+      document.getElementById('hEuAvatar').innerHTML = renderAvatar(meuPerfil.avatar, meuPerfil.avatarTipo);
+
+      // Escuta atualizações em tempo real
+      unsubBatalha = onSnapshot(doc(db,'batalhas',batalhaId), snap => {
+        if (!snap.exists()) return;
+        const d = snap.data();
+        // Atualiza pontuação do oponente no header
+        const pontosOp = lado==='A' ? d.pontos_B : d.pontos_A;
+        document.getElementById('hOpPontos').textContent = pontosOp||0;
+        // Modo velocidade: detecta se oponente respondeu à questão atual
+        if (batalha.modo === 'velocidade' && !answered) {
+          const respsOp  = lado==='A' ? d.respostas_B : d.respostas_A;
+          if (respsOp && respsOp[current] !== undefined) {
+            // Oponente respondeu primeiro!
+            travouPorOponente(respsOp[current]);
+          }
+        }
+        // Detecta fim da batalha
+        if (d.status === 'finalizada') {
+          if (unsubBatalha) unsubBatalha();
+          localStorage.setItem('batalha_resultado_id', batalhaId);
+          location.href = 'batalha-resultado.html';
+        }
+        // Modo normal: detecta se ambos terminaram
+        if (batalha.modo === 'normal') {
+          const qA = d.questaoAtual_A, qB = d.questaoAtual_B;
+          if (qA >= questoes.length && qB >= questoes.length) {
+            finalizarBatalha(d);
+          }
+        }
+      });
+
+      loadQuestion();
+    }
+
+    function loadQuestion() {
+      if (current >= questoes.length) {
+        // Terminou as questões
+        finalizarMeuLado();
+        return;
+      }
+      answered = false;
+      clearInterval(timer);
+      timeLeft = batalha.tempoPorQuestao || 20;
+
+      const q = questoes[current];
+      document.getElementById('questionNumber').textContent = String(current+1).padStart(2,'0');
+      document.getElementById('questionText').textContent   = q.p;
+      document.getElementById('questionCounter').textContent = `Questão ${current+1} de ${questoes.length}`;
+      document.getElementById('progressBar').style.width    = ((current/questoes.length)*100)+'%';
+      document.getElementById('statusVelocidade').classList.add('hidden');
+
+      // Embaralha alternativas
+      let alts = q.ops.map((texto,idx) => ({ texto, original:idx }));
+      alts = alts.sort(() => Math.random()-0.5);
+      q._alts    = alts;
+      q._correta = alts.findIndex(a => a.original === q.c);
+
+      const grid = document.getElementById('optionsGrid');
+      grid.innerHTML = '';
+      ['A','B','C','D'].forEach((lbl,i) => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.innerHTML = `<span class="option-label">${lbl}</span><span class="option-text">${alts[i].texto}</span>`;
+        btn.onclick = () => responder(i, btn);
+        btn.style.animationDelay = (i*0.08)+'s';
+        grid.appendChild(btn);
+      });
+
+      startTimer();
+    }
+
+    function startTimer() {
+      document.getElementById('timerBar').style.cssText = 'width:100%;transition:none';
+      document.getElementById('timerDisplay').textContent = `⏱ ${timeLeft}s`;
+      document.getElementById('timerDisplay').style.color = '';
+      setTimeout(() => {
+        document.getElementById('timerBar').style.cssText = `width:0%;transition:width ${timeLeft}s linear`;
+      }, 50);
+      timer = setInterval(() => {
+        timeLeft--;
+        document.getElementById('timerDisplay').textContent = `⏱ ${timeLeft}s`;
+        if (timeLeft<=5) document.getElementById('timerDisplay').style.color='#ff4444';
+        if (timeLeft<=0) { clearInterval(timer); timeoutQuestao(); }
+      }, 1000);
+    }
+
+    async function responder(index, btn) {
+      if (answered) return;
+      answered = true;
+      clearInterval(timer);
+
+      const q      = questoes[current];
+      const correta = q._correta;
+      const acertou = index === correta;
+
+      document.querySelectorAll('.option-btn').forEach(b => b.disabled=true);
+
+      if (acertou) {
+        btn.classList.add('correct');
+        const pts = 10 + timeLeft;
+        pontos += pts;
+        document.getElementById('hEuPontos').textContent = pontos;
+        showFeedback(true, `✅ Correto! +${pts}`);
+      } else {
+        btn.classList.add('wrong');
+        document.querySelectorAll('.option-btn')[correta].classList.add('correct');
+        showFeedback(false, '❌ Errou!');
+      }
+
+      // Salva resposta no Firestore
+      if (batalha.modo === 'velocidade') {
+        // Usa transaction para garantir que só o 1º grava
+        try {
+          await runTransaction(db, async (tx) => {
+            const batalhaRef  = doc(db,'batalhas',batalhaId);
+            const batalhaSnap = await tx.get(batalhaRef);
+            const data = batalhaSnap.data();
+            const respsOp = lado==='A' ? data.respostas_B : data.respostas_A;
+            // Se oponente já respondeu esta questão, não sobrescreve
+            if (respsOp && respsOp[current] !== undefined) return;
+            const campoResps = lado==='A' ? 'respostas_A' : 'respostas_B';
+            const campoPontos= lado==='A' ? 'pontos_A'    : 'pontos_B';
+            const novasResps = { ...(lado==='A' ? data.respostas_A : data.respostas_B) };
+            novasResps[current] = { resposta:index, acertou, tempo: timeLeft };
+            tx.update(batalhaRef, {
+              [campoResps]: novasResps,
+              [campoPontos]: pontos,
+              [`questaoAtual_${lado}`]: current+1
+            });
+          });
+        } catch(e) { console.log('Transaction error:', e); }
+      } else {
+        // Modo normal: grava direto
+        const campoResps = lado==='A' ? 'respostas_A' : 'respostas_B';
+        const campoPontos= lado==='A' ? 'pontos_A'    : 'pontos_B';
+        const snap       = await getDoc(doc(db,'batalhas',batalhaId));
+        const novasResps = { ...(snap.data()[campoResps]||{}) };
+        novasResps[current] = { resposta:index, acertou, tempo:timeLeft };
+        await updateDoc(doc(db,'batalhas',batalhaId), {
+          [campoResps]: novasResps,
+          [campoPontos]: pontos,
+          [`questaoAtual_${lado}`]: current+1
+        });
+      }
+
+      setTimeout(() => proximaQuestao(), 2000);
+    }
+
+    function travouPorOponente(respOp) {
+      if (answered) return;
+      answered = true;
+      clearInterval(timer);
+      document.querySelectorAll('.option-btn').forEach(b => b.disabled=true);
+      const status = document.getElementById('statusVelocidade');
+      status.textContent = '⚡ Oponente respondeu primeiro! Questão expirada.';
+      status.classList.remove('hidden');
+      // Marca como não respondida (pulou)
+      const campoResps = lado==='A' ? 'respostas_A' : 'respostas_B';
+      const campoPontos= lado==='A' ? 'pontos_A'    : 'pontos_B';
+      getDoc(doc(db,'batalhas',batalhaId)).then(snap => {
+        const novasResps = { ...(snap.data()[campoResps]||{}) };
+        novasResps[current] = { resposta:-1, acertou:false, tempo:0, pulou:true };
+        updateDoc(doc(db,'batalhas',batalhaId), { [campoResps]:novasResps, [`questaoAtual_${lado}`]:current+1 });
+      });
+      setTimeout(() => proximaQuestao(), 2000);
+    }
+
+    function timeoutQuestao() {
+      if (answered) return;
+      answered = true;
+      document.querySelectorAll('.option-btn').forEach(b => b.disabled=true);
+      document.querySelectorAll('.option-btn')[questoes[current]._correta]?.classList.add('correct');
+      showFeedback(false, '⏰ Tempo esgotado!');
+      // Salva timeout
+      const campoResps = lado==='A' ? 'respostas_A' : 'respostas_B';
+      getDoc(doc(db,'batalhas',batalhaId)).then(snap => {
+        const novasResps = { ...(snap.data()[campoResps]||{}) };
+        novasResps[current] = { resposta:-1, acertou:false, tempo:0, timeout:true };
+        updateDoc(doc(db,'batalhas',batalhaId), { [campoResps]:novasResps, [`questaoAtual_${lado}`]:current+1 });
+      });
+      setTimeout(() => proximaQuestao(), 2000);
+    }
+
+    function proximaQuestao() {
+      document.getElementById('feedbackOverlay').className = 'feedback-overlay hidden';
+      current++;
+      if (current < questoes.length) {
+        loadQuestion();
+      } else {
+        finalizarMeuLado();
+      }
+    }
+
+    async function finalizarMeuLado() {
+      clearInterval(timer);
+      document.getElementById('aguardandoFim').classList.remove('hidden');
+      document.getElementById('optionsGrid').innerHTML = '';
+      document.getElementById('questionText').textContent = '✅ Você terminou!';
+
+      // Modo normal: espera oponente (onSnapshot cuida disso)
+      // Modo velocidade: finaliza direto
+      if (batalha.modo === 'velocidade') {
+        const snap = await getDoc(doc(db,'batalhas',batalhaId));
+        const d    = snap.data();
+        finalizarBatalha(d);
+      }
+    }
+
+    async function finalizarBatalha(data) {
+      if (!data || data.status === 'finalizada') return;
+      // Apenas o jogador A finaliza (para evitar dupla escrita)
+      if (lado !== 'A') return;
+      const pA = data.pontos_A || 0;
+      const pB = data.pontos_B || 0;
+      const vencedor = pA > pB ? 'A' : pB > pA ? 'B' : 'empate';
+      await updateDoc(doc(db,'batalhas',batalhaId), { status:'finalizada', vencedor });
+    }
+
+    function showFeedback(ok, msg) {
+      const o = document.getElementById('feedbackOverlay');
+      o.className = 'feedback-overlay '+(ok?'correct-feedback':'wrong-feedback');
+      document.getElementById('feedbackText').textContent = msg;
+      setTimeout(() => o.classList.add('hidden'), 1800);
+    }
+  </script>
+</body>
+</html>

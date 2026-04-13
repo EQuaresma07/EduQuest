@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cognix — Quiz</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet"/>
+</head>
+<body class="quiz-page">
+  <div class="stars"></div>
+  <div class="container quiz-container">
+    <div class="quiz-header">
+      <div class="player-info">
+        <span class="player-avatar">👤</span>
+        <span id="playerNameDisplay">Jogador</span>
+      </div>
+      <div class="score-display">
+        <span>⭐</span>
+        <span id="scoreDisplay">0</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:0.5rem;">
+        <div class="subject-badge" id="subjectBadge">💻 Informática</div>
+        <button id="btnAbandonar" title="Abandonar partida"
+          style="background:rgba(255,68,85,0.1);border:1px solid rgba(255,68,85,0.4);border-radius:8px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--red);font-size:1rem;font-weight:700;transition:all 0.2s;flex-shrink:0;">✕</button>
+      </div>
+    </div>
+    <div class="progress-area">
+      <div class="progress-info">
+        <span id="questionCounter">Pergunta 1 de 10</span>
+        <span id="timerDisplay">⏱ 15s</span>
+      </div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progressBar"></div>
+      </div>
+    </div>
+    <div class="timer-bar-bg">
+      <div class="timer-bar-fill" id="timerBar"></div>
+    </div>
+    <div class="question-card">
+      <div class="question-number" id="questionNumber">01</div>
+      <p class="question-text" id="questionText">🔄 Carregando questões...</p>
+    </div>
+    <div class="options-grid" id="optionsGrid"></div>
+    <div class="feedback-overlay hidden" id="feedbackOverlay">
+      <div class="feedback-text" id="feedbackText"></div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { db, collection, getDocs, addDoc, doc, getDoc, query, where, limit, updateDoc, increment } from './js/firebase.js';
+    import { calcularNivel } from './js/perfil.js';
+
+    // Nome vem do localStorage — suporta qualquer disciplina dinâmica
+    const diffTime  = { facil:15, medio:20, dificil:25 };
+    const diffBonus = { facil:0, medio:5, dificil:10 };
+    const diffLabel = { facil:'🟢 Fácil', medio:'🟡 Médio', dificil:'🔴 Difícil' };
+
+    let player  = localStorage.getItem('eq_player')  || 'Jogador';
+    let subject = localStorage.getItem('eq_subject') || 'informatica';
+    let diff    = localStorage.getItem('eq_diff')    || 'facil';
+    let questions=[], current=0, score=0, timer, timeLeft, answered=false;
+
+    const subjectDisplayName = localStorage.getItem('eq_subject_name') || subject;
+    document.getElementById('playerNameDisplay').textContent = player;
+    document.getElementById('subjectBadge').textContent = subjectDisplayName;
+
+    async function carregarQuestoes() {
+      const modoGeral = localStorage.getItem('eq_modo_geral') === 'true';
+      try {
+        if (modoGeral) {
+          // Carrega questões de TODAS as disciplinas misturadas
+          const snap = await getDocs(query(collection(db,'questoes'), where('dificuldade','==',diff), limit(100)));
+          let firebaseQs = [];
+          snap.forEach(d => { const q = d.data(); firebaseQs.push({ p:q.p, ops:q.ops, c:q.c }); });
+
+          // Complementa com o JSON local (todas as disciplinas)
+          let localQs = [];
+          try {
+            const res  = await fetch('data/perguntas.json');
+            const data = await res.json();
+            for (const disc of Object.keys(data)) {
+              const pool = data[disc]?.[diff] || [];
+              localQs = [...localQs, ...pool];
+            }
+          } catch {}
+
+          // Junta, embaralha e pega 10
+          questions = [...localQs, ...firebaseQs].sort(() => Math.random() - 0.5).slice(0, 10);
+
+        } else {
+          // Modo normal — disciplina específica
+          const snap = await getDocs(query(collection(db,'questoes'), where('disciplina','==',subject), where('dificuldade','==',diff), limit(50)));
+          let firebaseQs = [];
+          snap.forEach(d => { const q = d.data(); firebaseQs.push({ p:q.p, ops:q.ops, c:q.c }); });
+          if (firebaseQs.length >= 5) {
+            questions = firebaseQs.sort(() => Math.random() - 0.5).slice(0, 10);
+          } else {
+            const res  = await fetch('data/perguntas.json');
+            const data = await res.json();
+            const pool = data[subject]?.[diff] || [];
+            questions  = [...pool, ...firebaseQs].sort(() => Math.random() - 0.5).slice(0, 10);
+          }
+        }
+
+        if (!questions.length) { document.getElementById('questionText').textContent='Nenhuma questão disponível.'; return; }
+        loadQuestion();
+      } catch(e) {
+        try {
+          const res  = await fetch('data/perguntas.json');
+          const data = await res.json();
+          if (localStorage.getItem('eq_modo_geral') === 'true') {
+            let localQs = [];
+            for (const disc of Object.keys(data)) localQs = [...localQs, ...(data[disc]?.[diff]||[])];
+            questions = localQs.sort(() => Math.random() - 0.5).slice(0, 10);
+          } else {
+            questions = (data[subject]?.[diff] || []).sort(() => Math.random() - 0.5).slice(0, 10);
+          }
+          if (questions.length) loadQuestion();
+        } catch { document.getElementById('questionText').textContent='⚠️ Erro ao carregar questões.'; }
+      }
+    }
+
+    function embaralhar(q) {
+      let alts = q.ops.map((texto, idx) => ({ texto, original: idx }));
+      for (let i = alts.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [alts[i], alts[j]] = [alts[j], alts[i]];
+      }
+      return { alts, novaCorreta: alts.findIndex(a => a.original === q.c) };
+    }
+
+    function loadQuestion() {
+      answered=false; clearInterval(timer);
+      timeLeft = diffTime[diff]||15;
+      const q = questions[current];
+      document.getElementById('questionNumber').textContent = String(current+1).padStart(2,'0');
+      document.getElementById('questionText').textContent   = q.p;
+      document.getElementById('questionCounter').textContent = `Pergunta ${current+1} de ${questions.length}`;
+      document.getElementById('progressBar').style.width    = ((current/questions.length)*100)+'%';
+
+      const { alts, novaCorreta } = embaralhar(q);
+      q._alts    = alts;
+      q._correta = novaCorreta;
+
+      const grid = document.getElementById('optionsGrid');
+      grid.innerHTML='';
+      ['A','B','C','D'].forEach((lbl,i) => {
+        const btn = document.createElement('button');
+        btn.className='option-btn';
+        btn.innerHTML=`<span class="option-label">${lbl}</span><span class="option-text">${alts[i].texto}</span>`;
+        btn.onclick=()=>selectAnswer(i,btn);
+        btn.style.animationDelay=(i*0.1)+'s';
+        grid.appendChild(btn);
+      });
+      startTimer();
+    }
+
+    function startTimer() {
+      document.getElementById('timerBar').style.cssText='width:100%;transition:none';
+      document.getElementById('timerDisplay').textContent=`⏱ ${timeLeft}s`;
+      document.getElementById('timerDisplay').style.color='';
+      setTimeout(()=>{ document.getElementById('timerBar').style.cssText=`width:0%;transition:width ${timeLeft}s linear`; },50);
+      timer=setInterval(()=>{
+        timeLeft--;
+        document.getElementById('timerDisplay').textContent=`⏱ ${timeLeft}s`;
+        if(timeLeft<=5) document.getElementById('timerDisplay').style.color='#ff4444';
+        if(timeLeft<=0){clearInterval(timer);timeOut();}
+      },1000);
+    }
+
+    function timeOut(){
+      if(answered) return; answered=true;
+      document.querySelectorAll('.option-btn').forEach(b=>b.disabled=true);
+      document.querySelectorAll('.option-btn')[questions[current]._correta ?? questions[current].c].classList.add('correct');
+      showFeedback(false,'⏰ Tempo esgotado!');
+      setTimeout(nextQuestion,2000);
+    }
+
+    function selectAnswer(index,btn){
+      if(answered) return; answered=true; clearInterval(timer);
+      const q       = questions[current];
+      const correct = q._correta ?? q.c;
+      document.querySelectorAll('.option-btn').forEach(b=>b.disabled=true);
+      if(index===correct){
+        btn.classList.add('correct');
+        const pts=10+timeLeft+(diffBonus[diff]||0);
+        score+=pts;
+        document.getElementById('scoreDisplay').textContent=score;
+        showFeedback(true,`✅ Correto! +${pts} pts`);
+      } else {
+        btn.classList.add('wrong');
+        document.querySelectorAll('.option-btn')[correct].classList.add('correct');
+        showFeedback(false,'❌ Errou! Correta: '+String.fromCharCode(65+correct));
+      }
+      setTimeout(nextQuestion,2200);
+    }
+
+    function showFeedback(ok,msg){
+      const o=document.getElementById('feedbackOverlay');
+      o.className='feedback-overlay '+(ok?'correct-feedback':'wrong-feedback');
+      document.getElementById('feedbackText').textContent=msg;
+      setTimeout(()=>o.classList.add('hidden'),2000);
+    }
+
+    async function salvarRankingFirebase() {
+      try {
+        await addDoc(collection(db, 'ranking'), {
+          nome:        player,
+          pontos:      score,
+          disciplina:  subjectDisplayName,
+          dificuldade: diffLabel[diff],
+          data:        new Date().toLocaleDateString('pt-BR'),
+          timestamp:   new Date()
+        });
+      } catch(e) { console.log('Erro ao salvar ranking:', e); }
+    }
+
+    async function salvarPerfilAluno() {
+      const uid = localStorage.getItem('eq_uid');
+      if (!uid) return;
+      try {
+        const perfilRef = doc(db, 'alunos', uid);
+        const snap      = await getDoc(perfilRef);
+        if (!snap.exists()) return;
+
+        const xpAntes  = snap.data().xp || 0;
+        const xpDepois = xpAntes + score;
+        const nvAntes  = calcularNivel(xpAntes);
+        const nvDepois = calcularNivel(xpDepois);
+
+        await updateDoc(perfilRef, {
+          xp:             increment(score),
+          nivel:          nvDepois.nivel,
+          nomeNivel:      nvDepois.nome,
+          partidasJogadas: increment(1),
+          totalAcertos:   increment(questions.filter((_,i) => i < current).length > 0
+                            ? questions.reduce((acc, q, i) => acc, 0) : 0),
+        });
+
+        // Recalcula acertos/erros da partida
+        const acertosPartida  = Math.round((score - (diffBonus[diff]||0) * questions.length) / 12);
+        const errosPartida    = questions.length - acertosPartida;
+
+        await updateDoc(perfilRef, {
+          totalAcertos: increment(Math.max(0, acertosPartida)),
+          totalErros:   increment(Math.max(0, errosPartida)),
+        });
+
+        // Salva no histórico
+        await addDoc(collection(db,'alunos',uid,'historico'), {
+          tipo:       'quiz',
+          disciplina: localStorage.getItem('eq_subject') || '',
+          dificuldade: diff,
+          pontos:     score,
+          xpGanho:    score,
+          acertos:    Math.max(0, acertosPartida),
+          erros:      Math.max(0, errosPartida),
+          data:       new Date()
+        });
+
+        // Level up?
+        if (nvDepois.nivel > nvAntes.nivel) {
+          localStorage.setItem('eq_levelup', JSON.stringify({ nivel: nvDepois.nivel, nome: nvDepois.nome, emoji: nvDepois.emoji }));
+        }
+      } catch(e) { console.log('Erro ao salvar perfil:', e); }
+    }
+
+    async function nextQuestion(){
+      current++;
+      document.getElementById('feedbackOverlay').className='feedback-overlay hidden';
+      if(current<questions.length){
+        loadQuestion();
+      } else {
+        localStorage.setItem('eq_score', score);
+        localStorage.setItem('eq_player', player);
+        localStorage.setItem('eq_diff_label', diffLabel[diff]);
+        localStorage.setItem('eq_partida_ts', Date.now().toString());
+        await salvarRankingFirebase();
+        await salvarPerfilAluno();
+
+        // Verifica se deve pedir feedback (3ª partida, depois a cada 10)
+        const uid = localStorage.getItem('eq_uid');
+        if (uid) {
+          const perfilSnap = await getDoc(doc(db, 'alunos', uid));
+          if (perfilSnap.exists()) {
+            const totalPartidas = (perfilSnap.data().partidasJogadas || 0);
+            const devePerguntar = totalPartidas === 3 || (totalPartidas > 3 && (totalPartidas - 3) % 10 === 0);
+            if (devePerguntar) localStorage.setItem('eq_pedir_feedback', '1');
+          }
+        }
+
+        location.href='ranking.html';
+      }
+    }
+
+    // ===== BOTÃO ABANDONAR =====
+    document.getElementById('btnAbandonar').onclick = () => {
+      clearInterval(timer);
+      const confirma = confirm('⚠️ Deseja abandonar a partida?\n\nSeu progresso será perdido e você voltará ao início.');
+      if (confirma) {
+        localStorage.removeItem('eq_score');
+        localStorage.removeItem('eq_player');
+        localStorage.removeItem('eq_partida_ts');
+        location.href = 'index.html';
+      } else {
+        // Retoma o timer se não confirmou
+        startTimer();
+      }
+    };
+
+    carregarQuestoes();
+  </script>
+</body>
+</html>
