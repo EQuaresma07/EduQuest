@@ -340,11 +340,11 @@
       answered = true;
       document.querySelectorAll('.option-btn').forEach(b => b.disabled = true);
       const qT = questions[current];
-      document.querySelectorAll('.option-btn')[qT._correta].classList.add('correct');
+      // Não revela a correta — apenas registra
       erros++;
       respostas.push({ questao: qT.p, respondeu: 'Tempo esgotado', correta: qT._alts[qT._correta].texto, acertou: false });
-      showFeedback(false, '⏰ Tempo esgotado!');
-      setTimeout(nextQuestion, 2000);
+      showFeedback(true, '⏰ Tempo esgotado — resposta enviada');
+      setTimeout(nextQuestion, 1500);
     }
 
     function selectAnswer(index, btn) {
@@ -353,21 +353,19 @@
       clearInterval(timer);
 
       const q       = questions[current];
-      const correct = q._correta;  // posição correta após embaralhar
+      const correct = q._correta;
       document.querySelectorAll('.option-btn').forEach(b => b.disabled = true);
 
       const acertou = index === correct;
-      if (acertou) {
-        btn.classList.add('correct');
-        acertos++;
-        document.getElementById('acertosDisplay').textContent = acertos;
-        showFeedback(true, '✅ Correto!');
-      } else {
-        btn.classList.add('wrong');
-        document.querySelectorAll('.option-btn')[correct].classList.add('correct');
-        erros++;
-        showFeedback(false, '❌ Errou! Correta: ' + String.fromCharCode(65 + correct));
-      }
+
+      // Marca a alternativa escolhida com cor neutra (verde) — sem revelar se está certa
+      btn.classList.add('selected-neutral');
+      if (acertou) acertos++;
+      else         erros++;
+      document.getElementById('acertosDisplay').textContent = acertos;
+
+      // Feedback genérico — sem indicar certo/errado
+      showFeedback(true, '✔ Resposta enviada');
 
       respostas.push({
         questao:   q.p,
@@ -376,14 +374,15 @@
         acertou
       });
 
-      setTimeout(nextQuestion, 2000);
+      setTimeout(nextQuestion, 1200);
     }
 
     function showFeedback(ok, msg) {
       const o = document.getElementById('feedbackOverlay');
-      o.className = 'feedback-overlay ' + (ok ? 'correct-feedback' : 'wrong-feedback');
+      // Sempre usa estilo neutro — não distingue certo/errado
+      o.className = 'feedback-overlay correct-feedback';
       document.getElementById('feedbackText').textContent = msg;
-      setTimeout(() => o.classList.add('hidden'), 1800);
+      setTimeout(() => o.classList.add('hidden'), 1100);
     }
 
     async function nextQuestion() {
@@ -466,6 +465,15 @@
       font-size: 0.9rem;
       color: var(--text);
       font-weight: 600;
+    }
+    /* Resposta selecionada na prova — verde neutro, sem indicar certo/errado */
+    .option-btn.selected-neutral {
+      background: rgba(0,200,150,0.18) !important;
+      border-color: rgba(0,200,150,0.6) !important;
+      color: white !important;
+      box-shadow: 0 0 12px rgba(0,200,150,0.25);
+      transform: scale(1.01);
+      transition: all 0.25s;
     }
   </style>
 </body>
